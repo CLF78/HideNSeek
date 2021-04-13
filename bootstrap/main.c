@@ -3,7 +3,7 @@
 // Forward declaration
 void runPayload();
 
-// This function loads all the codes that FKW uses after StaticR has loaded
+// This function loads all the codes that HideNSeek uses after StaticR has loaded
 void readPayload() {
 
 	// Compose filename
@@ -34,9 +34,7 @@ void readPayload() {
 // Initial function. This hooks at the end of init_registers
 void start() {
 
-	///////////////
-	// Anticheat //
-	///////////////
+	// "Anticheat"
 
 	#ifndef DEBUG
 	// Overwrite all commonly used hooks
@@ -54,9 +52,7 @@ void start() {
 	_directWriteBlr((void*)0x800018A8);
 	#endif
 
-	///////////////
-	// Main Hook //
-	///////////////
+	// Main Hook
 	directWriteBranchEx(RelHook, readPayload, false);
 
 	// Flush cache
