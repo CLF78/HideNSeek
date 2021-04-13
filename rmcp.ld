@@ -91,7 +91,7 @@ SECTIONS {
 	DisableMap = 0x80858190;
 
 	/* Disable Laps */
-	NoLaps = 0x80534A08;
+	NoLaps = 0x805349EC;
 
 	/* Disable Star Power Music */
 	NoStarMusic = 0x8071002C;
@@ -105,7 +105,8 @@ SECTIONS {
 	/* Enable Score */
 	EnableScore = 0x80858668;
 	UpdateScoreHook = 0x807F789C;
-	FixScoreColor = 0x807EBF5C;
+	FixScoreColor = 0x807EBF48;
+	FixScoreSound = 0x807F78E0;
 
 	/* Finish Stuff */
 	FinishPos = 0x805354F8;
@@ -116,8 +117,9 @@ SECTIONS {
 	ForceCCHook = 0x80661404;
 
 	/* Force Teams On */
-	ForceTeams = 0x80530528;
-	ResetSeeker = 0x80530474;
+	ForceTeams = 0x80650F1C;
+	ForceTeams2 = 0x80650EFC;
+	ForceTeams3 = 0x80651524;
 	FixResults = 0x80645D58;
 
 	/* Friend Room Race Count Modifier */
@@ -143,14 +145,13 @@ SECTIONS {
 	/* Instant Respawn */
 	InstantRespawn1 = 0x80573E28;
 	InstantRespawn2 = 0x80579C28;
-	InstantRespawn3 = 0x808B5BB8;
 
 	/* Invisibility */
 	InvisibilityHook = 0x80657F34;
 
 	/* Item Hit Hooks */
-	ItemHit1Hook = 0x80798A50;
-	ItemHit2Hook = 0x8065DF44;
+	ItemHitLocalHook = 0x80798A50;
+	ItemHitRemoteHook = 0x8065DF44;
 	DisconnectPlayer = 0x80533D84;
 	PlayerDCHook = 0x80658B98;
 

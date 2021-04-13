@@ -12,8 +12,8 @@ lwz r4, 0xB68(r7)
 cmpwi r4, 0x20
 bltlr+
 
-# If so force battle starting points
-li r0, 3
+# If so force mission starting points (battle ones are buggy!)
+li r0, 4
 blr
 
 # Load current track from Racedata

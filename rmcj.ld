@@ -143,7 +143,6 @@ SECTIONS {
 	/* Instant Respawn */
 	InstantRespawn1 = 0x805737A8;
 	InstantRespawn2 = 0x805795A8;
-	InstantRespawn3 = 0x808B4D18;
 
 	/* Invisibility */
 	InvisibilityHook = 0x806575A0;

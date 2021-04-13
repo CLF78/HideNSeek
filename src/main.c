@@ -76,7 +76,7 @@ void loadCodes() {
 	directWrite16(No556DC, tempVal16);
 
 	// Disable Lap Counting (by Vega, modified by CLF78)
-	directWrite32(NoLaps, 0x38000000);
+	directWrite16(NoLaps, tempVal16);
 
 	// Disable Star Power Music (by Anarion)
 	directWriteNop(NoStarMusic);
@@ -88,6 +88,7 @@ void loadCodes() {
 	directWriteNop(EnableScore);
 	directWriteBranch(UpdateScoreHook, UpdateScore, true);
 	directWrite16(FixScoreColor, tempVal16);
+	directWriteNop(FixScoreSound);
 
 	// End Race on Command (by CLF78)
 	directWriteBranch(No5LimitHook, TimerEnd, false);
@@ -101,8 +102,10 @@ void loadCodes() {
 	directWriteBranch(ForceCCHook, ForceCC, true);
 
 	// Force Teams On (by CLF78)
-	directWrite32(ForceTeams, 0x38E00002);
-	directWrite32(ResetSeeker, 0x38C00001);
+	tempVal32 = 0x60000002;
+	directWrite32(ForceTeams, tempVal32);
+	directWrite32(ForceTeams2, tempVal32);
+	directWriteNop(ForceTeams3);
 	directWrite32(FixResults, 0x38000000);
 
 	// Friend Room Race Count Modifier (by MrBean)
@@ -132,10 +135,9 @@ void loadCodes() {
 	directWriteBranch(InvisibilityHook, Invisibility, true);
 
 	// Item Hit Hooks (by CLF78)
-	directWriteBranch(ItemHit1Hook, ItemHit1Helper, false);
-	directWriteBranch(ItemHit2Hook, ItemHit2, true);
+	directWriteBranch(ItemHitLocalHook, ItemHitRemoteHelper, false);
+	directWriteBranch(ItemHitRemoteHook, ItemHitRemote, true);
 	directWriteBranch(PlayerDCHook, PlayerDC, false);
-	directWriteBranch(DisconnectPlayer, RaceinfoCrashFix, false);
 
 	// Item Mod (by CLF78)
 	directWriteBranch(ItemModHook, ItemMod, true);

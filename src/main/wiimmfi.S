@@ -25,7 +25,7 @@ ble end
 lwz r3, 0xC(r1)
 lwz r0, OFF1(r13)
 cmpwi r0, 2
-beq- continue
+beq continue
 
 stw r3, OFF2(r13)
 li r0, 2

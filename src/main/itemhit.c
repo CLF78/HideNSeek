@@ -1,5 +1,6 @@
 #include <common.h>
 #include <hidenseek.h>
+#include <musichandler.h>
 #include <player.h>
 #include <racedata.h>
 #include <racepacket.h>
@@ -12,6 +13,10 @@ void PlayerKiller(char pid) {
 	HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + SeekerCount + 1;
 	HideNSeekData.totalSurvivors--;
 
+	// If only one hider is left, play the jingle
+	if (HideNSeekData.totalSurvivors == 1)
+		JingleFunc(MusicHandler, 5);
+
 	// If isInfection, switch the player's team, set them as Seeker and increase totalSeekers
 	if (HideNSeekData.isInfection) {
 		Racedata->main.scenarios[0].players[pid].team = TEAM_RED;
@@ -23,7 +28,7 @@ void PlayerKiller(char pid) {
 		DisconnectPlayer(Raceinfo, pid);
 }
 
-void ItemHit1(char pid) {
+void ItemHitLocal(char pid) {
 
 	// Check if damage is 3, that the player is local, and that this functions has not already run
 	if (pid == Racedata->main.scenarios[0].settings.hudPlayerIds[0] && PlayerHolder->players[pid]->pointers.playerSub14->damage == 3 && HideNSeekData.players[pid].position == 0) {
@@ -37,12 +42,10 @@ void ItemHit1(char pid) {
 			SpectatorMode = true;
 			CurrentSpectated = pid;
 		}
-		else if (!BtGlitch)
-			TagDistance = 0;
 	}
 }
 
-void ItemHit2(void* something, ItemPacket* packet, int length) {
+void ItemHitRemote(void* something, ItemPacket* packet, int length) {
 	register char pid asm("r26");
 
 	// Check that this functions has not already run
@@ -72,5 +75,9 @@ void PlayerDC() {
 	else if (HideNSeekData.players[pid].position == 0) {
 		HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + SeekerCount + 1;
 		HideNSeekData.totalSurvivors--;
+		
+		// If infection is on, turn said player red
+		if (HideNSeekData.isInfection)
+			Racedata->main.scenarios[0].players[pid].team = TEAM_RED;
 	}
 }
