@@ -7,13 +7,13 @@ SECTIONS {
 	RKNetController = 0x809C1138;
 	ItemHolder = 0x809C2678;
 	MusicHandler = 0x809C1858;
+	RKNetSelectHandler = 0x809C1160;
 
 	NETSHA1Init = 0x801D2414;
 	NETSHA1Update = 0x801D2464;
 	NETSHA1GetDigest = 0x801D2518;
 
-	UtilRandomSeed = 0x800F2DE8;
-	UtilRandint = 0x800F2E00;
+	RandomNextLimited = 0x80554F4C;
 
 	/* Codehandler Hooks */
 	VIHook = 0x801BAA40;
@@ -89,7 +89,7 @@ SECTIONS {
 	DisableMap = 0x808577FC;
 
 	/* Disable Laps */
-	NoLaps = 0x80534388;
+	NoLaps = 0x8053436C;
 
 	/* Disable Star Power Music */
 	NoStarMusic = 0x8070F698;
@@ -103,7 +103,8 @@ SECTIONS {
 	/* Enable Score */
 	EnableScore = 0x80857CD4;
 	UpdateScoreHook = 0x807F6F08;
-	FixScoreColor = 0x807EB5C8;
+	FixScoreColor = 0x807EB5B4;
+	FixScoreSound = 0x807F6F4C;
 
 	/* Finish Stuff */
 	FinishPos = 0x80534E78;
@@ -114,8 +115,10 @@ SECTIONS {
 	ForceCCHook = 0x80660A70;
 
 	/* Force Teams On */
-	ForceTeams = 0x8052FEA8;
-	ResetSeeker = 0x8052FDF4;
+	ForceTeams = 0x80650588;
+	ForceTeams2 = 0x80650568;
+	ForceTeams3 = 0x80650B90;
+	ForceTeams4Hook = 0x80650B90;
 	FixResults = 0x806453C4;
 
 	/* Friend Room Race Count Modifier */
@@ -146,8 +149,8 @@ SECTIONS {
 	InvisibilityHook = 0x806575A0;
 
 	/* Item Hit Hooks */
-	ItemHit1Hook = 0x807980BC;
-	ItemHit2Hook = 0x8065D5B0;
+	ItemHitLocalHook = 0x8056F1EC;
+	ItemHitRemoteHook = 0x8065D5B0;
 	DisconnectPlayer = 0x80533704;
 	PlayerDCHook = 0x80658204;
 
@@ -174,9 +177,6 @@ SECTIONS {
 	MuteCharsHook = 0x80706BD8;
 	MuteCharsHook2 = 0x80715874;
 	MuteCharsHook3 = 0x80706BDC;
-
-	/* No Clip */
-	NoClipHook = 0x8056F1EC;
 
 	/* No Disconnect */
 	NoDisconnect1 = 0x80520D88;
@@ -213,6 +213,7 @@ SECTIONS {
 	/* Seeker Picker */
 	HNSDataHook = 0x8052FF28;
 	HNSDataHook2 = 0x80531AA0;
+	HNSDataHook3 = 0x80661064;
 
 	/* Spectator Mode */
 	SpectatorModeHook = 0x805A1BB0;
@@ -224,4 +225,6 @@ SECTIONS {
 	/* Tag Distance Modifier */
 	TagDistanceHook = 0x807EF500;
 	TagDistanceHook2 = 0x807F1750;
+	TagShowHook = 0x807F02B4;
+	TagFunc = 0x807EF6B0;
 }
