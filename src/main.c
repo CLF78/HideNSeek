@@ -106,6 +106,7 @@ void loadCodes() {
 	directWrite32(ForceTeams, tempVal32);
 	directWrite32(ForceTeams2, tempVal32);
 	directWriteNop(ForceTeams3);
+	directWriteBranch(ForceTeams4Hook, ForceTeams4, true);
 	directWrite32(FixResults, 0x38000000);
 
 	// Friend Room Race Count Modifier (by MrBean)
@@ -135,7 +136,7 @@ void loadCodes() {
 	directWriteBranch(InvisibilityHook, Invisibility, true);
 
 	// Item Hit Hooks (by CLF78)
-	directWriteBranch(ItemHitLocalHook, ItemHitLocalHelper, false);
+	directWriteBranch(ItemHitLocalHook, ItemHitLocalHelper, true);
 	directWriteBranch(ItemHitRemoteHook, ItemHitRemote, true);
 	directWriteBranch(PlayerDCHook, PlayerDC, false);
 
@@ -160,9 +161,6 @@ void loadCodes() {
 	directWriteBranch(MuteCharsHook2, MuteChars2, true);
 	directWriteNop(MuteCharsHook3);
 
-	// No Clip (by Melg, modified by CLF78)
-	directWriteBranch(NoClipHook, NoClip, true);
-
 	// No Disconnect (by Bully)
 	tempVal32 = 0x38000000;
 	directWrite32(NoDisconnect1, tempVal32);
@@ -182,20 +180,21 @@ void loadCodes() {
 	directWriteBranch(FlagResetHook, FlagReset, false);
 
 	// Screen Edits (by CLF78)
-	directWriteBranch(ScreenLoadHook, ScreenLoad, false);
-	directWriteBranch(ScreenDSIFix1Hook, ScreenDSIFix1, false);
-	directWriteBranch(ScreenDSIFix2Hook, ScreenDSIFix2, true);
-	directWriteBranch(ScreenDSIFix3Hook, ScreenDSIFix2, true);
-	directWrite32(CupScreenPatchHook, (u32)&CupScreenPatch);
-	directWrite32(BattleCupScreenPatchHook, (u32)&BattleCupScreenPatch);
-	directWrite16(TrackVoteFix, 0x14);
-	directWrite16(TrackVoteFix2, 0x4C);
-	directWrite8(TrackVoteFix3, 0x2A);
-	directWrite8(TrackVoteFix4, 0x29);
-	directWriteNop(TrackVoteFix5);
+	// directWriteBranch(ScreenLoadHook, ScreenLoad, false);
+	// directWriteBranch(ScreenDSIFix1Hook, ScreenDSIFix1, false);
+	// directWriteBranch(ScreenDSIFix2Hook, ScreenDSIFix2, true);
+	// directWriteBranch(ScreenDSIFix3Hook, ScreenDSIFix2, true);
+	// directWrite32(CupScreenPatchHook, (u32)&CupScreenPatch);
+	// directWrite32(BattleCupScreenPatchHook, (u32)&BattleCupScreenPatch);
+	// directWrite16(TrackVoteFix, 0x14);
+	// directWrite16(TrackVoteFix2, 0x4C);
+	// directWrite8(TrackVoteFix3, 0x2A);
+	// directWrite8(TrackVoteFix4, 0x29);
+	// directWriteNop(TrackVoteFix5);
 
 	// Seeker Picker (by CLF78)
-	directWriteBranch(HNSDataHook, SetupHNS, false);
+	directWriteBranch(HNSDataHook3, SetupHNSHostHelper, true);
+	directWriteBranch(HNSDataHook, SetupHNSGuest, false);
 	directWriteBranch(HNSDataHook2, DeleteHNS, false);
 
 	// Spectator Mode (by tZ & Skullface, modified by CLF78)

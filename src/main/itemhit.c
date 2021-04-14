@@ -28,21 +28,32 @@ void PlayerKiller(char pid) {
 		DisconnectPlayer(Raceinfo, pid);
 }
 
-void ItemHitLocal(char pid) {
+bool ItemHitLocal(PlayerHolderPlayer* player, PlayerHolderPlayer* player2) {
 
-	// Check if damage is 3, that the player is local, and that this functions has not already run
-	if (pid == Racedata->main.scenarios[0].settings.hudPlayerIds[0] && PlayerHolder->players[pid]->pointers.playerSub14->damage == 3 && HideNSeekData.players[pid].position == 0) {
+	char pid = player->playerPointers->params->playerId;
+	char pid2 = player2->playerPointers->params->playerId;
 
-		// Kill the player
-		PlayerKiller(pid);
-		AmIDead = 1;
+	// Check if the player is a Seeker
+	if (!HideNSeekData.players[pid].isSeeker) {
 
-		// Enable Spectator Mode is isInfection is false
-		if (!HideNSeekData.isInfection) {
-			SpectatorMode = true;
-			CurrentSpectated = pid;
+		// Check that the player is local, and that this functions has not already run
+		if (Have30SecondsPassed && pid == Racedata->main.scenarios[0].settings.hudPlayerIds[0] && HideNSeekData.players[pid].position == 0 && HideNSeekData.players[pid2].isSeeker) {
+
+			// Kill the player
+			PlayerKiller(pid);
+			AmIDead = 1;
+
+			// Enable Spectator Mode is isInfection is false
+			if (!HideNSeekData.isInfection) {
+				SpectatorMode = true;
+				CurrentSpectated = pid;
+			}
 		}
+
+		return 1;
 	}
+
+	return 0;
 }
 
 void ItemHitRemote(void* something, ItemPacket* packet, int length) {

@@ -7,13 +7,13 @@ SECTIONS {
 	RKNetController = 0x809C20D8;
 	ItemHolder = 0x809C3618;
 	MusicHandler = 0x809C27F8;
+	RKNetSelectHandler = 0x809C2100;
 
 	NETSHA1Init = 0x801D24F4;
 	NETSHA1Update = 0x801D2544;
 	NETSHA1GetDigest = 0x801D25F8;
-
-	UtilRandomSeed = 0x800F2EC8;
-	UtilRandint = 0x800F2EE0;
+	
+	RandomNextLimited = 0x805555CC;
 
 	/* Codehandler Hooks */
 	VIHook = 0x801BAB20;
@@ -118,6 +118,7 @@ SECTIONS {
 	ForceTeams = 0x80650F1C;
 	ForceTeams2 = 0x80650EFC;
 	ForceTeams3 = 0x80651524;
+	ForceTeams4Hook = 0x80651534;
 	FixResults = 0x80645D58;
 
 	/* Friend Room Race Count Modifier */
@@ -148,7 +149,7 @@ SECTIONS {
 	InvisibilityHook = 0x80657F34;
 
 	/* Item Hit Hooks */
-	ItemHitLocalHook = 0x80798A50;
+	ItemHitLocalHook = 0x8056F86C;
 	ItemHitRemoteHook = 0x8065DF44;
 	DisconnectPlayer = 0x80533D84;
 	PlayerDCHook = 0x80658B98;
@@ -176,9 +177,6 @@ SECTIONS {
 	MuteCharsHook = 0x8070756C;
 	MuteCharsHook2 = 0x80716208;
 	MuteCharsHook3 = 0x80707570;
-
-	/* No Clip */
-	NoClipHook = 0x8056F86C;
 
 	/* No Disconnect */
 	NoDisconnect1 = 0x80521408;
@@ -215,6 +213,7 @@ SECTIONS {
 	/* Seeker Picker */
 	HNSDataHook = 0x805305A8;
 	HNSDataHook2 = 0x80532120;
+	HNSDataHook3 = 0x806619F8;
 
 	/* Spectator Mode */
 	SpectatorModeHook = 0x805A2230;

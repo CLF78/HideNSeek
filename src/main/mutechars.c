@@ -19,7 +19,3 @@ bool MuteChars2(PlayerHolderPlayer* player) {
 	// Otherwise return True if not Seeker
 	return (!HideNSeekData.players[pid].isSeeker);
 }
-
-bool NoClip(PlayerHolderPlayer* player) {
-	return (!HideNSeekData.players[player->playerPointers->params->playerId].isSeeker);
-}
