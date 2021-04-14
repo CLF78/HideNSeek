@@ -37,7 +37,6 @@ void SetupHNS() {
 
 	// Restore some values
 	Have30SecondsPassed = 0;
-	IsLastMinute = 0;
 	EndReason = 0;
 	SpectatorMode = 0;
 	CurrentSpectated = 0;

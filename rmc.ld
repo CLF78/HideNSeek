@@ -18,7 +18,6 @@ SECTIONS {
 	CurrentSpectated = 0x800001EE;
 	AmIDead = 0x800001EF;
 	Have30SecondsPassed = 0x800001F0;
-	IsLastMinute = 0x800001F1;
 
 	/* Riivo Options */
 	NoMusic = 0x80004000;

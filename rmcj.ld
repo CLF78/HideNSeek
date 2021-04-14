@@ -15,8 +15,6 @@ SECTIONS {
 	UtilRandomSeed = 0x800F2DE8;
 	UtilRandint = 0x800F2E00;
 
-	TagDistance = 0x808D2F64;
-
 	/* Codehandler Hooks */
 	VIHook = 0x801BAA40;
 	KPADHook = 0x801979C8;

@@ -29,17 +29,13 @@ void MainTimerUpdate(u32 timer) {
 
 		// If timer is 1, reset it back to 10 minutes (minus 1 frame because it will give 1 point otherwise)
 		else if (timer == 1) {
-			
+
 			if (HalfTimer)
 				tmanager->frames = 0x4650;
 			else
 				tmanager->frames = 0x8CA0;
-			
-			Have30SecondsPassed = true;
 
-			// Even if you aren't Seeker, this will not harm
-			if (BtGlitch)
-				TagDistance = 0x47927C00;
+			Have30SecondsPassed = true;
 
 			// Allow the Seekers to move
 			for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
@@ -71,10 +67,8 @@ void MainTimerUpdate(u32 timer) {
 		}
 
 		// If one minute is remaining, play the final lap jingle and enable faster music
-		if (timer == 3600) {
+		if (timer == 3600)
 			JingleFunc(MusicHandler, 5);
-			IsLastMinute = 1;
-		}
 
 		// Play the countdown jingle in the last 10 seconds
 		else if (timer % 60 == 0) {
@@ -134,4 +128,8 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 	else if (noSeekers)
 		return 3;
 	return 0;
+}
+
+bool TimerFlashFix() {
+	return (Have30SecondsPassed && Raceinfo->timerManager->frames <= 3600);
 }

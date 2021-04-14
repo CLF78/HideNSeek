@@ -135,7 +135,7 @@ void loadCodes() {
 	directWriteBranch(InvisibilityHook, Invisibility, true);
 
 	// Item Hit Hooks (by CLF78)
-	directWriteBranch(ItemHitLocalHook, ItemHitRemoteHelper, false);
+	directWriteBranch(ItemHitLocalHook, ItemHitLocalHelper, false);
 	directWriteBranch(ItemHitRemoteHook, ItemHitRemote, true);
 	directWriteBranch(PlayerDCHook, PlayerDC, false);
 
@@ -205,9 +205,10 @@ void loadCodes() {
 	directWriteBranch(TimerInit, StartingTime, true);
 	directWriteBranch(TimerInit2, StartingTime2, true);
 
-	// Tag Distance Modifier (by CLF78)
+	// Tag Modifier (by CLF78)
 	directWriteBranch(TagDistanceHook, TagDistanceFunc, true);
 	directWriteBranch(TagDistanceHook2, TagDistanceFunc, true);
+	directWriteBranch(TagShowHook, HandleTags, true);
 
 	// Disable Track Music (by CosmoCourtney)
 	if (NoMusic == 1) {

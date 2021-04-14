@@ -15,8 +15,6 @@ SECTIONS {
 	UtilRandomSeed = 0x800F2EC8;
 	UtilRandint = 0x800F2EE0;
 
-	TagDistance = 0x808D3E14;
-
 	/* Codehandler Hooks */
 	VIHook = 0x801BAB20;
 	KPADHook = 0x80197AA8;
@@ -225,7 +223,9 @@ SECTIONS {
 	TimerInit = 0x805358E4;
 	TimerInit2 = 0x80535890;
 
-	/* Tag Distance Modifier */
+	/* Tag Modifier */
 	TagDistanceHook = 0x807EFE94;
 	TagDistanceHook2 = 0x807F20E4;
+	TagShowHook = 0x807F0C48;
+	TagFunc = 0x807F0044;
 }
