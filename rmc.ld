@@ -11,6 +11,7 @@ SECTIONS {
 	CurrentSpectated = 0x800001E6;
 	AmIDead = 0x800001E7;
 	Have30SecondsPassed = 0x800001E8;
+	UseReplayCams = 0x800001E9;
 
 	/* HNS Per-GP Data */
 	SeekerCount = 0x800002B0;

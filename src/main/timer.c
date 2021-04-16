@@ -36,6 +36,7 @@ void MainTimerUpdate(u32 timer) {
 				tmanager->frames = 0x8CA0;
 
 			Have30SecondsPassed = true;
+			EndReason = 0;
 
 			// Allow the Seekers to move
 			for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {

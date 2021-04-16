@@ -235,6 +235,7 @@ SECTIONS {
 
 	/* Spectator Mode */
 	SpectatorModeHook = 0x805A1BB0;
+	ReplayCameraHook = 0x805A2240;
 	
 	/* Starting Time Modifier */
 	TimerInit = 0x80535264;

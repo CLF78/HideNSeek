@@ -203,6 +203,7 @@ void loadCodes() {
 
 	// Spectator Mode (by tZ & Skullface, modified by CLF78)
 	directWriteBranch(SpectatorModeHook, SpectatorModeFunc, false);
+	directWriteBranch(ReplayCameraHook, ReplayCameraManager, true);
 
 	// Starting Time Modifier (by Bully, modified by CLF78)
 	directWriteBranch(TimerInit, StartingTime, true);
