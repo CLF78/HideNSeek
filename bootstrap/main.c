@@ -48,12 +48,19 @@ void start() {
 	// Wipe area at 0x80001800-0x80003000
 	memset((void*)0x80001800, 0, 0x1800);
 
-	// Hook for Dolphin's codehandler
+	// Disable Dolphin's codehandler
 	_directWriteBlr((void*)0x800018A8);
 	#endif
 
 	// Main Hook
 	directWriteBranchEx(RelHook, readPayload, false);
+
+	// 30 FPS (by CLF78)
+	if (ThirtyFPS == 1) {
+		directWriteBranch(ThirtyFPSHook1, ThirtyFPS1, true);
+		directWrite8(ThirtyFPSHook2, 2);
+		directWrite8(ThirtyFPSHook3, 2);
+	}
 
 	// Flush cache
 	sync();

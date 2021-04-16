@@ -65,6 +65,14 @@ SECTIONS {
 	MSURL = 0x8026BCE3;
 	GSURL = 0x8026BD67;
 
+	/* 30 FPS */
+	ThirtyFPSHook1 = 0x80009B44;
+	ThirtyFPSHook2 = 0x800093FB;
+	ThirtyFPSHook3 = 0x800091FF;
+	ThirtyFPSHook4 = 0x80508FB4;
+	ThirtyFPSHook5 = 0x8050935C;
+	ThirtyFPSHook6 = 0x8050934B;
+
 	/* Always Win Track Vote */
 	AlwaysWinVoteHook = 0x80650138;
 
@@ -152,10 +160,12 @@ SECTIONS {
 	InvisibilityHook = 0x8064624C;
 
 	/* Item Hit Hooks */
-	ItemHitLocalHook = 0x8055D8C4;
+	ItemHitLocalHook = 0x8055D1D8;
 	ItemHitRemoteHook = 0x8064C25C;
 	DisconnectPlayer = 0x80521DDC;
 	PlayerDCHook = 0x80646EB0;
+	HitboxPatch1Hook = 0x8055D000;
+	HitboxPatch2Hook = 0x8055D014;
 
 	/* Item Mod */
 	ItemModHook = 0x807A8520;

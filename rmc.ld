@@ -23,4 +23,5 @@ SECTIONS {
 
 	/* Riivo Options */
 	NoMusic = 0x80004000;
+	ThirtyFPS = 0x8000400F;
 }

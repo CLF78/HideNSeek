@@ -9,7 +9,7 @@
 
 # Move player to r4
 ItemHitLocalHelper:
-mr r4, r30
+mr r4, r31
 b ItemHitLocal
 
 ##################
@@ -25,7 +25,7 @@ lfs f28, 0x4(r29)
 
 # Do bl trick
 bl trick
-.float 1.5
+.float 2.0
 
 # Load multiplier in f2
 trick:

@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern TimerChecks, No5LimitHook2, No5LimitHook3, EndReason
+.extern TimerChecks, No5LimitHook2, No5LimitHook3, EndReason, Have30SecondsPassed
 .global StartingTime, StartingTime2, TimerEnd
 
 ##########################
@@ -33,8 +33,14 @@ blr
 
 # This is an ASM helper for the main function in C
 
-# Check if EndReason is not 0
+# Check if Have30SecondsPassed is 0
 TimerEnd:
+lis r3, Have30SecondsPassed@ha
+lbz r3, Have30SecondsPassed@l(r3)
+cmpwi r3, 0
+beq noEndRace
+
+# Check if EndReason is not 0
 lis r3, EndReason@ha
 lbz r3, EndReason@l(r3)
 cmpwi r3, 0
@@ -47,6 +53,8 @@ bl TimerChecks
 # Store EndReason and return
 lis r4, EndReason@ha
 stb r3, EndReason@l(r4)
+
+noEndRace:
 b No5LimitHook3
 
 # End the race

@@ -184,7 +184,7 @@ void loadCodes() {
 	directWriteBranch(GuestFlagsHook, GuestFlags, false);
 	directWriteBranch(FlagResetHook, FlagReset, false);
 
-	// Screen Edits (by CLF78, currently disabled)
+	// Screen Edits (by CLF78 & Kevin, currently disabled)
 	// directWriteBranch(ScreenLoadHook, ScreenLoad, false);
 	// directWriteBranch(ScreenDSIFix1Hook, ScreenDSIFix1, false);
 	// directWriteBranch(ScreenDSIFix2Hook, ScreenDSIFix2, true);
@@ -216,6 +216,13 @@ void loadCodes() {
 	// Disable Track Music (by CosmoCourtney)
 	if (NoMusic == 1) {
 		directWrite32(NoMusicHook, 0x38600000);
+	}
+
+	// 30 FPS (by CLF78)
+	if (ThirtyFPS == 1) {
+		directWrite32(ThirtyFPSHook4, 0x3BE00002);
+		directWriteNop(ThirtyFPSHook5);
+		directWrite8(ThirtyFPSHook6, 2);
 	}
 
 	sync();

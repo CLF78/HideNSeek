@@ -6,6 +6,11 @@ void flushAddr(void* addr) {
 	icbi(addr);
 }
 
+void _directWrite8(u8* addr, u8 value) {
+	addr[0] = value;
+	flushAddr(addr);
+}
+
 void _directWrite32(u32* addr, u32 value) {
 	addr[0] = value;
 	flushAddr(addr);

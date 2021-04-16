@@ -65,6 +65,14 @@ SECTIONS {
 	MSURL = 0x8027DE33;
 	GSURL = 0x8027DEB7;
 
+	/* 30 FPS */
+	ThirtyFPSHook1 = 0x80009A3C;
+	ThirtyFPSHook2 = 0x800092AB;
+	ThirtyFPSHook3 = 0x800090AF;
+	ThirtyFPSHook4 = 0x8051AF94;
+	ThirtyFPSHook5 = 0x8051B33C;
+	ThirtyFPSHook6 = 0x8051B32B;
+
 	/* Always Win Track Vote */
 	AlwaysWinVoteHook = 0x80661E20;
 
