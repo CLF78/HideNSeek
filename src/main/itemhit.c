@@ -28,32 +28,26 @@ void PlayerKiller(char pid) {
 		DisconnectPlayer(Raceinfo, pid);
 }
 
-bool ItemHitLocal(PlayerHolderPlayer* player, PlayerHolderPlayer* player2) {
+bool ItemHitLocal(bool result, PlayerHolderPlayer* player) {
 
+	// Get pid
 	char pid = player->playerPointers->params->playerId;
-	char pid2 = player2->playerPointers->params->playerId;
 
-	// Check if the player is a Seeker
-	if (!HideNSeekData.players[pid].isSeeker) {
+	// Check that a collision happened, that we're in the game, that the player is local, and that this functions has not already run
+	if (result && Have30SecondsPassed && pid == Racedata->main.scenarios[0].settings.hudPlayerIds[0] && HideNSeekData.players[pid].position == 0) {
 
-		// Check that the player is local, and that this functions has not already run
-		if (Have30SecondsPassed && pid == Racedata->main.scenarios[0].settings.hudPlayerIds[0] && HideNSeekData.players[pid].position == 0 && HideNSeekData.players[pid2].isSeeker) {
+		// Kill the player
+		PlayerKiller(pid);
+		AmIDead = 1;
 
-			// Kill the player
-			PlayerKiller(pid);
-			AmIDead = 1;
-
-			// Enable Spectator Mode is isInfection is false
-			if (!HideNSeekData.isInfection) {
-				SpectatorMode = true;
-				CurrentSpectated = pid;
-			}
+		// Enable Spectator Mode is isInfection is false
+		if (!HideNSeekData.isInfection) {
+			SpectatorMode = true;
+			CurrentSpectated = pid;
 		}
-
-		return 1;
 	}
 
-	return 0;
+	return result;
 }
 
 void ItemHitRemote(void* something, ItemPacket* packet, int length) {

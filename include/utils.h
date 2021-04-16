@@ -3,7 +3,8 @@
 #include <itemholder.h>
 #include <raceinfo.h>
 
-int RandomNextLimited(void* random, int limit);
+int UtilRandint(int lo, int hi);
+void UtilRandomSeed(int seed);
 u32 CalcCRC32(void* data, u32 length);
 
 void DisconnectPlayer(_Raceinfo* raceinfo, int pid);

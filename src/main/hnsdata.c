@@ -2,73 +2,73 @@
 #include <hidenseek.h>
 #include <racedata.h>
 #include <rknetcontroller.h>
-#include <selecthandler.h>
 #include <utils.h>
 
-char getRandomAid(void* random, s8 otheraid, _RKNetSelectHandler* handler) {
+int pidHelper(char currentpid, char prevaid1, char prevaid2, int index) {
 
-	s8 aid = -1;
-	while (true) {
-		aid = RandomNextLimited(random, 12);
-		bool cond = ((RKNetController->availableAids) >> aid) & 1;
-		if (cond && aid != otheraid)
-			break;
-	}
+	// Setup loop
+	s32 aid = -1;
+	u32 pid;
 
-	handler->teams |= (1 << (aid * 2));
-	return aid;
+    do {
+		// If AlwaysSeeker, this will return 0 and the next available aid (aid 1 isn't guaranteed to be present)
+		if (AlwaysSeeker)
+			aid++;
+		else
+			aid = UtilRandint(0, 12);
+
+		// Check if the aid meets the conditions
+        for (pid = 0; pid < 12; pid++) {
+            if (RKNetController->aidsToPids[pid] == aid && pid != currentpid && (AlwaysSeeker || (aid != prevaid1 && aid != prevaid2))) {
+				PrevSeekers[index] = aid;
+				break;
+			}
+        }
+    } while (PrevSeekers[index] == 0xFF);
+
+	return pid;
 }
 
-void* SetupHNSHost(void* random, int fake, _RKNetSelectHandler* selecthandler) {
+void SetupHNS() {
 
-	// Zero out existing teams
-	selecthandler->teams &= 0xFF000000;
-
-	// If playerCount <= 2, reduce Seeker count to 1
-	char pcount = RKNetController->playerCount;
-    if (pcount <= 2)
-		SeekerCount = 0;
-
-	// If playerCount <= 3, checking for the second Seeker would inevitably cause a repick (it's also unnecessary with less than two Seekers)
-    if (pcount <= 3 || SeekerCount == 0)
-		PrevSeekers[1] = -1;
-
-	if (AlwaysSeeker) {
-		PrevSeekers[0] = 0;
-		selecthandler->teams |= 1;
-		if (SeekerCount == 1)
-			PrevSeekers[1] = getRandomAid(random, PrevSeekers[0], selecthandler);
-	} else {
-		PrevSeekers[0] = getRandomAid(random, -1, selecthandler);
-		if (SeekerCount == 1)
-			PrevSeekers[1] = getRandomAid(random, PrevSeekers[0], selecthandler);
-	}
-
-	// Original instruction
-	asm volatile("li 4, -1");
-	return random;
-}
-
-void SetupHNSGuest() {
+	// Set random seed to selectid
+	register int selectid asm("r6");
+	UtilRandomSeed(selectid);
 
 	// Write playerCount and isInfection
 	char pcount = Racedata->main.scenarios[0].playerCount;
     HideNSeekData.playerCount = pcount;
 	HideNSeekData.isInfection = IsInfection;
 
-	for (int pid = 0; pid < pcount; pid++) {
-		if (Racedata->main.scenarios[0].players[pid].team == TEAM_RED) {
-			PrevSeekers[HideNSeekData.totalSeekers] = RKNetController->aidsToPids[pid];
-			HideNSeekData.totalSeekers++;
-			HideNSeekData.players[pid].isSeeker = true;
-			HideNSeekData.players[pid].isRealSeeker = true;
-		}
-		else
-			HideNSeekData.totalSurvivors++;
-	}
+	// If playerCount <= 2, reduce Seeker count to 1
+    if (pcount <= 2)
+		SeekerCount = 0;
 
-	// Set score accordingly
-	Racedata->main.scenarios[0].mission.score = HideNSeekData.totalSurvivors;
+	// Calculate totalSeekers
+	HideNSeekData.totalSeekers = SeekerCount+1;
+
+	// Calculate totalSurvivors and set score accordingly
+    HideNSeekData.totalSurvivors = pcount - HideNSeekData.totalSeekers;
+	Racedata->main.scenarios[0].mission.score = pcount - HideNSeekData.totalSeekers;
+
+	// If playerCount <= 3, checking for the second Seeker would inevitably cause a repick (it's also unnecessary with less than two Seekers)
+    if (pcount <= 3 || SeekerCount == 0)
+		PrevSeekers[1] = -1;
+
+	// Setup loop
+    char pid = -1;
+	char prevaid1 = PrevSeekers[0];
+	char prevaid2 = PrevSeekers[1];
+	PrevSeekers[0] = -1;
+	PrevSeekers[1] = -1;
+
+	// Get the Seekers!
+    for (int amount = 0; amount < HideNSeekData.totalSeekers; amount++) {
+        pid = pidHelper(pid, prevaid1, prevaid2, amount);
+        HideNSeekData.players[pid].isSeeker = true;
+        HideNSeekData.players[pid].isRealSeeker = true;
+        Racedata->main.scenarios[0].players[pid].team = 0;
+    }
 }
 
 void DeleteHNS() {

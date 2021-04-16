@@ -81,6 +81,9 @@ void loadCodes() {
 	// Disable Star Power Music (by Anarion)
 	directWriteNop(NoStarMusic);
 
+	// Disable Title Demo Movie (by Diamond)
+	directWrite16(NoTitleDemo, tempVal16);
+
 	// Disable Wheelie (by Luis, modified by CLF78)
 	directWriteBranch(DisableWheelieHook, DisableWheelie, true);
 
@@ -102,19 +105,13 @@ void loadCodes() {
 	directWriteBranch(ForceCCHook, ForceCC, true);
 
 	// Force Teams On (by CLF78)
-	tempVal32 = 0x60000002;
-	directWrite32(ForceTeams, tempVal32);
-	directWrite32(ForceTeams2, tempVal32);
-	directWriteNop(ForceTeams3);
-	directWriteBranch(ForceTeams4Hook, ForceTeams4, true);
 	directWrite32(FixResults, 0x38000000);
+	directWrite32(ForceTeams, 0x38E00002);
+	directWrite32(ResetSeeker, 0x38C00001);
 
 	// Friend Room Race Count Modifier (by MrBean)
 	directWrite16(FroomRaceCount1, 1);
 	directWrite16(FroomRaceCount2, 1);
-
-	// GeoHit Patcher (by CLF78)
-	directWriteBranch(GeoHitHook, GeoHitFix, true);
 
 	// Go To Friends Menu Automatically (by Chadderz)
 	directWrite8(AutoFriendsMenu, 0x8D);
@@ -135,8 +132,10 @@ void loadCodes() {
 	// Invisibility (by CLF78)
 	directWriteBranch(InvisibilityHook, Invisibility, true);
 
-	// Item Hit Hooks (by CLF78)
-	directWriteBranch(ItemHitLocalHook, ItemHitLocalHelper, true);
+	// Item Hit Hooks (by CLF78 & stebler)
+	directWriteBranch(ItemHitLocalHook, ItemHitLocalHelper, false);
+	directWriteBranch(HitboxPatch1Hook, HitboxPatch1, true);
+	directWriteBranch(HitboxPatch2Hook, HitboxPatch2, true);
 	directWriteBranch(ItemHitRemoteHook, ItemHitRemote, true);
 	directWriteBranch(PlayerDCHook, PlayerDC, false);
 
@@ -145,6 +144,9 @@ void loadCodes() {
 	directWriteBranch(ItemRouletteHook, ItemMod, true);
 	directWriteBranch(ItemRouletteHook2, ItemMod, true);
 	directWriteBlr(NoSpecialItems);
+	
+	// License Unlocker (by _tZ)
+	directWrite32(LicenseUnlocker, 0x38600001);
 
 	// Message Editor (by WhatIsLoaf & CLF78)
 	directWriteBranch(MessageEditorHook, MessageEditor, false);
@@ -160,6 +162,9 @@ void loadCodes() {
 	directWriteBranch(MuteCharsHook, MuteChars, true);
 	directWriteBranch(MuteCharsHook2, MuteChars2, true);
 	directWriteNop(MuteCharsHook3);
+
+	// No Clip (by Melg, modified by CLF78)
+	directWriteBranch(NoClipHook, NoClip, true);
 
 	// No Disconnect (by Bully)
 	tempVal32 = 0x38000000;
@@ -179,7 +184,7 @@ void loadCodes() {
 	directWriteBranch(GuestFlagsHook, GuestFlags, false);
 	directWriteBranch(FlagResetHook, FlagReset, false);
 
-	// Screen Edits (by CLF78)
+	// Screen Edits (by CLF78, currently disabled)
 	// directWriteBranch(ScreenLoadHook, ScreenLoad, false);
 	// directWriteBranch(ScreenDSIFix1Hook, ScreenDSIFix1, false);
 	// directWriteBranch(ScreenDSIFix2Hook, ScreenDSIFix2, true);
@@ -193,8 +198,7 @@ void loadCodes() {
 	// directWriteNop(TrackVoteFix5);
 
 	// Seeker Picker (by CLF78)
-	directWriteBranch(HNSDataHook3, SetupHNSHostHelper, true);
-	directWriteBranch(HNSDataHook, SetupHNSGuest, false);
+	directWriteBranch(HNSDataHook, SetupHNS, false);
 	directWriteBranch(HNSDataHook2, DeleteHNS, false);
 
 	// Spectator Mode (by tZ & Skullface, modified by CLF78)

@@ -13,6 +13,8 @@ SECTIONS {
 	NETSHA1Update = 0x801D2464;
 	NETSHA1GetDigest = 0x801D2518;
 
+	UtilRandomSeed = 0x800F2DE8;
+	UtilRandint = 0x800F2E00;
 	RandomNextLimited = 0x80554F4C;
 
 	/* Codehandler Hooks */
@@ -94,6 +96,9 @@ SECTIONS {
 	/* Disable Star Power Music */
 	NoStarMusic = 0x8070F698;
 
+	/* Disable Title Demo Movie */
+	NoTitleDemo = 0x806F9F90;
+
 	/* Disable Track Music */
 	NoMusicHook = 0x8009122C;
 
@@ -115,11 +120,9 @@ SECTIONS {
 	ForceCCHook = 0x80660A70;
 
 	/* Force Teams On */
-	ForceTeams = 0x80650588;
-	ForceTeams2 = 0x80650568;
-	ForceTeams3 = 0x80650B90;
-	ForceTeams4Hook = 0x80650B90;
 	FixResults = 0x806453C4;
+	ForceTeams = 0x8052FEA8;
+	ResetSeeker = 0x8052FDF4;
 
 	/* Friend Room Race Count Modifier */
 	FroomRaceCount1 = 0x80645726;
@@ -160,6 +163,9 @@ SECTIONS {
 	ItemRouletteHook2 = 0x807B9A94;
 	NoSpecialItems = 0x80799628;
 
+	/* License Unlocker */
+	LicenseUnlocker = 0x805492F4;
+
 	/* Message Editor */
 	MessageEditorHook = 0x805CD6A0;
 	MessageEditorHook2 = 0x805CD634;
@@ -177,6 +183,9 @@ SECTIONS {
 	MuteCharsHook = 0x80706BD8;
 	MuteCharsHook2 = 0x80715874;
 	MuteCharsHook3 = 0x80706BDC;
+
+	/* No Clip */
+	NoClipHook = 0x8056F1EC;
 
 	/* No Disconnect */
 	NoDisconnect1 = 0x80520D88;
@@ -213,7 +222,6 @@ SECTIONS {
 	/* Seeker Picker */
 	HNSDataHook = 0x8052FF28;
 	HNSDataHook2 = 0x80531AA0;
-	HNSDataHook3 = 0x80661064;
 
 	/* Spectator Mode */
 	SpectatorModeHook = 0x805A1BB0;
