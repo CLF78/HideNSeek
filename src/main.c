@@ -121,6 +121,11 @@ void loadCodes() {
 	directWrite16(AutoFriendsMenu2, 0x28);
 	directWrite16(AutoFriendsMenu3, 0x30);
 
+	// Grumble Volcano Fixes (by CLF78 & Ismy)
+	directWriteArray(RockFixHook, RockFix, 8);
+	directWriteArray(RockFix2Hook, RockFix, 8);
+	directWriteBranch(GeyserFixHook, GeyserFix, true);
+
 	// Increase Visual Distance (by davidevgen)
 	directWrite32(DrawDistance, 0x49742400);
 

@@ -139,13 +139,15 @@ SECTIONS {
 	FroomRaceCount1 = 0x806460BA;
 	FroomRaceCount2 = 0x8064F51E;
 
-	/* GeoHit Patcher */
-	GeoHitHook = 0x8082A470;
-
 	/* Go To Friends Menu Automatically */
 	AutoFriendsMenu = 0x8064795B;
 	AutoFriendsMenu2 = 0x8064D616;
 	AutoFriendsMenu3 = 0x8064D51A;
+
+	/* Grumble Volcano Patches */
+	RockFixHook = 0x806E3B4C;
+	RockFix2Hook = 0x80817F1C;
+	GeyserFixHook = 0x806C3B28;
 
 	/* Increase Visual Distance */
 	DrawDistance = 0x80892320;
