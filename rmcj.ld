@@ -101,6 +101,9 @@ SECTIONS {
 	/* Disable Laps */
 	NoLaps = 0x8053436C;
 
+	/* Disable Luma */
+	NoLuma = 0x807C7FE8;
+
 	/* Disable Star Power Music */
 	NoStarMusic = 0x8070F698;
 

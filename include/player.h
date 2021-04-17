@@ -22,6 +22,7 @@ typedef struct {
 } PlayerSub14;
 
 typedef struct {
+	void* vtable;
 	PlayerPointers *pointers;
 	// Incomplete, needs research
 } PlayerSub18;

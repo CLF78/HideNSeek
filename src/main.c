@@ -78,6 +78,9 @@ void loadCodes() {
 	// Disable Lap Counting (by Vega, modified by CLF78)
 	directWrite16(NoLaps, tempVal16);
 
+	// Disable Luma (by CLF78)
+	directWrite16(NoLuma, tempVal16);
+
 	// Disable Star Power Music (by Anarion)
 	directWriteNop(NoStarMusic);
 

@@ -25,7 +25,7 @@ lfs f28, 0x4(r29)
 
 # Do bl trick
 bl trick
-.float 2.0
+.float 1.25
 
 # Load multiplier in f2
 trick:
