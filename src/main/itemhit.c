@@ -34,7 +34,7 @@ bool ItemHitLocal(bool result, PlayerHolderPlayer* player) {
 	char pid = player->playerPointers->params->playerId;
 
 	// Check that a collision happened, that we're in the game, that the player is local, and that this functions has not already run
-	if (result && Have30SecondsPassed && pid == Racedata->main.scenarios[0].settings.hudPlayerIds[0] && HideNSeekData.players[pid].position == 0) {
+	if (result && Have30SecondsPassed && pid == Racedata->main.scenarios[0].settings.hudPlayerIds[0] && HideNSeekData.players[pid].position == 0 && !HideNSeekData.players[pid].isSeeker) {
 
 		// Kill the player
 		PlayerKiller(pid);
