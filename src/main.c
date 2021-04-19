@@ -104,6 +104,7 @@ void loadCodes() {
 
 	// Finish Position/Points Updater (by CLF78)
 	directWrite32(FinishPoints, 0x48000014);
+	directWriteBranch(FixPositionsHook, FixPositionsHelper, false);
 
 	// Force 150cc (by XeR, modified by CLF78)
 	directWriteBranch(ForceCCHook, ForceCC, true);

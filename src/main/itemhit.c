@@ -66,25 +66,29 @@ void PlayerDC() {
 	register _RKNetController* rknet asm("r29");
 	register int aid asm("r28");
 
-	// Get the player's pid from the aid
-	int pid;
-	for (pid = 0; pid < 12; pid++) {
-		if (rknet->aidsToPids[pid] == aid)
-			break;
-	}
+	// Failsafe
+	if (Raceinfo != 0) {
 
-	// If the player is a Seeker, just decrease totalSeekers
-	if (HideNSeekData.players[pid].isSeeker)
-		HideNSeekData.totalSeekers--;
+		// Get the player's pid from the aid
+		int pid;
+		for (pid = 0; pid < 12; pid++) {
+			if (rknet->aidsToPids[pid] == aid)
+				break;
+		}
 
-	// If the player is an uncaught Hider, place them totalSurvivors + SeekerCount
-	else if (HideNSeekData.players[pid].position == 0) {
-		HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + SeekerCount + 1;
-		Raceinfo->players[pid]->battleScore = HideNSeekData.totalSurvivors + SeekerCount + 1;
-		HideNSeekData.totalSurvivors--;
-		
-		// If infection is on, turn said player red
-		if (HideNSeekData.isInfection)
-			Racedata->main.scenarios[0].players[pid].team = TEAM_RED;
+		// If the player is a Seeker, just decrease totalSeekers
+		if (HideNSeekData.players[pid].isSeeker)
+			HideNSeekData.totalSeekers--;
+
+		// If the player is an uncaught Hider, place them totalSurvivors + SeekerCount
+		else if (HideNSeekData.players[pid].position == 0) {
+			HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + SeekerCount + 1;
+			Raceinfo->players[pid]->battleScore = HideNSeekData.totalSurvivors + SeekerCount + 1;
+			HideNSeekData.totalSurvivors--;
+			
+			// If infection is on, turn said player red
+			if (HideNSeekData.isInfection)
+				Racedata->main.scenarios[0].players[pid].team = TEAM_RED;
+		}
 	}
 }

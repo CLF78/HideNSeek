@@ -64,7 +64,7 @@ void MainTimerUpdate(u32 timer) {
 		}
 
 		// Run the Star function if the local player is a Seeker (unless they already have a Star)
-		pid = Racedata->main.scenarios[0].settings.hudPlayerIds[0];
+		int pid = Racedata->main.scenarios[0].settings.hudPlayerIds[0];
 		if (HideNSeekData.players[pid].isSeeker && PlayerHolder->players[pid]->pointers.playerSub10->starTimer == 0)
 			StarFunc(&ItemHolder->ptr->players[pid]);
 	}
