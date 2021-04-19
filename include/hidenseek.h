@@ -2,7 +2,7 @@
 #include <common.h>
 
 typedef struct {
- 	u8 position, isSeeker, isRealSeeker, points;
+ 	u8 position, isSeeker, isRealSeeker, respawnTimer;
 } HideNSeekPlayer;
 
 typedef struct {

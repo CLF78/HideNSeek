@@ -81,6 +81,9 @@ void loadCodes() {
 	// Disable Luma (by CLF78)
 	directWrite16(NoLuma, tempVal16);
 
+	// Disable Lakitu When Going Backwards (by CLF78)
+	directWrite16(NoLakitu, tempVal16);
+
 	// Disable Star Power Music (by Anarion)
 	directWriteNop(NoStarMusic);
 
@@ -100,9 +103,7 @@ void loadCodes() {
 	directWriteBranch(No5LimitHook, TimerEnd, false);
 
 	// Finish Position/Points Updater (by CLF78)
-	directWriteBranch(FinishPos, UpdateCompletions, true);
-	directWrite16(FinishPosFix, tempVal16);
-	directWriteBranch(FinishPoints, UpdatePoints, true);
+	directWrite32(FinishPoints, 0x48000014);
 
 	// Force 150cc (by XeR, modified by CLF78)
 	directWriteBranch(ForceCCHook, ForceCC, true);

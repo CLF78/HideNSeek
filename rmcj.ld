@@ -101,6 +101,9 @@ SECTIONS {
 	/* Disable Laps */
 	NoLaps = 0x8053436C;
 
+	/* Disable Lakitu Backwards */
+	NoLakitu = 0x80534F3C;
+
 	/* Disable Luma */
 	NoLuma = 0x807C7FE8;
 
@@ -123,9 +126,7 @@ SECTIONS {
 	FixScoreSound = 0x807F6F4C;
 
 	/* Finish Stuff */
-	FinishPos = 0x80534E78;
-	FinishPosFix = 0x8053F040;
-	FinishPoints = 0x8052E5B8;
+	FinishPoints = 0x8052E58C;
 
 	/* Force CC */
 	ForceCCHook = 0x80660A70;

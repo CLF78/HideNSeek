@@ -51,22 +51,6 @@ void MainTimerUpdate(u32 timer) {
 
 	else {
 
-		// If one minute has passed, add one point to each survivor
-		// Technically this affects realSeekers too, but the points will be overridden when the match ends so the check would be redundant
-		int interval;
-		if (HalfTimer)
-			interval = 1800;
-		else
-			interval = 3600;
-
-		char pid;
-		if (timer % interval == 0) {
-			for (pid = 0; pid < HideNSeekData.playerCount; pid++) {
-				if (HideNSeekData.players[pid].position == 0)
-					HideNSeekData.players[pid].points++;
-			}
-		}
-
 		// If one minute is remaining, play the final lap jingle and enable faster music
 		if (timer == 3600)
 			JingleFunc(MusicHandler, 5);
@@ -105,14 +89,14 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 
 			// For Seekers, set their position to be the amount of survivors + 1, and their points to the total amount of players caught (or 15 if all players were caught)
 			if (HideNSeekData.players[pid].isRealSeeker) {
-				HideNSeekData.players[pid].points = (noSurvivors) ? 15 : HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount - 1;
+				Raceinfo->players[pid]->battleScore = (noSurvivors) ? 15 : HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount - 1;
 				HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + seekerpos;
 				seekerpos++;
 
 			// For all uncaught Hiders, set position to survivorpos and points to 15
 			} else if (HideNSeekData.players[pid].position == 0) {
 				HideNSeekData.players[pid].position = survivorpos;
-				HideNSeekData.players[pid].points = 15;
+				Raceinfo->players[pid]->battleScore = 15;
 				survivorpos++;
 			}
 		}
