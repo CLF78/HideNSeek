@@ -14,5 +14,8 @@ int DisableWheelie(int value, PlayerPointers* ptr) {
 	if (!Have30SecondsPassed && HideNSeekData.players[pid].isRealSeeker)
 		return 0;
 
+	if (HideNSeekData.players[pid].respawnTimer != 0)
+		return 0;
+
 	return value;
 }

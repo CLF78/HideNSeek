@@ -187,6 +187,9 @@ void loadCodes() {
 	// Remove Mushroom Bug (by Vega)
 	directWrite8(NoMushroomBug, 0);
 
+	// Respawn Cooldown (by CLF78 & stebler)
+	directWriteBranch(RespawnCooldownHook, RespawnCooldown, true);
+
 	// Reversed Timer (by CLF78)
 	directWriteBranch(TimerManagerHook, MainTimerUpdate, true);
 

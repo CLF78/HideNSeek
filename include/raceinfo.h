@@ -67,7 +67,7 @@ typedef struct {
 	void* gamemodeData;
 	TimerManager* timerManager;
 	u8 unk[0x10];
-	u16 raceState;
+	u32 raceState;
 } _Raceinfo;
 
 extern _Raceinfo* Raceinfo;

@@ -13,6 +13,15 @@ void MainTimerUpdate(u32 timer) {
 	if (timer > 0)
 		tmanager->frames = timer-1;
 
+	// Update respawn timer for each player
+	for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
+		if (HideNSeekData.players[pid].respawnTimer > 0) {
+			HideNSeekData.players[pid].respawnTimer--;
+			if (HideNSeekData.players[pid].respawnTimer == 0)
+				PlayerHolder->players[pid]->pointers.playerSub10->hardSpeedLimit = 0x42F00000;
+		}
+	}
+
 	// Some things happen before 30 seconds have passed
 	if (!Have30SecondsPassed) {
 
@@ -24,7 +33,7 @@ void MainTimerUpdate(u32 timer) {
 			}
 
 		// Play the countdown jingle again
-		} else if (timer % 60 == 0 && timer <= 180 && Raceinfo->raceState != 7)
+		} else if (timer % 60 == 0 && timer <= 180 && Raceinfo->raceState != 4)
 			CustomJingleFunc(0xD8);
 
 		// If timer is 1, reset it back to 10 minutes (minus 1 frame because it will give 1 point otherwise)
@@ -44,7 +53,7 @@ void MainTimerUpdate(u32 timer) {
 			}
 
 			// Play the GO jingle again!
-			if (Raceinfo->raceState != 7)
+			if (Raceinfo->raceState != 4)
 				CustomJingleFunc(0xD9);
 		}
 	}
@@ -52,7 +61,7 @@ void MainTimerUpdate(u32 timer) {
 	else {
 
 		// Only play sounds if the race has not ended
-		if (Raceinfo->raceState != 7) {
+		if (Raceinfo->raceState != 4) {
 
 			// If one minute is remaining, play the final lap jingle and enable faster music
 			if (timer == 3600)

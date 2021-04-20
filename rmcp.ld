@@ -214,6 +214,9 @@ SECTIONS {
 	/* Remove Mushroom Bug */
 	NoMushroomBug = 0x807BA077;
 
+	/* Respawn Cooldown */
+	RespawnCooldownHook = 0x80581CFC;
+
 	/* Reversed Timer */
 	TimerManagerHook = 0x80535C7C;
 
