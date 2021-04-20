@@ -10,8 +10,8 @@
 void PlayerKiller(char pid) {
 
 	// Set the player's position to totalSurvivors+SeekerCount and decrease totalSurvivors
+	Raceinfo->players[pid]->battleScore = HideNSeekData.totalSurvivors + SeekerCount;
 	HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + SeekerCount + 1;
-	Raceinfo->players[pid]->battleScore = HideNSeekData.totalSurvivors + SeekerCount + 1;
 	HideNSeekData.totalSurvivors--;
 
 	// If only one hider is left, play the jingle
@@ -82,8 +82,8 @@ void PlayerDC() {
 
 		// If the player is an uncaught Hider, place them totalSurvivors + SeekerCount
 		else if (HideNSeekData.players[pid].position == 0) {
+			Raceinfo->players[pid]->battleScore = HideNSeekData.totalSurvivors + SeekerCount;
 			HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + SeekerCount + 1;
-			Raceinfo->players[pid]->battleScore = HideNSeekData.totalSurvivors + SeekerCount + 1;
 			HideNSeekData.totalSurvivors--;
 			
 			// If infection is on, turn said player red

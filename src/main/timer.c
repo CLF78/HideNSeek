@@ -24,11 +24,11 @@ void MainTimerUpdate(u32 timer) {
 			}
 
 		// Play the countdown jingle again
-		} else if (timer % 60 == 0 && timer <= 180)
+		} else if (timer % 60 == 0 && timer <= 180 && Raceinfo->raceState != 7)
 			CustomJingleFunc(0xD8);
 
 		// If timer is 1, reset it back to 10 minutes (minus 1 frame because it will give 1 point otherwise)
-		else if (timer == 1) {
+		else if (timer == 2) {
 
 			if (HalfTimer)
 				tmanager->frames = 0x4650;
@@ -36,7 +36,6 @@ void MainTimerUpdate(u32 timer) {
 				tmanager->frames = 0x8CA0;
 
 			Have30SecondsPassed = true;
-			EndReason = 0;
 
 			// Allow the Seekers to move
 			for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
@@ -45,22 +44,27 @@ void MainTimerUpdate(u32 timer) {
 			}
 
 			// Play the GO jingle again!
-			CustomJingleFunc(0xD9);
+			if (Raceinfo->raceState != 7)
+				CustomJingleFunc(0xD9);
 		}
 	}
 
 	else {
 
-		// If one minute is remaining, play the final lap jingle and enable faster music
-		if (timer == 3600)
-			JingleFunc(MusicHandler, 5);
+		// Only play sounds if the race has not ended
+		if (Raceinfo->raceState != 7) {
 
-		// Play the countdown jingle in the last 10 seconds
-		else if (timer % 60 == 0) {
-			if (timer >= 240 && timer <= 600)
-				CustomJingleFunc(0xEB);
-			else if (timer > 0 && timer <= 180)
-				CustomJingleFunc(0xEC);
+			// If one minute is remaining, play the final lap jingle and enable faster music
+			if (timer == 3600)
+				JingleFunc(MusicHandler, 5);
+
+			// Play the countdown jingle in the last 10 seconds
+			else if (timer % 60 == 0) {
+				if (timer >= 240 && timer <= 600)
+					CustomJingleFunc(0xEB);
+				else if (timer > 0 && timer <= 180)
+					CustomJingleFunc(0xEC);
+			}
 		}
 
 		// Run the Star function if the local player is a Seeker (unless they already have a Star)
@@ -89,20 +93,17 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 
 			// For Seekers, set their position to be the amount of survivors + 1, and their points to the total amount of players caught (or 15 if all players were caught)
 			if (HideNSeekData.players[pid].isRealSeeker) {
-				Raceinfo->players[pid]->battleScore = (noSurvivors) ? 15 : HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount - 1;
+				rinfo->players[pid]->battleScore = (noSurvivors) ? 15 : HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount - 1;
 				HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + seekerpos;
 				seekerpos++;
 
 			// For all uncaught Hiders, set position to survivorpos and points to 15
 			} else if (HideNSeekData.players[pid].position == 0) {
 				HideNSeekData.players[pid].position = survivorpos;
-				Raceinfo->players[pid]->battleScore = 15;
+				rinfo->players[pid]->battleScore = 15;
 				survivorpos++;
 			}
 		}
-
-		// Play the battle end jingle
-		CustomJingleFunc(0xED);
 	}
 
 	// Return a different value based on which bool is true

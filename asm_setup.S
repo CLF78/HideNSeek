@@ -17,4 +17,4 @@
 .set sp, 1
 .set rtoc, 2
 
-.set REGION, 'K'
+.set REGION, 'E'

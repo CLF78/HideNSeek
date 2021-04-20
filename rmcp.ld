@@ -195,6 +195,7 @@ SECTIONS {
 	JingleFunc = 0x80711AC4;
 	SomeJingleThing = 0x809C2850;
 	TimerFlash = 0x807F82F4;
+	BattleEnd = 0x8070B358;
 
 	/* Mute Characters */
 	MuteCharsHook = 0x8070756C;

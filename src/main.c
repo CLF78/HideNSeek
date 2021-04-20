@@ -167,6 +167,7 @@ void loadCodes() {
 	// Music Patches (by CLF78)
 	directWriteNop(BattleCountdown);
 	directWriteBranch(TimerFlash, TimerFlashFix, false);
+	directWriteNop(BattleEnd);
 
 	// Mute Characters (by Melg, modified by CLF78)
 	directWriteBranch(MuteCharsHook, MuteChars, true);
