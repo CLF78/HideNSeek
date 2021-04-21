@@ -151,6 +151,13 @@ SECTIONS {
 	RockFix2Hook = 0x80805170;
 	GeyserFixHook = 0x806E5814;
 
+	/* Host Version Check */
+	GuestSendHook = 0x800DBC98;
+	HostCheckHook = 0x800DC3FC;
+	DWCiCheckResvCommand = 0x800DE618;
+	HostCheckHelperHook = 0x800DC310;
+	Original30 = 0x80272D10;
+
 	/* Increase Visual Distance */
 	DrawDistance = 0x8088DBE0;
 

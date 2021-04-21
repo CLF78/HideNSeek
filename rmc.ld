@@ -22,6 +22,9 @@ SECTIONS {
 	AlwaysWinVote = 0x800002B6;
 	AlwaysSeeker = 0x800002B7;
 
+	/* Version */
+	Version = 0x800003B0;
+
 	/* Riivo Options */
 	NoMusic = 0x80004000;
 	ThirtyFPS = 0x8000400F;

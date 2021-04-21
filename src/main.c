@@ -128,6 +128,12 @@ void loadCodes() {
 	directWriteArray(RockFix2Hook, RockFix, 8);
 	directWriteBranch(GeyserFixHook, GeyserFix, true);
 
+	// Host Version Check (by CLF78 & Seeky)
+	directWriteBranch(GuestSendHook, GuestSend, false);
+	directWriteBranch(HostCheckHook, HostCheck, true);
+	directWriteBranch(HostCheckHelperHook, HostCheckHelper, true);
+	directWrite8(Version, 1);
+
 	// Increase Visual Distance (by davidevgen)
 	directWrite32(DrawDistance, 0x49742400);
 
