@@ -102,14 +102,14 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 
 			// For Seekers, set their position to be the amount of survivors + 1, and their points to the total amount of players caught (or 15 if all players were caught)
 			if (HideNSeekData.players[pid].isRealSeeker) {
-				rinfo->players[pid]->battleScore = (noSurvivors) ? 15 : HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount - 1;
+				rinfo->players[pid]->battleScore = (noSurvivors) ? HideNSeekData.playerCount - SeekerCount + 2 : HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount;
 				HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + seekerpos;
 				seekerpos++;
 
 			// For all uncaught Hiders, set position to survivorpos and points to 15
 			} else if (HideNSeekData.players[pid].position == 0) {
 				HideNSeekData.players[pid].position = survivorpos;
-				rinfo->players[pid]->battleScore = 15;
+				rinfo->players[pid]->battleScore = HideNSeekData.playerCount - SeekerCount + 2;
 				survivorpos++;
 			}
 		}

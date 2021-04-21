@@ -10,6 +10,7 @@
 # Move player to r4
 ItemHitLocalHelper:
 mr r4, r31
+mr r5, r30
 b ItemHitLocal
 
 ##################
