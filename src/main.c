@@ -105,6 +105,7 @@ void loadCodes() {
 	// Finish Position/Points Updater (by CLF78)
 	directWrite32(FinishPoints, 0x48000014);
 	directWriteBranch(FixPositionsHook, FixPositionsHelper, false);
+	directWriteBranch(FixFanfareHook, FixFanfare, true);
 
 	// Force 150cc (by XeR, modified by CLF78)
 	directWriteBranch(ForceCCHook, ForceCC, true);
@@ -221,7 +222,7 @@ void loadCodes() {
 	directWriteBranch(HNSDataHook, SetupHNS, false);
 	directWriteBranch(HNSDataHook2, DeleteHNS, false);
 
-	// Spectator Mode (by tZ & Skullface, modified by CLF78)
+	// Spectator Mode (by tZ, Skullface, Geeh and EvilRobot, modified by CLF78)
 	directWriteBranch(SpectatorModeHook, SpectatorModeFunc, false);
 	directWriteBranch(ReplayCameraHook, ReplayCameraManager, true);
 

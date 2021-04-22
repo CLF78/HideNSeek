@@ -128,6 +128,7 @@ SECTIONS {
 	/* Finish Stuff */
 	FinishPoints = 0x8051CC64;
 	FixPositionsHook = 0x8084AC80;
+	FixFanfareHook = 0x8077B47C;
 
 	/* Force CC */
 	ForceCCHook = 0x8064F71C;
