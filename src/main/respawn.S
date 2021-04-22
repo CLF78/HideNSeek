@@ -13,10 +13,6 @@ lbz r4, Have30SecondsPassed@l(r4)
 cmpwi r4, 0
 beqlr
 
-# Store 0 to hardSpeedLimit
-li r4, 0
-stw r4, 0x2C(r29)
-
 # Get player id
 lwz r3, 0(r3)
 lbz r4, 0x10(r3)
@@ -27,7 +23,19 @@ lis r3, HideNSeekData@ha
 ori r3, r3, HideNSeekData@l+4
 add r3, r3, r4
 
-# Store 60 to respawnTimer and return
+# Check if player is seeker
+lbz r4, 0x1(r3)
+cmpwi r4, 1
+beqlr
+
+# Store 0 to hardSpeedLimit
+li r4, 0
+stw r4, 0x2C(r29)
+
+# Store 60 to respawnTimer
 li r4, 60
 stb r4, 0x3(r3)
+
+# Disable the boost and return
+li r0, 0
 blr
