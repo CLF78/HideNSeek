@@ -33,9 +33,16 @@ blr
 
 # This is an ASM helper for the main function in C
 
-# Load Raceinfo and call function
+# Load Raceinfo
 TimerEnd:
 lwz r3, 0x4(r31)
+
+# Check if countdown has ended
+lwz r4, 0x28(r3)
+cmpwi r4, 2
+blt noEndRace
+
+# Call function
 bl TimerChecks
 
 # Store r3 to EndReason
@@ -45,6 +52,9 @@ stb r3, EndReason@l(r4)
 # Check if EndReason is not 0
 cmpwi r3, 0
 bne endRace
+
+# Do not end the race yet
+noEndRace:
 b No5LimitHook3
 
 # End the race
