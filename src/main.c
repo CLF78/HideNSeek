@@ -141,6 +141,7 @@ void loadCodes() {
 	// Infinite Star Timer (by CLF78)
 	directWrite32(InfiniteStarHook, 0x7C601B78);
 	directWrite32(InfiniteStarHook2, 0x7C802378);
+	directWrite32(InfiniteStarHook3, 0x48000044);
 
 	// Instant Respawn (by davidevgen)
 	directWrite32(InstantRespawn1, 0x3800FFC3);

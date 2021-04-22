@@ -165,6 +165,7 @@ SECTIONS {
 	/* Infinite Star */
 	InfiniteStarHook = 0x80572EC4;
 	InfiniteStarHook2 = 0x80579BA4;
+	InfiniteStarHook3 = 0x80566B4C;
 	StarFunc = 0x807A860C;
 
 	/* Instant Respawn */
