@@ -31,6 +31,7 @@ bl trick
 .string16 "\nTime's up!\nThe match has ended."
 .string16 "\nAll players have been caught.\nThe match has ended."
 .string16 "\nAll seekers left.\nThe match has ended."
+.string16 "Hide and Seek v1.7"
 .align 2
 
 trick:
@@ -111,8 +112,13 @@ cmpwi r14, 1341
 bne+ not1341
 addi r3, r12, 0x2B2
 
-# Store pointer before it gets overwritten (original instruction)
 not1341:
+cmpwi r14, 4002
+bne+ not4002
+addi r3, r12, 0x302
+
+# Store pointer before it gets overwritten (original instruction)
+not4002:
 stw r3, 0x20(r1)
 
 .if (REGION == 'P' || REGION == 'E')
