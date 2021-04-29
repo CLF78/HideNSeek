@@ -1,7 +1,7 @@
 .include "asm_setup.S"
 
-.extern SeekerCount, IsInfection, HalfTimer, AlwaysSeeker, BtGlitch, AlwaysWinVote, HostFlagsHook, PrevSeekers
-.global HostFlags
+.extern SeekerCount, IsInfection, HalfTimer, AlwaysSeeker, GlitchesAllowed, BtGlitch, AlwaysWinVote, HostFlagsHook, PrevSeekers
+.global HostFlags, SceneSwap
 
 # Get message type
 HostFlags:
@@ -12,6 +12,10 @@ bne+ normalRoomMessage
 # It's a Room Start message, attach all flags! Load 0x8000 in r11
 lis r11, SeekerCount@ha
 
+# Store IsInfection
+rlwinm r12, r4, 24, 31, 31
+stb r12, IsInfection@l(r11)
+
 # Reset PrevSeekers
 li r12, -1
 sth r12, PrevSeekers@l(r11)
@@ -21,18 +25,18 @@ lbz r12, SeekerCount@l(r11)
 slwi r12, r12, 23
 or r4, r4, r12
 
-# Attach IsInfection
-lbz r12, IsInfection@l(r11)
-slwi r12, r12, 22
-or r4, r4, r12
-
-# Attack HalfTimer
+# Attach HalfTimer
 lbz r12, HalfTimer@l(r11)
-slwi r12, r12, 21
+slwi r12, r12, 22
 or r4, r4, r12
 
 # Attach AlwaysSeeker
 lbz r12, AlwaysSeeker@l(r11)
+slwi r12, r12, 21
+or r4, r4, r12
+
+# Attach GlitchesAllowed
+lbz r12, GlitchesAllowed@l(r11)
 slwi r12, r12, 20
 or r4, r4, r12
 
@@ -71,29 +75,29 @@ bgt+ notSeekerCount
 stb r11, SeekerCount@l(r6)
 b end
 
-# Check if it's IsInfection
+# Check if it's HalfTimer
 notSeekerCount:
 cmpwi r12, 3
-bgt+ notIsInfection
-stb r11, IsInfection@l(r6)
-b end
-
-# Check if it's HalfTimer
-notIsInfection:
-cmpwi r12, 5
 bgt+ notHalfTimer
 stb r11, HalfTimer@l(r6)
 b end
 
 # Check if it's AlwaysSeeker
 notHalfTimer:
-cmpwi r12, 7
+cmpwi r12, 5
 bgt+ notAlwaysSeeker
 stb r11, AlwaysSeeker@l(r6)
 b end
 
-# Check if it's BtGlitch
+# Check if it's GlitchesAllowed
 notAlwaysSeeker:
+cmpwi r12, 7
+bgt+ notGlitchesAllowed
+stb r11, GlitchesAllowed@l(r6)
+b end
+
+# Check if it's BtGlitch
+notGlitchesAllowed:
 cmpwi r12, 9
 bgt+ notBtGlitch
 stb r11, BtGlitch@l(r6)
@@ -109,3 +113,15 @@ stb r11, AlwaysWinVote@l(r6)
 end:
 li r0, 2
 b HostFlagsHook+4
+
+# Check for Friend Room Team VS
+SceneSwap:
+cmpwi r4, 0x61
+bne+ end
+
+# Switch to normal VS
+subi r4, r4, 1
+
+# Original instruction
+mr r31, r4
+blr

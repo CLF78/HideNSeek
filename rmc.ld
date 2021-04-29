@@ -14,13 +14,14 @@ SECTIONS {
 	UseReplayCams = 0x800001E9;
 
 	/* HNS Per-GP Data */
-	SeekerCount = 0x800002B0;
-	IsInfection = 0x800002B1;
+	IsInfection = 0x800002B0;
+	SeekerCount = 0x800002B1;
 	PrevSeekers = 0x800002B2;
 	HalfTimer = 0x800002B4;
-	BtGlitch = 0x800002B5;
-	AlwaysWinVote = 0x800002B6;
-	AlwaysSeeker = 0x800002B7;
+	AlwaysSeeker = 0x800002B5;
+	GlitchesAllowed = 0x800002B6;
+	BtGlitch = 0x800002B7;
+	AlwaysWinVote = 0x800002B8;
 
 	/* Version */
 	Version = 0x800003B0;

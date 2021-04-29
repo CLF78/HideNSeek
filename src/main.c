@@ -75,14 +75,14 @@ void loadCodes() {
 	// Disable 5:56 Disconnection (by CLF78)
 	directWrite16(No556DC, tempVal16);
 
+	// Disable Lakitu When Going Backwards (by CLF78)
+	directWrite16(NoLakitu, tempVal16);
+
 	// Disable Lap Counting (by Vega, modified by CLF78)
 	directWrite16(NoLaps, tempVal16);
 
 	// Disable Luma (by CLF78)
 	directWrite16(NoLuma, tempVal16);
-
-	// Disable Lakitu When Going Backwards (by CLF78)
-	directWrite16(NoLakitu, tempVal16);
 
 	// Disable Star Power Music (by Anarion)
 	directWriteNop(NoStarMusic);
@@ -169,8 +169,7 @@ void loadCodes() {
 	// Message Editor (by WhatIsLoaf & CLF78)
 	directWriteBranch(MessageEditorHook, MessageEditor, false);
 	directWriteBranch(MessageEditorHook2, MessageEditor2, true);
-	directWriteBranch(MessageEditorHook3, MessageEditor3, true);
-	directWriteBranch(MessageEditorHook4, MessageEditor3, true);
+	directWriteBranch(MessageEditorHook3, MessageEditor2, true);
 
 	// Music Patches (by CLF78)
 	directWriteNop(BattleCountdown);
@@ -205,6 +204,14 @@ void loadCodes() {
 	directWriteBranch(HostFlagsHook, HostFlags, false);
 	directWriteBranch(GuestFlagsHook, GuestFlags, false);
 	directWriteBranch(FlagResetHook, FlagReset, false);
+	directWrite8(MessageButtons, 0x6C);
+	directWriteArray(MessageButtons2Hook, MessageButtons2, 8);
+	directWriteBranch(MessageButtons3Hook, MessageButtons3, false);
+	tempVal8 = 2;
+	directWrite8(MessageButtons4, tempVal8);
+	directWrite8(MessageButtons5, tempVal8);
+	directWriteBranch(MessageButtons6Hook, MessageButtons6, true);
+	directWriteBranch(SceneSwapHook, SceneSwap, true);
 
 	// Screen Edits (by CLF78 & Kevin, currently disabled)
 	// directWriteBranch(ScreenLoadHook, ScreenLoad, false);

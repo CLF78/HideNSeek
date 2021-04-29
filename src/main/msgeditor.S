@@ -2,7 +2,7 @@
 
 .extern EndReason
 .extern MessageEditorHook, MessageFunc, SCGetLanguage
-.global MessageEditor, MessageEditor2, MessageEditor3
+.global MessageEditor, MessageEditor2
 
 ###########
 # Patch 1 #
@@ -16,16 +16,18 @@ bl MessageFunc
 bl trick
 
 # Messages go here
+.string16 "We're playing Hide and Seek!"
+.string16 "We're playing Infection Mode!"
 .string16 "Double Seeker: ON!"
 .string16 "Double Seeker: OFF!"
-.string16 "Infection Mode: ON!"
-.string16 "Infection Mode: OFF!"
 .string16 "Halved Timer: ON!"
 .string16 "Halved Timer: OFF!"
 .string16 "Host Always Seeker: ON!"
 .string16 "Host Always Seeker: OFF!"
-.string16 "Battle Glitch: ON!"
-.string16 "Battle Glitch: OFF!"
+.string16 "Allow Glitches: ON!"
+.string16 "Allow Glitches: OFF!"
+.string16 "Long Distance Names: ON!"
+.string16 "Long Distance Names: OFF!"
 .string16 "Host Always Wins Vote: ON!"
 .string16 "Host Always Wins Vote: OFF!"
 .string16 "\nTime's up!\nThe match has ended."
@@ -37,90 +39,104 @@ bl trick
 trick:
 mflr r12
 
-# Begin messages
-cmpwi r14, 4568
-bne+ not4568
+# Friend Room Start messages
+cmpwi r14, 4110
+bne+ not4110
 mr r3, r12
 
-not4568:
-cmpwi r14, 4569
-bne+ not4569
-addi r3, r12, 0x26
+not4110:
+cmpwi r14, 4111
+bne+ not4111
+addi r3, r12, 0x3A
 
-not4569:
-cmpwi r14, 4570
-bne+ not4570
-addi r3, r12, 0x4E
-
-not4570:
-cmpwi r14, 4571
-bne+ not4571
+# Room Flag messages
+not4111:
+cmpwi r14, 8410
+bne+ not8410
 addi r3, r12, 0x76
 
-not4571:
-cmpwi r14, 4572
-bne+ not4572
-addi r3, r12, 0xA0
+not8410:
+cmpwi r14, 8411
+bne+ not8411
+addi r3, r12, 0x9C
 
-not4572:
-cmpwi r14, 4573
-bne+ not4573
+not8411:
+cmpwi r14, 8412
+bne+ not8412
 addi r3, r12, 0xC4
 
-not4573:
-cmpwi r14, 4574
-bne+ not4574
-addi r3, r12, 0xEA
+not8412:
+cmpwi r14, 8413
+bne+ not8413
+addi r3, r12, 0xE8
 
-not4574:
-cmpwi r14, 4575
-bne+ not4575
-addi r3, r12, 0x11A
+not8413:
+cmpwi r14, 8414
+bne+ not8414
+addi r3, r12, 0x10E
 
-not4575:
-cmpwi r14, 4576
-bne+ not4576
-addi r3, r12, 0x14C
+not8414:
+cmpwi r14, 8415
+bne+ not8415
+addi r3, r12, 0x13E
 
-not4576:
-cmpwi r14, 4577
-bne+ not4577
-addi r3, r12, 0x172
+not8415:
+cmpwi r14, 8416
+bne+ not8416
+addi r3, r12, 0x170
 
-not4577:
-cmpwi r14, 4578
-bne+ not4578
-addi r3, r12, 0x19A
+not8416:
+cmpwi r14, 8417
+bne+ not8417
+addi r3, r12, 0x198
 
-not4578:
-cmpwi r14, 4579
-bne+ not4579
-addi r3, r12, 0x1D0
+not8417:
+cmpwi r14, 8418
+bne+ not8418
+addi r3, r12, 0x1C2
 
-not4579:
+not8418:
+cmpwi r14, 8419
+bne+ not8419
+addi r3, r12, 0x1F4
+
+not8419:
+cmpwi r14, 8420
+bne+ not8420
+addi r3, r12, 0x228
+
+not8420:
+cmpwi r14, 8421
+bne+ not8421
+addi r3, r12, 0x25E
+
+# Race end messages
+not8421:
 cmpwi r14, 1340
 bne+ not1340
-addi r3, r12, 0x208
+addi r3, r12, 0x296
 
 not1340:
 cmpwi r14, 1342
 bne+ not1342
-addi r3, r12, 0x24A
+addi r3, r12, 0x2D8
 
 not1342:
 cmpwi r14, 1341
 bne+ not1341
-addi r3, r12, 0x2B2
+addi r3, r12, 0x340
 
+# Version string
 not1341:
 cmpwi r14, 4002
 bne+ not4002
-addi r3, r12, 0x302
+addi r3, r12, 0x390
 
 # Store pointer before it gets overwritten (original instruction)
 not4002:
 stw r3, 0x20(r1)
 
+# Friend status messages
 .if (REGION == 'P' || REGION == 'E')
 
 	# Call SCGetLanguage
@@ -178,35 +194,8 @@ b MessageEditorHook+8
 # Patch 2 #
 ###########
 
-# Check if BMG is between 4500 and 4511 (use cr7 because cr0 is reserved atm)
-MessageEditor2:
-subi r14, r6, 4500
-cmplwi cr7, r14, 11
-bgt+ cr7, notFirstTen
-
-# If so add 68
-addi r6, r6, 68
-b return
-
-# Check if BMG is between 4510 and 4579 (use cr7 because cr0 is reserved atm)
-notFirstTen:
-cmplwi cr7, r14, 79
-bgt+ cr7, return
-
-# If so subtract 12
-subi r6, r6, 12
-
-# Original instruction
-return:
-mr r14, r6
-blr
-
-###########
-# Patch 3 #
-###########
-
 # Use EndReason rather than the field in RaceinfoPlayer to determine the message
-MessageEditor3:
+MessageEditor2:
 lis r3, EndReason@ha
 lbz r3, EndReason@l(r3)
 addi r3, r3, 1

@@ -1,7 +1,7 @@
 .include "asm_setup.S"
 
 .extern RKNetController
-.extern SeekerCount, IsInfection, HalfTimer, AlwaysSeeker, BtGlitch, AlwaysWinVote
+.extern SeekerCount, IsInfection, HalfTimer, AlwaysSeeker, GlitchesAllowed, BtGlitch, AlwaysWinVote
 .global GuestFlags
 
 # Check if mainType is 1
@@ -27,21 +27,25 @@ mtlr r0
 # Load 0x8000 in r12
 lis r12, SeekerCount@ha
 
+# Store IsInfection
+rlwinm r11, r3, 24, 31, 31
+stb r11, IsInfection@l(r12)
+
 # Store SeekerCount
 rlwinm r11, r3, 9, 31, 31
 stb r11, SeekerCount@l(r12)
 
-# Store IsInfection
-rlwinm r11, r3, 10, 31, 31
-stb r11, IsInfection@l(r12)
-
 # Store HalfTimer
-rlwinm r11, r3, 11, 31, 31
+rlwinm r11, r3, 10, 31, 31
 stb r11, HalfTimer@l(r12)
 
 # Store AlwaysSeeker
-rlwinm r11, r3, 12, 31, 31
+rlwinm r11, r3, 11, 31, 31
 stb r11, AlwaysSeeker@l(r12)
+
+# Store GlitchesAllowed
+rlwinm r11, r3, 12, 31, 31
+stb r11, GlitchesAllowed@l(r12)
 
 # Store BtGlitch
 rlwinm r11, r3, 13, 31, 31

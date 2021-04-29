@@ -194,9 +194,8 @@ SECTIONS {
 
 	/* Message Editor */
 	MessageEditorHook = 0x805CDDC4;
-	MessageEditorHook2 = 0x805CDD58;
-	MessageEditorHook3 = 0x807F8E50;
-	MessageEditorHook4 = 0x807F8EC8;
+	MessageEditorHook2 = 0x807F8E50;
+	MessageEditorHook3 = 0x807F8EC8;
 	MessageFunc = 0x805F8CF0;
 
 	/* Music Patches */
@@ -233,6 +232,13 @@ SECTIONS {
 	HostFlagsHook = 0x8065AE70;
 	GuestFlagsHook = 0x8065AF70;
 	FlagResetHook = 0x800D1AB0;
+	MessageButtons = 0x805DC3EB;
+	MessageButtons2Hook = 0x805DB3E0;
+	MessageButtons3Hook = 0x805DAD7C;
+	MessageButtons4 = 0x805DC47F;
+	MessageButtons5 = 0x805DACF7;
+	MessageButtons6Hook = 0x805DCB78;
+	SceneSwapHook = 0x80621E1C;
 
 	/* Screen Edits */
 	ScreenLoadHook = 0x8062E82C;
