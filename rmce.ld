@@ -232,6 +232,13 @@ SECTIONS {
 	HostFlagsHook = 0x806569E8;
 	GuestFlagsHook = 0x80656AE8;
 	FlagResetHook = 0x800D1A10;
+	MessageButtons = 0x8062C907;
+	MessageButtons2Hook = 0x8062B954;
+	MessageButtons3Hook = 0x8062B2F0;
+	MessageButtons4 = 0x8062C99B;
+	MessageButtons5 = 0x8062B26B;
+	MessageButtons6Hook = 0x8062D094;
+	SceneSwapHook = 0x805F0F68;
 
 	/* Screen Edits */
 	ScreenLoadHook = 0x805FD978;
