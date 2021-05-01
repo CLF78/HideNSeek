@@ -138,7 +138,7 @@ SECTIONS {
 	FixPositionsHook = 0x8085A230;
 	FixPositions2 = 0x80529EC4;
 	FixPositions3 = 0x80529F58;
-	FixPositionsHook4 = 0x80529EA8;
+	FixPositions4Hook = 0x80529EA8;
 	FixFanfareHook = 0x807840B0;
 
 	/* Force CC */
@@ -205,7 +205,7 @@ SECTIONS {
 
 	/* Message Editor */
 	MessageEditorHook = 0x805C12A4;
--	MessageEditorHook2 = 0x805C1238;
+	MessageEditorHook2 = 0x805C1238;
 	MessageEditorHook3 = 0x80843288;
 	MessageEditorHook4 = 0x80843300;
 	MessageFunc = 0x805D840C;

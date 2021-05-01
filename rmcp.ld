@@ -138,7 +138,7 @@ SECTIONS {
 	FixPositionsHook = 0x8085C8C0;
 	FixPositions2 = 0x8052EA0C;
 	FixPositions3 = 0x8052EAA0;
-	FixPositionsHook4 = 0x8052E9F0;
+	FixPositions4Hook = 0x8052E9F0;
 	FixFanfareHook = 0x8078D0BC;
 
 	/* Force CC */
