@@ -19,9 +19,14 @@ int pidHelper(char currentpid, char prevaid1, char prevaid2, int index) {
 
 		// Check if the aid meets the conditions
         for (pid = 0; pid < 12; pid++) {
-            if (RKNetController->aidsToPids[pid] == aid && pid != currentpid && (AlwaysSeeker || (aid != prevaid1 && aid != prevaid2))) {
-				PrevSeekers[index] = aid;
-				break;
+            if (RKNetController->aidsToPids[pid] == aid && pid != currentpid) {
+				if (AlwaysSeeker || Racedata->main.scenarios[0].settings.gamemode <= MODE_PUBLIC_BATTLE) {
+					PrevSeekers[index] = aid;
+					break;
+				} else if (aid != prevaid1 && aid != prevaid2) {
+					PrevSeekers[index] = aid;
+					break;
+				}
 			}
         }
     } while (PrevSeekers[index] == 0xFF);

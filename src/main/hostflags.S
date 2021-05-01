@@ -117,11 +117,25 @@ b HostFlagsHook+4
 # Check for Friend Room Team VS
 SceneSwap:
 cmpwi r4, 0x61
-bne+ end
+bne+ not61
 
 # Switch to normal VS
-subi r4, r4, 1
+li r4, 0x60
+b return
+
+# Check for Battle Voting
+not61:
+cmpwi r4, 0x59
+bne+ return
+
+# Set IsInfection and HalfTimer to 1 and switch to VS Voting
+li r4, 1
+lis r31, IsInfection@ha
+stb r4, IsInfection@l(r31)
+stb r4, HalfTimer@l(r31)
+li r4, 0x58
 
 # Original instruction
+return:
 mr r31, r4
 blr

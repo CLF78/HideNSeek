@@ -45,9 +45,15 @@ rlwinm r9, r9, 0, 0xFF
 lis r12, Version@ha
 lbz r12, Version@l(r12)
 cmpw r9, r12
+bne deny
+
+# Check if the player is alone
+lbz r9, 0x1C(r31)
+cmpwi r9, 1
 beq+ return
 
-# They don't match, send RESV_DENY
+# Conditions were not met, send RESV_DENY
+deny:
 li r3, 3
 blr
 

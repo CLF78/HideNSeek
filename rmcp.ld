@@ -49,6 +49,14 @@ SECTIONS {
 	WiimmfiPatch4 = 0x801D4EFC;
 
 	LoginRegion = 0x80384FD0;
+	VSRegion = 0x80653644;
+	VSRegion2 = 0x806536B0;
+	VSRegion3 = 0x8065920C;
+	VSRegion4 = 0x80659260;
+	VSRegion5 = 0x80659724;
+	VSRegion6 = 0x80659778;
+	VSRegion7 = 0x8065A034;
+	VSRegion8 = 0x8065A080;
 
 	WiimmfiVersionString = 0x80276054;
 	NaswiiURL = 0x8027A404;
@@ -128,6 +136,9 @@ SECTIONS {
 	/* Finish Stuff */
 	FinishPoints = 0x8052EC0C;
 	FixPositionsHook = 0x8085C8C0;
+	FixPositions2 = 0x8052EA0C;
+	FixPositions3 = 0x8052EAA0;
+	FixPositionsHook4 = 0x8052E9F0;
 	FixFanfareHook = 0x8078D0BC;
 
 	/* Force CC */
@@ -194,8 +205,9 @@ SECTIONS {
 
 	/* Message Editor */
 	MessageEditorHook = 0x805CDDC4;
-	MessageEditorHook2 = 0x807F8E50;
-	MessageEditorHook3 = 0x807F8EC8;
+	MessageEditorHook2 = 0x805CDD58;
+	MessageEditorHook3 = 0x807F8E50;
+	MessageEditorHook4 = 0x807F8EC8;
 	MessageFunc = 0x805F8CF0;
 
 	/* Music Patches */
@@ -219,6 +231,28 @@ SECTIONS {
 	NoDisconnect3 = 0x8053F0B4;
 	NoDisconnect4 = 0x8053F124;
 
+	/* Online Menu Edits */
+	NoWWButton1 = 0x8064B983;
+	NoWWButton2 = 0x8064BA10;
+	NoWWButton3 = 0x8064BA38;
+	NoWWButton4 = 0x8064BA50;
+	NoWWButton5 = 0x8064BC13;
+	NoWWButton6 = 0x8064BC3E;
+	NoWWButton7 = 0x8064BCB6;
+	NoWWButton8 = 0x8064BF5F;
+	BattleButton1 = 0x8064C41B;
+	BattleButton2 = 0x8064C433;
+	BattleButton3 = 0x8064C76F;
+	BattleButton4 = 0x80608568;
+	VersionString1 = 0x8064C5A6;
+	VersionString2 = 0x8064C5BA;
+	VersionString3 = 0x8064CE22;
+	VersionString4 = 0x805D9CFE;
+	VersionString5 = 0x80608652;
+	VersionString6 = 0x80608676;
+	VersionString7 = 0x805D46E6;
+	VersionString8 = 0x805D5C6A;
+
 	/* Remove Mushroom Bug */
 	NoMushroomBug = 0x807BA077;
 
@@ -232,6 +266,9 @@ SECTIONS {
 	HostFlagsHook = 0x8065AE70;
 	GuestFlagsHook = 0x8065AF70;
 	FlagResetHook = 0x800D1AB0;
+	FlagResetHook2 = 0x800D1980;
+	FlagResetHook3 = 0x800D1D64;
+	FlagResetHook4 = 0x800D2CD0;
 	MessageButtons = 0x805DC3EB;
 	MessageButtons2Hook = 0x805DB3E0;
 	MessageButtons3Hook = 0x805DAD7C;
@@ -242,6 +279,7 @@ SECTIONS {
 
 	/* Screen Edits */
 	ScreenLoadHook = 0x8062E82C;
+	ScreenLoadHook2 = 0x8062E0A0;
 	CupScreenPatchHook = 0x808D9564;
 	BattleCupScreenPatchHook = 0x808D8F24;
 	ScreenDSIFix1Hook = 0x80837744;

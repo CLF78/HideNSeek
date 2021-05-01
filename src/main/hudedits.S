@@ -13,9 +13,14 @@ lwz r5, 0x4(r3)
 
 # Froom VS
 cmpwi r5, 0x42
+beq decrement
+
+# WW VS
+cmpwi r5, 0x40
 bne+ end
 
 # Decrement
+decrement:
 subi r4, r4, 2
 
 # Original instruction

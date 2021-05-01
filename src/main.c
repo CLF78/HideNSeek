@@ -52,6 +52,17 @@ void loadCodes() {
 	// Wiimmfi Login Region Changer (by Atlas)
 	directWriteString(LoginRegion, "120053");
 
+	// VS Matchmaking Region Patch (by Leseratte)
+	tempVal32 = 0x38E04E55;
+	directWrite32(VSRegion, 0x38A04E55);
+	directWrite32(VSRegion2, 0x38C04E55);
+	directWrite32(VSRegion3, tempVal32);
+	directWrite32(VSRegion4, tempVal32);
+	directWrite32(VSRegion5, tempVal32);
+	directWrite32(VSRegion6, tempVal32);
+	directWrite32(VSRegion7, 0x38800055);
+	directWrite32(VSRegion8, 0x38800055);
+
 	// Always Win Track Vote (by Star, modified by Seeky & CLF78)
 	directWriteBranch(AlwaysWinVoteHook, VotePatch, true);
 
@@ -61,7 +72,7 @@ void loadCodes() {
 	// Battle Arena Fixes (by CLF78)
 	directWriteBranch(BattleSpawnFixHook, BattleSpawnFix, true);
 	directWriteBranch(BattleCCFixHook, BattleCCFix, true);
-	directWrite16(BattleCCFix2, 0x40A1);
+	directWrite16(BattleCCFix2, 0x41A0);
 
 	// Decrement Screen Elements (by stebler)
 	directWriteBranch(DecrementScreenElements, HideHUD, false);
@@ -105,6 +116,9 @@ void loadCodes() {
 	// Finish Position/Points Updater (by CLF78)
 	directWrite32(FinishPoints, 0x48000014);
 	directWriteBranch(FixPositionsHook, FixPositionsHelper, false);
+	directWriteNop(FixPositions2);
+	directWriteNop(FixPositions3);
+	directWriteBranch(FixPositions4Hook, FixPositions4, true);
 	directWriteBranch(FixFanfareHook, FixFanfare, true);
 
 	// Force 150cc (by XeR, modified by CLF78)
@@ -120,9 +134,9 @@ void loadCodes() {
 	directWrite16(FroomRaceCount2, 1);
 
 	// Go To Friends Menu Automatically (by Chadderz)
-	directWrite8(AutoFriendsMenu, 0x8D);
-	directWrite16(AutoFriendsMenu2, 0x28);
-	directWrite16(AutoFriendsMenu3, 0x30);
+	// directWrite8(AutoFriendsMenu, 0x8D);
+	// directWrite16(AutoFriendsMenu2, 0x28);
+	// directWrite16(AutoFriendsMenu3, 0x30);
 
 	// Grumble Volcano Fixes (by CLF78 & Ismy)
 	directWriteArray(RockFixHook, RockFix, 8);
@@ -133,7 +147,7 @@ void loadCodes() {
 	directWriteBranch(GuestSendHook, GuestSend, false);
 	directWriteBranch(HostCheckHook, HostCheck, true);
 	directWriteBranch(HostCheckHelperHook, HostCheckHelper, true);
-	directWrite8(Version, 1);
+	directWrite8(Version, 2);
 
 	// Increase Visual Distance (by davidevgen)
 	directWrite32(DrawDistance, 0x49742400);
@@ -169,7 +183,8 @@ void loadCodes() {
 	// Message Editor (by WhatIsLoaf & CLF78)
 	directWriteBranch(MessageEditorHook, MessageEditor, false);
 	directWriteBranch(MessageEditorHook2, MessageEditor2, true);
-	directWriteBranch(MessageEditorHook3, MessageEditor2, true);
+	directWriteBranch(MessageEditorHook3, MessageEditor3, true);
+	directWriteBranch(MessageEditorHook4, MessageEditor3, true);
 
 	// Music Patches (by CLF78)
 	directWriteNop(BattleCountdown);
@@ -191,6 +206,30 @@ void loadCodes() {
 	directWrite32(NoDisconnect3, tempVal32);
 	directWrite32(NoDisconnect4, tempVal32);
 
+	// Online Menu Edits (by CLF78 & Chadderz)
+	directWrite8(NoWWButton1, 5);
+	directWriteNop(NoWWButton2);
+	directWriteNop(NoWWButton3);
+	directWrite32(NoWWButton4, 0x48000010);
+	directWrite8(NoWWButton5, 1);
+	tempVal16 = 0x484;
+	directWrite16(NoWWButton6, tempVal16);
+	directWrite16(NoWWButton7, tempVal16);
+	directWrite8(NoWWButton8, 0x18);
+	directWrite8(BattleButton1, 0x18);
+	directWrite8(BattleButton2, 0x6A);
+	directWrite8(BattleButton3, 0x10);
+	directWrite16(BattleButton4, 0x4800);
+	tempVal16 = 8422;
+	directWrite16(VersionString1, tempVal16);
+	directWrite16(VersionString2, tempVal16);
+	directWrite16(VersionString3, tempVal16);
+	directWrite16(VersionString4, tempVal16);
+	directWrite16(VersionString5, tempVal16);
+	directWrite16(VersionString6, tempVal16);
+	directWrite16(VersionString7, tempVal16);
+	directWrite16(VersionString8, tempVal16);
+
 	// Remove Mushroom Bug (by Vega)
 	directWrite8(NoMushroomBug, 0);
 
@@ -204,6 +243,9 @@ void loadCodes() {
 	directWriteBranch(HostFlagsHook, HostFlags, false);
 	directWriteBranch(GuestFlagsHook, GuestFlags, false);
 	directWriteBranch(FlagResetHook, FlagReset, false);
+	directWriteBranch(FlagResetHook2, FlagReset, false);
+	directWriteBranch(FlagResetHook3, FlagReset, false);
+	directWriteBranch(FlagResetHook4, FlagReset, false);
 	directWrite8(MessageButtons, 0x6C);
 	directWriteArray(MessageButtons2Hook, MessageButtons2, 8);
 	directWriteBranch(MessageButtons3Hook, MessageButtons3, false);
@@ -213,18 +255,19 @@ void loadCodes() {
 	directWriteBranch(MessageButtons6Hook, MessageButtons6, true);
 	directWriteBranch(SceneSwapHook, SceneSwap, true);
 
-	// Screen Edits (by CLF78 & Kevin, currently disabled)
-	// directWriteBranch(ScreenLoadHook, ScreenLoad, false);
-	// directWriteBranch(ScreenDSIFix1Hook, ScreenDSIFix1, false);
-	// directWriteBranch(ScreenDSIFix2Hook, ScreenDSIFix2, true);
-	// directWriteBranch(ScreenDSIFix3Hook, ScreenDSIFix2, true);
-	// directWrite32(CupScreenPatchHook, (u32)&CupScreenPatch);
-	// directWrite32(BattleCupScreenPatchHook, (u32)&BattleCupScreenPatch);
-	// directWrite16(TrackVoteFix, 0x14);
-	// directWrite16(TrackVoteFix2, 0x4C);
-	// directWrite8(TrackVoteFix3, 0x2A);
-	// directWrite8(TrackVoteFix4, 0x29);
-	// directWriteNop(TrackVoteFix5);
+	// Screen Edits (by CLF78 & Kevin)
+	directWriteBranch(ScreenLoadHook, ScreenLoad, false);
+	directWriteBranch(ScreenLoadHook2, ScreenLoad, false);
+	directWriteBranch(ScreenDSIFix1Hook, ScreenDSIFix1, false);
+	directWriteBranch(ScreenDSIFix2Hook, ScreenDSIFix2, true);
+	directWriteBranch(ScreenDSIFix3Hook, ScreenDSIFix2, true);
+	directWrite32(CupScreenPatchHook, (u32)&CupScreenPatch);
+	directWrite32(BattleCupScreenPatchHook, (u32)&BattleCupScreenPatch);
+	directWrite16(TrackVoteFix, 0x14);
+	directWrite16(TrackVoteFix2, 0x4C);
+	directWrite8(TrackVoteFix3, 0x2A);
+	directWrite8(TrackVoteFix4, 0x29);
+	directWriteNop(TrackVoteFix5);
 
 	// Seeker Picker (by CLF78)
 	directWriteBranch(HNSDataHook, SetupHNS, false);

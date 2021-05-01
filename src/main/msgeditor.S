@@ -2,7 +2,7 @@
 
 .extern EndReason
 .extern MessageEditorHook, MessageFunc, SCGetLanguage
-.global MessageEditor, MessageEditor2
+.global MessageEditor, MessageEditor2, MessageEditor3
 
 ###########
 # Patch 1 #
@@ -34,6 +34,9 @@ bl trick
 .string16 "\nAll players have been caught.\nThe match has ended."
 .string16 "\nAll seekers left.\nThe match has ended."
 .string16 "Hide and Seek v1.7"
+.string16 "Hide and Seek"
+.string16 "Hide and Seek Infection"
+.string16 "In a Worldwide HnS Race!"
 .align 2
 
 trick:
@@ -126,14 +129,31 @@ cmpwi r14, 1341
 bne+ not1341
 addi r3, r12, 0x340
 
-# Version string
+# VS/Battle Buttons
 not1341:
-cmpwi r14, 4002
+cmpwi r14, 0x10D1
+bne+ not10D1
+addi r3, r12, 0x3B6
+
+not10D1:
+cmpwi r14, 0x10D4
+bne+ not10D4
+addi r3, r12, 0x3D2
+
+# Version string
+not10D4:
+cmpwi r14, 8422
 bne+ not4002
 addi r3, r12, 0x390
 
-# Store pointer before it gets overwritten (original instruction)
+# Status messages
 not4002:
+cmpwi r14, 0x14BD
+bne+ not14BD
+addi r3, r12, 0x402
+
+# Store pointer before it gets overwritten (original instruction)
+not14BD:
 stw r3, 0x20(r1)
 
 # Friend status messages
@@ -194,8 +214,34 @@ b MessageEditorHook+8
 # Patch 2 #
 ###########
 
-# Use EndReason rather than the field in RaceinfoPlayer to determine the message
+# Check if BMG is 4001
 MessageEditor2:
+cmplwi cr7, r6, 4001
+bne+ cr7, not4001 
+
+# If so replace it with 4000
+subi r6, r6, 1
+b return
+
+# Check if BMG is 0x7F1
+not4001:
+cmplwi cr7, r6, 0x7F1
+bne+ cr7, return
+
+# If so replace it with 8422
+li r6, 8422
+
+# Original instruction
+return:
+mr r14, r6
+blr
+
+###########
+# Patch 3 #
+###########
+
+# Use EndReason rather than the field in RaceinfoPlayer to determine the message
+MessageEditor3:
 lis r3, EndReason@ha
 lbz r3, EndReason@l(r3)
 addi r3, r3, 1
