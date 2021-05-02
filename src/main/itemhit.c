@@ -23,10 +23,16 @@ void PlayerKiller(char pid) {
 		Racedata->main.scenarios[0].players[pid].team = TEAM_RED;
 		HideNSeekData.players[pid].isSeeker = true;
 		HideNSeekData.totalSeekers++;
+
+		// Remove Respawn Cooldown if present
 		if (HideNSeekData.players[pid].respawnTimer > 0) {
 			HideNSeekData.players[pid].respawnTimer = 0;
 			PlayerHolder->players[pid]->pointers.playerSub10->hardSpeedLimit = 0x42F00000;
 		}
+
+		// Add 1 to items to prevent game from removing it
+		if (ItemHolder->ptr->players[pid].itemAmount > 0)
+			ItemHolder->ptr->players[pid].itemAmount++;
 
 	// If infection is not enabled, simply run the disconnection function
 	} else

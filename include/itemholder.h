@@ -2,7 +2,10 @@
 #include <common.h>
 
 typedef struct {
-	u8 unk[0x248];
+	u8 unk[0x8C];
+	u32 item;
+	u32 itemAmount;
+	u8 unk2[0x1B4];
 } ItemHolderPlayer;
 
 // I didn't know how to do it so there we go
