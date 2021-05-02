@@ -16,8 +16,8 @@ bl MessageFunc
 bl trick
 
 # Messages go here
-.string16 "We're playing Hide and Seek!"
-.string16 "We're playing Infection Mode!"
+.string16 "We're playing a Classic HnS!"
+.string16 "We're playing an Infection HnS!"
 .string16 "Double Seeker: ON!"
 .string16 "Double Seeker: OFF!"
 .string16 "Halved Timer: ON!"
@@ -34,9 +34,9 @@ bl trick
 .string16 "\nAll players have been caught.\nThe match has ended."
 .string16 "\nAll seekers left.\nThe match has ended."
 .string16 "Hide and Seek v1.7"
-.string16 "Hide and Seek"
-.string16 "Hide and Seek Infection"
-.string16 "In a Worldwide HnS Race!"
+.string16 "Classic"
+.string16 "Infection"
+.string16 "In a Worldwide HnS match!"
 .align 2
 
 trick:
@@ -56,101 +56,101 @@ addi r3, r12, 0x3A
 not4111:
 cmpwi r14, 8410
 bne+ not8410
-addi r3, r12, 0x76
+addi r3, r12, 0x7A
 
 not8410:
 cmpwi r14, 8411
 bne+ not8411
-addi r3, r12, 0x9C
+addi r3, r12, 0xA0
 
 not8411:
 cmpwi r14, 8412
 bne+ not8412
-addi r3, r12, 0xC4
+addi r3, r12, 0xC8
 
 not8412:
 cmpwi r14, 8413
 bne+ not8413
-addi r3, r12, 0xE8
+addi r3, r12, 0xEC
 
 not8413:
 cmpwi r14, 8414
 bne+ not8414
-addi r3, r12, 0x10E
+addi r3, r12, 0x112
 
 not8414:
 cmpwi r14, 8415
 bne+ not8415
-addi r3, r12, 0x13E
+addi r3, r12, 0x142
 
 not8415:
 cmpwi r14, 8416
 bne+ not8416
-addi r3, r12, 0x170
+addi r3, r12, 0x174
 
 not8416:
 cmpwi r14, 8417
 bne+ not8417
-addi r3, r12, 0x198
+addi r3, r12, 0x19C
 
 not8417:
 cmpwi r14, 8418
 bne+ not8418
-addi r3, r12, 0x1C2
+addi r3, r12, 0x1C6
 
 not8418:
 cmpwi r14, 8419
 bne+ not8419
-addi r3, r12, 0x1F4
+addi r3, r12, 0x1F8
 
 not8419:
 cmpwi r14, 8420
 bne+ not8420
-addi r3, r12, 0x228
+addi r3, r12, 0x22C
 
 not8420:
 cmpwi r14, 8421
 bne+ not8421
-addi r3, r12, 0x25E
+addi r3, r12, 0x262
 
 # Race end messages
 not8421:
 cmpwi r14, 1340
 bne+ not1340
-addi r3, r12, 0x296
+addi r3, r12, 0x29A
 
 not1340:
 cmpwi r14, 1342
 bne+ not1342
-addi r3, r12, 0x2D8
+addi r3, r12, 0x2DC
 
 not1342:
 cmpwi r14, 1341
 bne+ not1341
-addi r3, r12, 0x340
+addi r3, r12, 0x344
+
+# Version string
+not1341:
+cmpwi r14, 8422
+bne+ not8422
+addi r3, r12, 0x394
 
 # VS/Battle Buttons
-not1341:
+not8422:
 cmpwi r14, 0x10D1
 bne+ not10D1
-addi r3, r12, 0x3B6
+addi r3, r12, 0x3BA
 
 not10D1:
 cmpwi r14, 0x10D4
 bne+ not10D4
-addi r3, r12, 0x3D2
-
-# Version string
-not10D4:
-cmpwi r14, 8422
-bne+ not4002
-addi r3, r12, 0x390
+addi r3, r12, 0x3CA
 
 # Status messages
-not4002:
+not10D4:
 cmpwi r14, 0x14BD
 bne+ not14BD
-addi r3, r12, 0x402
+addi r3, r12, 0x3DE
 
 # Store pointer before it gets overwritten (original instruction)
 not14BD:
