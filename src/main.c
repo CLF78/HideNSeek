@@ -119,6 +119,8 @@ void loadCodes() {
 	directWriteNop(FixPositions2);
 	directWriteNop(FixPositions3);
 	directWriteBranch(FixPositions4Hook, FixPositions4, true);
+	directWriteBranch(FixPositions5Hook, FixPositions5Helper, false);
+	directWrite16(FixPositions6, tempVal16);
 	directWriteBranch(FixFanfareHook, FixFanfare, true);
 
 	// Force 150cc (by XeR, modified by CLF78)

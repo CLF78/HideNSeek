@@ -1,11 +1,9 @@
 #include <common.h>
 #include <hidenseek.h>
 
-int FixPositions() {
-	register int position asm("r27");
-
+int FixPositions(void* unused, int position) {
 	for (int pid = 0; pid < 12; pid++) {
-		if (HideNSeekData.players[pid].position == position+1)
+		if (HideNSeekData.players[pid].position == position)
 			return pid;
 	}
 }

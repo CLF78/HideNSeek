@@ -1,7 +1,7 @@
 .include "asm_setup.S"
 
-.extern FixPositions, FixPositionsHook, HideNSeekData
-.global FixPositionsHelper, FixFanfare, FixPositions4
+.extern FixPositions, FixPositionsHook, FixPositions5Hook, HideNSeekData
+.global FixPositionsHelper, FixFanfare, FixPositions4, FixPositions5Helper
 
 #############################
 # Position Order Fix Helper #
@@ -26,6 +26,18 @@ ori r3, r3, HideNSeekData@l+4
 add r3, r3, r19
 lbz r23, 0(r3)
 blr
+
+#############################
+# Position Order Fix 5 (WW) #
+#############################
+
+# Call function
+FixPositions5Helper:
+bl FixPositions
+
+# Move pid to r25 and return
+mr r25, r3
+b FixPositions5Hook+4
 
 ###############
 # Fanfare Fix #
