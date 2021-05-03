@@ -126,7 +126,7 @@ b return
 # Check for Battle Voting
 not61:
 cmpwi r4, 0x59
-bne+ return
+bne+ not59
 
 # Set IsInfection and HalfTimer to 1 and switch to VS Voting
 li r4, 1
@@ -134,6 +134,19 @@ lis r31, IsInfection@ha
 stb r4, IsInfection@l(r31)
 stb r4, HalfTimer@l(r31)
 li r4, 0x58
+b return
+
+# Check for Battle Live View
+not59:
+cmpwi r4, 0x6E
+bne+ return
+
+# Set IsInfection and HalfTimer to 1 and switch to VS Live View
+li r4, 1
+lis r31, IsInfection@ha
+stb r4, IsInfection@l(r31)
+stb r4, HalfTimer@l(r31)
+li r4, 0x6A
 
 # Original instruction
 return:

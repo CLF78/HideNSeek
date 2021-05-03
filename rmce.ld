@@ -254,6 +254,8 @@ SECTIONS {
 	VersionString6 = 0x805E3D96;
 	VersionString7 = 0x805C75CA;
 	VersionString8 = 0x805C8B4E;
+	FriendStatusFixHook = 0x8064F0BC;
+	FriendStatusFixHook2 = 0x8064F188;
 
 	/* Remove Mushroom Bug */
 	NoMushroomBug = 0x807AB617;
