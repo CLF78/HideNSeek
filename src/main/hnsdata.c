@@ -20,7 +20,7 @@ int pidHelper(char currentpid, char prevaid1, char prevaid2, int index) {
 		// Check if the aid meets the conditions
         for (pid = 0; pid < 12; pid++) {
             if (RKNetController->aidsToPids[pid] == aid && pid != currentpid) {
-				if (AlwaysSeeker || Racedata->main.scenarios[0].settings.gamemode <= MODE_PUBLIC_BATTLE) {
+				if (AlwaysSeeker || Racedata->main.scenarios[0].settings.gamemode == MODE_PUBLIC_VS) {
 					PrevSeekers[index] = aid;
 					break;
 				} else if (aid != prevaid1 && aid != prevaid2) {
