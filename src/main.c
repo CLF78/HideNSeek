@@ -231,8 +231,6 @@ void loadCodes() {
 	directWrite16(VersionString6, tempVal16);
 	directWrite16(VersionString7, tempVal16);
 	directWrite16(VersionString8, tempVal16);
-	directWriteArray(FriendStatusFixHook, FriendStatusFix, 0x14);
-	directWriteArray(FriendStatusFixHook2, FriendStatusFix, 0x14);
 
 	// Remove Mushroom Bug (by Vega)
 	directWrite8(NoMushroomBug, 0);

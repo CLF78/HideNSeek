@@ -36,8 +36,7 @@ bl trick
 .string16 "Hide and Seek v1.7"
 .string16 "Classic"
 .string16 "Infection"
-.string16 "In a Classic HnS match!"
-.string16 "In an Infection HnS match!"
+.string16 "In a Worldwide HnS match!"
 .align 2
 
 trick:
@@ -153,13 +152,8 @@ cmpwi r14, 0x14BD
 bne+ not14BD
 addi r3, r12, 0x3DE
 
-not14BD:
-cmpwi r14, 0x14BE
-bne+ not14BE
-addi r3, r12, 0x40E
-
 # Store pointer before it gets overwritten (original instruction)
-not14BE:
+not14BD:
 stw r3, 0x20(r1)
 
 # Friend status messages
