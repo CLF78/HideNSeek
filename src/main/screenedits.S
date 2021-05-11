@@ -2,7 +2,6 @@
 
 .extern ScreenLoadHook, ScreenDSIFix1Hook, ScreenDSIFix4Hook
 .extern createScreen, switchScreen
-.extern IsInfection, HalfTimer
 .global ScreenLoad, CupScreenPatch, BattleCupScreenPatch, ScreenDSIFix1, ScreenDSIFix2, ScreenDSIFix3, SceneSwap
 
 ################################

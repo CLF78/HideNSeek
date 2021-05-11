@@ -79,6 +79,6 @@ void SetupHNS() {
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstringop-overflow"
 void DeleteHNS() {
-	memset(&HideNSeekData, 0, sizeof(HideNSeekData)+6);
+	memset(&HideNSeekData, 0, sizeof(HideNSeekData)+7);
 }
 #pragma GCC diagnostic pop

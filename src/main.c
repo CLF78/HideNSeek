@@ -280,9 +280,10 @@ void loadCodes() {
 	directWriteBranch(HNSDataHook, SetupHNS, false);
 	directWriteBranch(HNSDataHook2, DeleteHNS, false);
 
-	// Spectator Mode (by tZ, Skullface, Geeh and EvilRobot, modified by CLF78)
+	// Spectator Mode (by tZ, Skullface, Geeh, EvilRobot and JoshuaMK, modified by CLF78)
 	directWriteBranch(SpectatorModeHook, SpectatorModeFunc, false);
 	directWriteBranch(ReplayCameraHook, ReplayCameraManager, true);
+	directWriteBranch(BackwardsCameraHook, BackwardsCameraManager, false);
 
 	// Starting Time Modifier (by Bully, modified by CLF78)
 	directWriteBranch(TimerInit, StartingTime, true);
