@@ -1,8 +1,9 @@
 .include "asm_setup.S"
 
-.extern ScreenLoadHook, ScreenDSIFix1Hook
+.extern ScreenLoadHook, ScreenDSIFix1Hook, ScreenDSIFix4Hook
 .extern createScreen, switchScreen
-.global ScreenLoad, CupScreenPatch, BattleCupScreenPatch, ScreenDSIFix1, ScreenDSIFix2
+.extern IsInfection, HalfTimer
+.global ScreenLoad, CupScreenPatch, BattleCupScreenPatch, ScreenDSIFix1, ScreenDSIFix2, ScreenDSIFix3, SceneSwap
 
 ################################
 # Add Screens To Course Select #
@@ -69,4 +70,46 @@ beqlr
 
 # Original instruction
 lfs f1, 0(4)
+blr
+
+#######################
+# Fix DSI Exception 3 #
+#######################
+
+# Check if r5 is 0
+ScreenDSIFix3:
+cmpwi r5, 0
+beq skip2
+
+# Original instruction
+mr r3, r5
+b ScreenDSIFix4Hook+4
+
+skip2:
+b ScreenDSIFix4Hook+8
+
+###############
+# Screen Swap #
+###############
+
+# Check for Friend Room Team VS
+SceneSwap:
+cmpwi r4, 0x61
+bne+ not61
+
+# Switch to normal VS
+li r4, 0x60
+b return
+
+# Check for Main Menu (from Game Menus)
+not61:
+cmpwi r4, 0x41
+
+# Switch to Main Menu (from Settings)
+bne+ return
+li r4, 0x43
+
+# Original instruction
+return:
+mr r31, r4
 blr

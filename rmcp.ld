@@ -287,6 +287,7 @@ SECTIONS {
 	ScreenDSIFix1Hook = 0x80837744;
 	ScreenDSIFix2Hook = 0x8083945C;
 	ScreenDSIFix3Hook = 0x8083CF18;
+	ScreenDSIFix4Hook = 0x80837E60;
 	TrackVoteFix = 0x8064433E;
 	TrackVoteFix2 = 0x806440D6;
 	TrackVoteFix3 = 0x80661F33;
@@ -294,6 +295,11 @@ SECTIONS {
 	TrackVoteFix5 = 0x806440D0;
 	createScreen = 0x80622D08;
 	switchScreen = 0x80837720;
+	MainMenuFix1 = 0x805EBB40;
+	MainMenuFix1Dest = 0x8085110C;
+	MainMenuFix2 = 0x80851130;
+	MainMenuFix3 = 0x8085114C;
+	MainMenuFix4 = 0x808514DC;
 
 	/* Seeker Picker */
 	HNSDataHook = 0x805305A8;

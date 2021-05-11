@@ -263,6 +263,7 @@ void loadCodes() {
 	directWriteBranch(ScreenDSIFix1Hook, ScreenDSIFix1, false);
 	directWriteBranch(ScreenDSIFix2Hook, ScreenDSIFix2, true);
 	directWriteBranch(ScreenDSIFix3Hook, ScreenDSIFix2, true);
+	directWriteBranch(ScreenDSIFix4Hook, ScreenDSIFix3, false);
 	directWrite32(CupScreenPatchHook, (u32)&CupScreenPatch);
 	directWrite32(BattleCupScreenPatchHook, (u32)&BattleCupScreenPatch);
 	directWrite16(TrackVoteFix, 0x14);
@@ -270,6 +271,10 @@ void loadCodes() {
 	directWrite8(TrackVoteFix3, 0x2A);
 	directWrite8(TrackVoteFix4, 0x29);
 	directWriteNop(TrackVoteFix5);
+	directWriteBranch(MainMenuFix1, MainMenuFix1Dest, false);
+	directWrite32(MainMenuFix2, 0x38000004);
+	directWrite32(MainMenuFix3, 0x38800004);
+	directWrite32(MainMenuFix4, 0x3800FF9C);
 
 	// Seeker Picker (by CLF78)
 	directWriteBranch(HNSDataHook, SetupHNS, false);
