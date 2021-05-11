@@ -158,6 +158,8 @@ SECTIONS {
 	/* Glitch Prevention */
 	DisableWallrideHook = 0x8057B998;
 	DisableHWGHook = 0x80594D68;
+	FallBoundaryHook1 = 0x80515804;
+	FallBoundaryHook2 = 0x80515844;
 
 	/* Go To Friends Menu Automatically */
 	AutoFriendsMenu = 0x80646FC7;
