@@ -135,6 +135,10 @@ void loadCodes() {
 	directWrite16(FroomRaceCount1, 1);
 	directWrite16(FroomRaceCount2, 1);
 
+	// Glitch Prevention (by MrBean, stebler and CLF78)
+	directWriteBranch(DisableWallrideHook, DisableWallride, true);
+	directWriteBranch(DisableHWGHook, DisableHWG, true);
+
 	// Go To Friends Menu Automatically (by Chadderz)
 	directWrite8(AutoFriendsMenu, 0x8D);
 	directWrite16(AutoFriendsMenu2, 0x28);

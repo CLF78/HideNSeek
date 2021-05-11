@@ -155,6 +155,10 @@ SECTIONS {
 	FroomRaceCount1 = 0x806460BA;
 	FroomRaceCount2 = 0x8064F51E;
 
+	/* Glitch Prevention */
+	DisableWallrideHook = 0x8057C018;
+	DisableHWGHook = 0x805953E8;
+
 	/* Go To Friends Menu Automatically */
 	AutoFriendsMenu = 0x8064795B;
 	AutoFriendsMenu2 = 0x8064D616;
