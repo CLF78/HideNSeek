@@ -75,8 +75,8 @@ FallBoundary2:
 lwz r27, 0x8(r1)
 sub. r3, r29, r27
 
-# If the result is bigger than 0, load our custom areas
-bgt customAreas
+# If the result is equal or bigger than 0, load our custom areas
+bge customAreas
 
 # Original instruction
 lwz r3, 0xC(r28)
