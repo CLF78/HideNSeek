@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern AllowGlitches
+.extern GlitchesAllowed
 .global DisableWallride, DisableHWG
 
 ####################
@@ -12,8 +12,8 @@ DisableWallride:
 lwz r0, 0x4(r3)
 
 # Check if glitches are allowed
-lis r3, AllowGlitches@ha
-lbz r3, AllowGlitches@l(r3)
+lis r3, GlitchesAllowed@ha
+lbz r3, GlitchesAllowed@l(r3)
 cmpwi r3, 1
 beqlr
 
@@ -27,6 +27,6 @@ blr
 
 # Return whether glitches are allowed in r21
 DisableHWG:
-lis r21, AllowGlitches@ha
-lbz r21, AllowGlitches@l(r21)
+lis r21, GlitchesAllowed@ha
+lbz r21, GlitchesAllowed@l(r21)
 blr
