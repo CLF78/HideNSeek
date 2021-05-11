@@ -136,9 +136,9 @@ void loadCodes() {
 	directWrite16(FroomRaceCount2, 1);
 
 	// Go To Friends Menu Automatically (by Chadderz)
-	// directWrite8(AutoFriendsMenu, 0x8D);
-	// directWrite16(AutoFriendsMenu2, 0x28);
-	// directWrite16(AutoFriendsMenu3, 0x30);
+	directWrite8(AutoFriendsMenu, 0x8D);
+	directWrite16(AutoFriendsMenu2, 0x28);
+	directWrite16(AutoFriendsMenu3, 0x30);
 
 	// Grumble Volcano Fixes (by CLF78 & Ismy)
 	directWriteArray(RockFixHook, RockFix, 8);

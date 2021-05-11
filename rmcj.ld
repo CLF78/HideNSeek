@@ -277,7 +277,6 @@ SECTIONS {
 	MessageButtons4 = 0x805DBD5B;
 	MessageButtons5 = 0x805DA5D3;
 	MessageButtons6Hook = 0x805DC454;
-	SceneSwapHook = 0x80621568;
 
 	/* Screen Edits */
 	ScreenLoadHook = 0x8062DF78;
@@ -287,6 +286,7 @@ SECTIONS {
 	ScreenDSIFix1Hook = 0x80836DB0;
 	ScreenDSIFix2Hook = 0x80838AC8;
 	ScreenDSIFix3Hook = 0x8083C584;
+	ScreenDSIFix4Hook = 0x808374CC;
 	TrackVoteFix = 0x806439AA;
 	TrackVoteFix2 = 0x80643742;
 	TrackVoteFix3 = 0x8066159F;
@@ -294,6 +294,12 @@ SECTIONS {
 	TrackVoteFix5 = 0x8064373C;
 	createScreen = 0x80622454;
 	switchScreen = 0x80836D8C;
+	MainMenuFix1 = 0x805EB41C;
+	MainMenuFix1Dest = 0x80850778;
+	MainMenuFix2 = 0x8085079C;
+	MainMenuFix3 = 0x808507B8;
+	MainMenuFix4 = 0x80850B48;
+	SceneSwapHook = 0x80621568;
 
 	/* Seeker Picker */
 	HNSDataHook = 0x8052FF28;

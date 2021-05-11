@@ -277,7 +277,6 @@ SECTIONS {
 	MessageButtons4 = 0x805DC47F;
 	MessageButtons5 = 0x805DACF7;
 	MessageButtons6Hook = 0x805DCB78;
-	SceneSwapHook = 0x80621E1C;
 
 	/* Screen Edits */
 	ScreenLoadHook = 0x8062E82C;
@@ -300,6 +299,7 @@ SECTIONS {
 	MainMenuFix2 = 0x80851130;
 	MainMenuFix3 = 0x8085114C;
 	MainMenuFix4 = 0x808514DC;
+	SceneSwapHook = 0x80621E1C;
 
 	/* Seeker Picker */
 	HNSDataHook = 0x805305A8;
