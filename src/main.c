@@ -74,6 +74,9 @@ void loadCodes() {
 	directWriteBranch(BattleCCFixHook, BattleCCFix, true);
 	directWrite16(BattleCCFix2, 0x41A0);
 
+	// Battle Close-up Camera (by tZ)
+	directWrite8(BattleCamera, 1);
+
 	// Decrement Screen Elements (by stebler)
 	directWriteBranch(DecrementScreenElements, HideHUD, false);
 

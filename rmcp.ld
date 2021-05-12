@@ -92,6 +92,9 @@ SECTIONS {
 	BattleCCFixHook = 0x805780E4;
 	BattleCCFix2 = 0x805780E8;
 
+	/* Battle Camera */
+	BattleCamera = 0x805A8B0B;
+
 	/* Disable 5 Minute Limit */
 	No5LimitHook = 0x8053F3AC;
 	No5LimitHook2 = 0x8053F3FC;
