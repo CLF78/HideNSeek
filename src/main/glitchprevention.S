@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern GlitchesAllowed, Racedata
+.extern GlitchesAllowed, Racedata, ExtraAreas
 .global DisableWallride, DisableHWG, FallBoundary1, FallBoundary2
 
 ####################
@@ -39,8 +39,9 @@ blr
 FallBoundary1:
 lhz r30, 0x4(r4)
 
-# Store original count in stack
-sth r30, 0x8(r1)
+# Store area amount to EVA
+lis r29, ExtraAreas@ha
+sth r30, ExtraAreas@l(r29)
 
 # Get track slot
 lis r29, Racedata@ha
@@ -70,9 +71,12 @@ blr
 # Fall Boundary Injector - Hook 2 #
 ###################################
 
-# Subtract current count to original count
+# Get original area count
 FallBoundary2:
-lwz r27, 0x8(r1)
+lis r27, ExtraAreas@ha
+lhz r27, ExtraAreas@l(r27)
+
+# Subtract current count to it
 sub. r3, r29, r27
 
 # If the result is equal or bigger than 0, load our custom areas
@@ -106,8 +110,8 @@ blr
 ########################################
 
 AreaCounts:
-.byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-.byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+.byte 0, 0, 0, 0, 3, 0, 0, 0, 0, 0
+.byte 0, 1, 0, 0, 0, 0, 0, 0, 0, 0
 .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 .byte 0, 0
@@ -118,8 +122,42 @@ AreaCounts:
 ##########################################
 
 AreaPointers:
-.long 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-.long 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+.long 0, 0, 0, 0, ToadFactoryAreas, 0, 0, 0, 0, 0
+.long 0, MapleTreewayArea, 0, 0, 0, 0, 0, 0, 0, 0
 .long 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 .long 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 .long 0, 0
+
+##########################################
+# Fall Boundary Injector - Maple Treeway #
+##########################################
+
+MapleTreewayArea:
+.byte 0, 0xA, 0xFF, 0
+.float 10560.0, 12900.0, 17377.0
+.float 0.0, 0.0, 0.0
+.float 1.5, 0.1, 1.5
+.long 0, 0x00FF0000
+
+###########################################
+# Fall Boundary Injector - Toad's Factory #
+###########################################
+
+ToadFactoryAreas:
+.byte 0, 0xA, 0xFF, 0
+.float -42600.0, 3000.0, -1750.0
+.float 0.0, 0.0, 0.0
+.float 2.0, 2.0, 2.0
+.long 0, 0x00FF0000
+
+.byte 0, 0xA, 0xFF, 0
+.float -12600.0, 3000.0, -1750.0
+.float 0.0, 0.0, 0.0
+.float 2.0, 2.0, 2.0
+.long 0, 0x00FF0000
+
+.byte 0, 0xA, 0xFF, 0
+.float 17500.0, 900.0, -36000.0
+.float 0.0, 0.0, 0.0
+.float 1.0, 0.1, 1.0
+.long 0, 0x00FF0000
