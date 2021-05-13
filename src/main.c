@@ -275,6 +275,7 @@ void loadCodes() {
 	directWriteBranch(ScreenDSIFix4Hook, ScreenDSIFix3, false);
 	directWrite32(CupScreenPatchHook, (u32)&CupScreenPatch);
 	directWrite32(BattleCupScreenPatchHook, (u32)&BattleCupScreenPatch);
+	directWriteNop(BattleCupScreenPatch2);
 	directWrite16(TrackVoteFix, 0x14);
 	directWrite16(TrackVoteFix2, 0x4C);
 	directWrite8(TrackVoteFix3, 0x2A);

@@ -292,6 +292,7 @@ SECTIONS {
 	ScreenLoadHook2 = 0x8062D7EC;
 	CupScreenPatchHook = 0x808D86B4;
 	BattleCupScreenPatchHook = 0x808D8074;
+	BattleCupScreenPatch2 = 0x8064F840;
 	ScreenDSIFix1Hook = 0x80836DB0;
 	ScreenDSIFix2Hook = 0x80838AC8;
 	ScreenDSIFix3Hook = 0x8083C584;
