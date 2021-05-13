@@ -64,7 +64,7 @@ int SpectatorModeMain(char ogpid) {
 						increment = 1;
 					else if (input >> 6 & 1)	// 0x40 = B Button
 						increment = -1;
-					if (input >> 3 & 1)			// 0x8 = X Button
+					if (input >> 5 & 1)			// 0x20 = Y Button
 						UseReplayCams = !UseReplayCams;
 					break;
 
