@@ -302,6 +302,7 @@ SECTIONS {
 	TrackVoteFix3 = 0x8066159F;
 	TrackVoteFix4 = 0x806615E7;
 	TrackVoteFix5 = 0x8064373C;
+	TimerShow = 0x8064F8C0;
 	createScreen = 0x80622454;
 	switchScreen = 0x80836D8C;
 	MainMenuFix1 = 0x805EB41C;
