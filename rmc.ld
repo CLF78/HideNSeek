@@ -12,8 +12,7 @@ SECTIONS {
 	AmIDead = 0x800001E7;
 	Have30SecondsPassed = 0x800001E8;
 	UseReplayCams = 0x800001E9;
-	UseBackwardsView = 0x800001EA;
-	ExtraAreas = 0x800001EC;
+	ExtraAreas = 0x800001EA;
 
 	/* HNS Per-GP Data */
 	IsInfection = 0x800002B0;

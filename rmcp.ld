@@ -317,7 +317,7 @@ SECTIONS {
 	/* Spectator Mode */
 	SpectatorModeHook = 0x805A2230;
 	ReplayCameraHook = 0x805A28C0;
-	BackwardsCameraHook = 0x805A224C;
+	BackwardsCameraHook = 0x805A2244;
 	
 	/* Starting Time Modifier */
 	TimerInit = 0x805358E4;

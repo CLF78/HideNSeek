@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern SpectatorModeMain, SpectatorModeHook, UseReplayCams, UseBackwardsView, BackwardsCameraHook
+.extern SpectatorModeMain, SpectatorModeHook, UseReplayCams, PlayerHolder, Racedata
 .global SpectatorModeFunc, ReplayCameraManager, BackwardsCameraManager
 
 # Another shitty ASM helper
@@ -38,17 +38,19 @@ blr
 # Backwards Camera Activator #
 ##############################
 
-# Check if UseBackwardsView is on
-BackwardsCameraManager:
-lis r4, UseBackwardsView@ha
-lbz r4, UseBackwardsView@l(r4)
-cmpwi r4, 1
-bne+ end
-
-# If so, branch further in the function
-b BackwardsCameraHook+0x44
-
 # Original instruction
-end:
-lhz r0, 0x2C(r3)
-b BackwardsCameraHook+4
+BackwardsCameraManager:
+mr r30, r3
+
+# Get my pid
+lis r4, Racedata@ha
+lwz r4, Racedata@l(r4)
+lbz r4, 0xB84(r4)
+slwi r4, r4, 2
+
+# Get my PlayerHolder
+lis r3, PlayerHolder@ha
+lwz r3, PlayerHolder@l(r3)
+lwz r3, 0x20(r3)
+lwzx r3, r3, r4
+blr

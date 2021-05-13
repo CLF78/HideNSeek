@@ -36,8 +36,6 @@ int SpectatorModeMain(char ogpid) {
 						increment = -1;
 					if (input >> 11 & 1)		// 0x800 = Y Button
 						UseReplayCams = !UseReplayCams;
-					if (input >> 10 & 1)		// 0x400 = X Button
-						UseBackwardsView = !UseBackwardsView;
 					break;
 
 				// Wii Wheel
@@ -48,8 +46,6 @@ int SpectatorModeMain(char ogpid) {
 						increment = -1;
 					if (input >> 12 & 1)		// 0x1000 = - Button
 						UseReplayCams = !UseReplayCams;
-					if (input >> 11 & 1)		// 0x800 = A Button
-						UseBackwardsView = !UseBackwardsView;
 					break;
 				
 				// Nunchuck
@@ -60,8 +56,6 @@ int SpectatorModeMain(char ogpid) {
 						increment = -1;
 					if (input >> 12 & 1)		// 0x1000 = - Button
 						UseReplayCams = !UseReplayCams;
-					if (input >> 14 & 1)		// 0x4000 = C Button
-						UseBackwardsView = !UseBackwardsView;
 					break;
 
 				// Classic Controller
@@ -72,8 +66,6 @@ int SpectatorModeMain(char ogpid) {
 						increment = -1;
 					if (input >> 3 & 1)			// 0x8 = X Button
 						UseReplayCams = !UseReplayCams;
-					if (input >> 5 & 1)			// 0x20 = Y Button
-						UseBackwardsView = !UseBackwardsView;
 					break;
 
 				// Should never happen but whatever
