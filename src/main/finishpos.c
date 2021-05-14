@@ -6,4 +6,7 @@ int FixPositions(void* unused, int position) {
 		if (HideNSeekData.players[pid].position == position)
 			return pid;
 	}
+
+	// Failsafe so that positions don't get fucked
+	return 0;
 }
