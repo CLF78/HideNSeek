@@ -282,6 +282,13 @@ void loadCodes() {
 	directWrite8(TrackVoteFix4, 0x29);
 	directWriteNop(TrackVoteFix5);
 	directWriteNop(TimerShow);
+	tempVal16 = 0x4800;
+	directWrite16(TrackVoteLabel1, tempVal16);
+	directWrite16(TrackVoteLabel2, tempVal16);
+	tempVal32 = 0x38600D23;
+	directWrite32(TrackVoteLabel3, tempVal32);
+	directWrite32(TrackVoteLabel4, tempVal32);
+	directWrite32(TrackVoteLabel5, tempVal32);
 	directWriteBranch(MainMenuFix1, MainMenuFix1Dest, false);
 	directWrite32(MainMenuFix2, 0x38000004);
 	directWrite32(MainMenuFix3, 0x38800004);

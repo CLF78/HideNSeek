@@ -37,6 +37,8 @@ bl trick
 .string16 "Classic"
 .string16 "Infection"
 .string16 "In a Worldwide HnS match!"
+.string16 "Press +/START to vote for a Battle Arena!"
+.string16 "Press +/START to vote for a Track!"
 .align 2
 
 trick:
@@ -152,8 +154,19 @@ cmpwi r14, 0x14BD
 bne+ not14BD
 addi r3, r12, 0x3DE
 
-# Store pointer before it gets overwritten (original instruction)
+# Voting hints
 not14BD:
+cmpwi r14, 0xD21
+bne+ notD21
+addi r3, r12, 0x412
+
+notD21:
+cmpwi r14, 0xD23
+bne+ notD23
+addi r3, r12, 0x466
+
+# Store pointer before it gets overwritten (original instruction)
+notD23:
 stw r3, 0x20(r1)
 
 # Friend status messages
