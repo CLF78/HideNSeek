@@ -307,7 +307,7 @@ SECTIONS {
 	TrackVoteLabel2 = 0x80840A9C;
 	TrackVoteLabel3 = 0x8083895C;
 	TrackVoteLabel4 = 0x80838A04;
-	TrackVoteLabel5 = 0x80852734;
+	TrackVoteLabel5 = 0x8083C4C0;
 	createScreen = 0x80622454;
 	switchScreen = 0x80836D8C;
 	MainMenuFix1 = 0x805EB41C;
