@@ -1,0 +1,48 @@
+name: Build binaries
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache
+        id: cache-1
+        uses: actions/cache@v2
+        with:
+          path: cache
+          key: ${{ runner.os }}-cache-33
+
+      - name: Download devkitPPC r33
+        if: steps.cache-1.outputs.cache-hit != 'true'
+        run: | 
+          mkdir cache && cd cache
+          wget "https://wii.leseratte10.de/devkitPro/file.php/devkitPPC-r33-1-linux.pkg.tar.xz"
+          cd ..
+
+      - name: Extract devkitPPC
+        run: | 
+          tar -xf cache/devkitPPC-r33-1-linux.pkg.tar.xz opt/devkitpro/devkitPPC --strip-components=1
+
+      - name: Install PyELFTools
+        run: |
+          pip install pyelftools
+
+      - name: Compile
+        run: |
+          echo "n" | PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro python3 make.py
+          mv bin bin_release
+          echo "y" | PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro python3 make.py
+          mv bin bin_debug
+
+
+      - name: Upload result
+        uses: actions/upload-artifact@v2
+        with: 
+          name: Binaries
+          path: |
+            bin_release
+            bin_debug

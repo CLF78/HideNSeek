@@ -35,12 +35,7 @@ def build(isBootStrap):
                 asmlist.append(filename)
             elif item.lower().endswith('.c'):
                 filename = os.path.join(root, item)
-                
-                # A hack because i'm lazy
-                if item == 'main.c':
-                    cpplist.insert(0, filename)
-                else:
-                    cpplist.append(filename)
+                cpplist.append(filename)
 
     for region in regionlist:
         # Make a clean build folder
@@ -48,23 +43,8 @@ def build(isBootStrap):
             rmtree('build')
         os.mkdir('build')
 
-        # FUCK DEVKIT
-        with open('asm_setup.S', 'r+') as f:
-            f.seek(0, 2)
-            f.seek(f.tell()-4, 0)
-            f.write(region)
-
-        # Compile the asm
-        for file in asmlist:
-            c = call([asm, '-mregnames', '-m750cl', file, '-o', os.path.join('build', os.path.basename(file)[:-2] + '.o')])
-            if c != 0:
-                print('Build failed!')
-                return
-
-            file = file.replace('.S', '.o')
-
         # Initialize GCC command
-        cc_command = [gcc, '-Iinclude', '-nostartfiles', '-nostdinc', '-D', 'REGION_{}'.format(region), '-Os', '-Wl,-T,{}/mem.ld,-T,rmc.ld,-T,rmc{}.ld'.format(mainpath, region.lower()), '-ffunction-sections', '-fdata-sections', '-mcpu=750', '-meabi', '-mhard-float']
+        cc_command = [gcc, '-Iinclude', '-nostartfiles', '-nostdinc', '-D', 'REGION_{}'.format(region), '-D', 'REGION=\'{}\''.format(region), '-Os', '-Wl,-T,{}/mem.ld,-T,rmc.ld,-T,rmc{}.ld'.format(mainpath, region.lower()), '-ffunction-sections', '-fdata-sections', '-fcommon', '-mcpu=750', '-meabi', '-mhard-float']
 
         # Add debug macro if debug is on
         if debug:
@@ -75,7 +55,10 @@ def build(isBootStrap):
         cc_command += asmlist
         cc_command += ['-o', 'build/{}{}.o'.format(outname, region)]
 
-        # Call GCC and Objcopy
+        # Debug output for testing:
+        # print(*cc_command)
+
+        # Call GCC to compile everything
         c = call(cc_command)
         if c != 0:
             print('Build failed!')
@@ -103,6 +86,7 @@ def build(isBootStrap):
 
 def main():
     # Debug prompt
+    global debug
     debug = input('Enable debug mode? (Y/N): ').lower() == 'y'
 
     # Make a clean bin folder
