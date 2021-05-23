@@ -138,13 +138,14 @@ SECTIONS {
 
 	/* Finish Stuff */
 	FinishPoints = 0x8052EC0C;
-	FixPositionsHook = 0x8085C8C0;
-	FixPositions2 = 0x8052EA0C;
-	FixPositions3 = 0x8052EAA0;
-	FixPositions4Hook = 0x8052E9F0;
-	FixPositions5Hook = 0x8085D2E8;
-	FixPositions6 = 0x8085D2C8;
-	FixFanfareHook = 0x8078D0BC;
+	StopUpdatingPosTracker = 0x805336d8;
+	StopUpdatingPosTracker2 = 0x8053f9c0;
+	StopUpdatingTimerMin = 0x805348a0;
+	StopUpdatingTimerSec = 0x805348a8;
+	StopUpdatingTimerMs = 0x805348b0;
+	RaceAlonePatch = 0x8053fc10;
+
+	OSReport = 0x801a25d0;
 
 	/* Force CC */
 	ForceCCHook = 0x80661404;
