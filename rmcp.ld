@@ -143,6 +143,7 @@ SECTIONS {
 	StopUpdatingTimerMin = 0x805348a0;
 	StopUpdatingTimerSec = 0x805348a8;
 	StopUpdatingTimerMs = 0x805348b0;
+	RaceAlonePatch = 0x8053fc10;
 
 	OSReport = 0x801a25d0;
 

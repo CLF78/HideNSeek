@@ -153,7 +153,6 @@ void updatePlayerFinishTimes() {
 
 	for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
 		int pos = Raceinfo->players[pid]->position;
-		OSReport("pid %d is at pos %d\n", pid, pos);
 	}
 
 }

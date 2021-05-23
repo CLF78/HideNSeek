@@ -123,6 +123,7 @@ void loadCodes() {
 	directWriteNop(StopUpdatingTimerMs);
 	directWriteBlr(StopUpdatingPosTracker);
 	directWriteNop(StopUpdatingPosTracker2);
+	directWriteNop(RaceAlonePatch);
 
 	// Force 150cc (by XeR, modified by CLF78)
 	directWriteBranch(ForceCCHook, ForceCC, true);
