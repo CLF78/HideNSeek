@@ -1,1 +1,16 @@
-MEMORY { MEM (rwx): ORIGIN = 0x808DD400, LENGTH = 0xC2000 }
+SECTIONS {
+	.text 0x808DD400 : {
+		*(.loader*)
+		
+		*(.text*)
+		*(.data*)
+		*(.sdata*)
+		*(.rodata*)
+		*(.bss*)
+		*(.sbss*)
+		. = ALIGN(32);
+	}
+	/DISCARD/ : {
+		*(*)
+	}
+}
