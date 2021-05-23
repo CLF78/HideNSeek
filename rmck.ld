@@ -139,6 +139,7 @@ SECTIONS {
 	/* Finish Stuff */
 	FinishPoints = 0x8051CC64;
 	StopUpdatingPosTracker = 0x80521730;
+	StopUpdatingPosTracker2 = 0x8052da18;
 	StopUpdatingTimerMin = 0x805228f8;
 	StopUpdatingTimerSec = 0x80522900;
 	StopUpdatingTimerMs = 0x80522908;
