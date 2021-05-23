@@ -104,15 +104,20 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 			if (HideNSeekData.players[pid].isRealSeeker) {
 				rinfo->players[pid]->battleScore = (noSurvivors) ? HideNSeekData.playerCount - SeekerCount + 2 : HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount;
 				HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + seekerpos;
+				Raceinfo->players[pid]->position = HideNSeekData.totalSurvivors + seekerpos;
+				
 				seekerpos++;
 
 			// For all uncaught Hiders, set position to survivorpos and points to 15
 			} else if (HideNSeekData.players[pid].position == 0) {
 				HideNSeekData.players[pid].position = survivorpos;
+				Raceinfo->players[pid]->position = survivorpos;
 				rinfo->players[pid]->battleScore = HideNSeekData.playerCount - SeekerCount + 2;
 				survivorpos++;
 			}
 		}
+
+		updatePlayerFinishTimes();
 	}
 
 	// Return a different value based on which bool is true
@@ -127,4 +132,24 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 
 bool TimerFlashFix() {
 	return (Have30SecondsPassed && Raceinfo->timerManager->frames <= 3600);
+}
+
+void updatePlayerFinishTimes() {
+	// Sets the player's finish time to their position in minutes.
+
+	for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
+		int pos = Raceinfo->players[pid]->position;
+
+		void * timerdata = Raceinfo->players[pid]->raceFinishTime;
+		
+		unsigned short * minutes = (unsigned short *)((char *)timerdata + 4);
+		unsigned char * seconds = (unsigned char *)((char *)timerdata + 6);
+		unsigned short * milliseconds = (unsigned short *)((char *)timerdata + 8);
+
+		*minutes = pos;
+		*seconds = 0;
+		*milliseconds = 0;
+	}
+
+
 }
