@@ -138,13 +138,10 @@ SECTIONS {
 
 	/* Finish Stuff */
 	FinishPoints = 0x8051CC64;
-	FixPositionsHook = 0x8084AC80;
-	FixPositions2 = 0x8051CA64;
-	FixPositions3 = 0x8051CAF8;
-	FixPositions4Hook = 0x8051CA48;
-	FixPositions5Hook = 0x8084B6A8;
-	FixPositions6 = 0x8084B688;
-	FixFanfareHook = 0x8077B47C;
+	StopUpdatingPosTracker = 0x80521730;
+	StopUpdatingTimerMin = 0x805228f8;
+	StopUpdatingTimerSec = 0x80522900;
+	StopUpdatingTimerMs = 0x80522908;
 
 	/* Force CC */
 	ForceCCHook = 0x8064F71C;

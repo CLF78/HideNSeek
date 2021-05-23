@@ -116,15 +116,12 @@ void loadCodes() {
 	// End Race on Command (by CLF78)
 	directWriteBranch(No5LimitHook, TimerEnd, false);
 
-	// Finish Position/Points Updater (by CLF78)
+	// Finish Position/Points Updater (by CLF78 and Leseratte)
 	directWrite32(FinishPoints, 0x48000014);
-	directWriteBranch(FixPositionsHook, FixPositionsHelper, false);
-	directWriteNop(FixPositions2);
-	directWriteNop(FixPositions3);
-	directWriteBranch(FixPositions4Hook, FixPositions4, true);
-	directWriteBranch(FixPositions5Hook, FixPositions5Helper, false);
-	directWrite16(FixPositions6, tempVal16);
-	directWriteBranch(FixFanfareHook, FixFanfare, true);
+	directWriteNop(StopUpdatingTimerMin);
+	directWriteNop(StopUpdatingTimerSec);
+	directWriteNop(StopUpdatingTimerMs);
+	directWriteBlr(StopUpdatingPosTracker);
 
 	// Force 150cc (by XeR, modified by CLF78)
 	directWriteBranch(ForceCCHook, ForceCC, true);
