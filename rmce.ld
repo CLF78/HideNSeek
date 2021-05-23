@@ -143,6 +143,8 @@ SECTIONS {
 	StopUpdatingTimerSec = 0x8052fd60;
 	StopUpdatingTimerMs = 0x8052fd68;
 
+	OSReport = 0x801a2530;
+
 	/* Force CC */
 	ForceCCHook = 0x806594C8;
 
