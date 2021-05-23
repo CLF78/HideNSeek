@@ -52,8 +52,8 @@ typedef struct {
 	  2 is end of race camera
 	  1 is in race?
 	*/
-	void* lapFinishTimes;
-	void* raceFinishTime;
+	Timer** lapFinishTimes;
+	Timer* raceFinishTime;
 	u8 unk4[0x4];
 	void* controllerHolder;
 	u8 unk5[0x8];

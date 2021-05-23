@@ -11,10 +11,10 @@ void PlayerKiller(char pid) {
 
 	// Set the player's position to totalSurvivors+SeekerCount and decrease totalSurvivors
 	Raceinfo->players[pid]->battleScore = HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount;
-	HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + SeekerCount + 1;
 	Raceinfo->players[pid]->position = HideNSeekData.totalSurvivors + SeekerCount + 1;
 	HideNSeekData.totalSurvivors--;
 
+	// Update finish times
 	updatePlayerFinishTimes();
 
 	// If only one hider is left, play the jingle
@@ -48,8 +48,8 @@ bool ItemHitLocal(bool result, PlayerHolderPlayer* player, PlayerSub18* player2)
 	char pid = player->playerPointers->params->playerId;
 	char pid2 = player2->pointers->params->playerId;
 
-	// Check that a collision happened, that we're in the game, that the player is local, and that this functions has not already run
-	if (result && Have30SecondsPassed && pid == Racedata->main.scenarios[0].settings.hudPlayerIds[0] && HideNSeekData.players[pid].position == 0 && !HideNSeekData.players[pid].isSeeker) {
+	// Check that a collision happened, that we're in the game, that the player is local, and that this function has not already run
+	if (result && Have30SecondsPassed && pid == Racedata->main.scenarios[0].settings.hudPlayerIds[0] && Raceinfo->players[pid]->position == 0 && !HideNSeekData.players[pid].isSeeker) {
 
 		// Kill the player
 		PlayerKiller(pid);
@@ -74,8 +74,8 @@ bool ItemHitLocal(bool result, PlayerHolderPlayer* player, PlayerSub18* player2)
 void ItemHitRemote(void* something, ItemPacket* packet, int length) {
 	register char pid asm("r26");
 
-	// Check that this functions has not already run
-	if (packet->isPlayerDead && HideNSeekData.players[pid].position == 0) {
+	// Check that this function has not already run
+	if (packet->isPlayerDead && Raceinfo->players[pid]->position == 0) {
 		PlayerKiller(pid);
 
 		// Get the pid of who killed me
@@ -119,13 +119,12 @@ void PlayerDC() {
 				HideNSeekData.totalSeekers--;
 
 			// If the player is an uncaught Hider, place them totalSurvivors + SeekerCount
-			else if (HideNSeekData.players[pid].position == 0) {
+			else if (Raceinfo->players[pid]->position == 0) {
 				Raceinfo->players[pid]->battleScore = HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount;
-				HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + SeekerCount + 1;
 				Raceinfo->players[pid]->position = HideNSeekData.totalSurvivors + SeekerCount + 1;
 
+				// Update finishing times and totalSurvivors
 				updatePlayerFinishTimes();
-				
 				HideNSeekData.totalSurvivors--;
 				
 				// If infection is on, turn said player red

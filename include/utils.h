@@ -12,3 +12,5 @@ void StarFunc(ItemHolderPlayer* player);
 
 void CustomJingleFunc(int sfx);
 void TagFunc(void* something, int pid);
+
+void updatePlayerFinishTimes(void);

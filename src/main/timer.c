@@ -103,15 +103,13 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 			// For Seekers, set their position to be the amount of survivors + 1, and their points to the total amount of players caught (or 15 if all players were caught)
 			if (HideNSeekData.players[pid].isRealSeeker) {
 				rinfo->players[pid]->battleScore = (noSurvivors) ? HideNSeekData.playerCount - SeekerCount + 2 : HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount;
-				HideNSeekData.players[pid].position = HideNSeekData.totalSurvivors + seekerpos;
-				Raceinfo->players[pid]->position = HideNSeekData.totalSurvivors + seekerpos;
+				rinfo->players[pid]->position = HideNSeekData.totalSurvivors + seekerpos;
 				
 				seekerpos++;
 
 			// For all uncaught Hiders, set position to survivorpos and points to 15
-			} else if (HideNSeekData.players[pid].position == 0) {
-				HideNSeekData.players[pid].position = survivorpos;
-				Raceinfo->players[pid]->position = survivorpos;
+			} else if (rinfo->players[pid]->position == 0) {
+				rinfo->players[pid]->position = survivorpos;
 				rinfo->players[pid]->battleScore = HideNSeekData.playerCount - SeekerCount + 2;
 				survivorpos++;
 			}
@@ -135,24 +133,8 @@ bool TimerFlashFix() {
 }
 
 void updatePlayerFinishTimes() {
-	// Sets the player's finish time to their position in minutes.
 
-	for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
-		int pos = Raceinfo->players[pid]->position;
-
-		void * timerdata = Raceinfo->players[pid]->raceFinishTime;
-		
-		unsigned short * minutes = (unsigned short *)((char *)timerdata + 4);
-		unsigned char * seconds = (unsigned char *)((char *)timerdata + 6);
-		unsigned short * milliseconds = (unsigned short *)((char *)timerdata + 8);
-
-		*minutes = pos;
-		*seconds = 0;
-		*milliseconds = 0;
-	}
-
-	for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
-		int pos = Raceinfo->players[pid]->position;
-	}
-
+	// Set the player's finish time to their position in minutes
+	for (int pid = 0; pid < HideNSeekData.playerCount; pid++)
+		Raceinfo->players[pid]->raceFinishTime->minutes = Raceinfo->players[pid]->position;
 }

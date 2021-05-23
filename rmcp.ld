@@ -35,6 +35,7 @@ SECTIONS {
 	sprintf = 0x80011A2C;
 	swprintf = 0x80017814;
 	OSFatal = 0x801A4EC4;
+	OSReport = 0x801A25D0;
 	CalcCRC32 = 0x801D1CA0;
 	SCGetLanguage = 0x801B1D0C;
 
@@ -138,14 +139,12 @@ SECTIONS {
 
 	/* Finish Stuff */
 	FinishPoints = 0x8052EC0C;
-	StopUpdatingPosTracker = 0x805336d8;
-	StopUpdatingPosTracker2 = 0x8053f9c0;
-	StopUpdatingTimerMin = 0x805348a0;
-	StopUpdatingTimerSec = 0x805348a8;
-	StopUpdatingTimerMs = 0x805348b0;
-	RaceAlonePatch = 0x8053fc10;
-
-	OSReport = 0x801a25d0;
+	StopUpdatingPosTracker = 0x805336D8;
+	StopUpdatingPosTracker2 = 0x8053F9C0;
+	StopUpdatingTimerMin = 0x805348A0;
+	StopUpdatingTimerSec = 0x805348A8;
+	StopUpdatingTimerMs = 0x805348B0;
+	RaceAlonePatch = 0x8053FC10;
 
 	/* Force CC */
 	ForceCCHook = 0x80661404;
