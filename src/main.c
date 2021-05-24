@@ -150,15 +150,15 @@ void loadCodes() {
 	directWrite16(AutoFriendsMenu3, 0x30);
 
 	// Grumble Volcano Fixes (by CLF78 & Ismy)
-	directWriteArray(RockFixHook, RockFix, 8);
-	directWriteArray(RockFix2Hook, RockFix, 8);
+	directWriteBranch(RockFixHook, RockFix, true);
+	directWriteBranch(RockFix2Hook, RockFix, true);
 	directWriteBranch(GeyserFixHook, GeyserFix, true);
 
 	// Host Version Check (by CLF78 & Seeky)
 	directWriteBranch(GuestSendHook, GuestSend, false);
 	directWriteBranch(HostCheckHook, HostCheck, true);
 	directWriteBranch(HostCheckHelperHook, HostCheckHelper, true);
-	directWrite8(Version, 2);
+	directWrite8(Version, 3);
 
 	// Increase Visual Distance (by davidevgen)
 	directWrite32(DrawDistance, 0x49742400);
@@ -322,6 +322,11 @@ void loadCodes() {
 		directWrite32(ThirtyFPSHook4, 0x3BE00002);
 		directWriteNop(ThirtyFPSHook5);
 		directWrite8(ThirtyFPSHook6, 2);
+	}
+
+	// Disable Track Patches (by CLF78)
+	if (CTSupport == 1){
+		directWrite32(PatchFilename, 0x5F434C46);
 	}
 
 	sync();

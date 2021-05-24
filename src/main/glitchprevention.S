@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern GlitchesAllowed, Racedata, ExtraAreas
+.extern GlitchesAllowed, Racedata, ExtraAreas, CTSupport
 .global DisableWallride, DisableHWG, FallBoundary1, FallBoundary2
 
 ####################
@@ -53,6 +53,12 @@ lis r31, AreaCounts@h
 ori r31, r31, AreaCounts@l
 lbzx r29, r29, r31
 
+# Check if CT support was enabled
+lis r31, CTSupport@ha
+lbz r31, CTSupport@l(r31)
+cmpwi r31, 1
+beq noAreas
+
 # Check if glitches are allowed
 lis r31, GlitchesAllowed@ha
 lbz r31, GlitchesAllowed@l(r31)
@@ -60,6 +66,7 @@ cmpwi r31, 1
 bne+ end
 
 # If not, replace r29 with 0
+noAreas:
 li r29, 0
 
 # Add to the count and return

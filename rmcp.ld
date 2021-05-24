@@ -125,6 +125,9 @@ SECTIONS {
 	/* Disable Title Demo Movie */
 	NoTitleDemo = 0x806FA924;
 
+	/* Disable Track Patches */
+	PatchFilename = 0x8088FDF4;
+
 	/* Disable Track Music */
 	NoMusicHook = 0x8009130C;
 

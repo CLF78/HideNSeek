@@ -21,6 +21,12 @@ lis r4, BtGlitch@ha
 lbz r4, BtGlitch@l(r4)
 slwi r4, r4, 2
 
+# Check if CTSupport was enabled
+lis r12, CTSupport@ha
+lbz r12, CTSupport@l(r12)
+cmpwi r12, 1
+beq continue
+
 # Get track slot
 lis r12, Racedata@ha
 lwz r12, Racedata@l(r12)
