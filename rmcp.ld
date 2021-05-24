@@ -141,6 +141,9 @@ SECTIONS {
 	FinishPoints = 0x8052EC0C;
 	StopUpdatingPosTracker = 0x805336D8;
 	StopUpdatingPosTracker2 = 0x8053F9C0;
+	StopUpdatingPosTracker3 = 0x80533F04;
+	StopUpdatingPosTracker4 = 0x80532938; 
+	StopUpdatingPosTracker5 = 0x80536554;
 	StopUpdatingTimer = 0x8053489C;
 	RaceAlonePatch = 0x8053FC10;
 
