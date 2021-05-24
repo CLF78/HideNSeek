@@ -118,9 +118,7 @@ void loadCodes() {
 
 	// Finish Position/Points Updater (by CLF78 and Leseratte)
 	directWrite32(FinishPoints, 0x48000014);
-	directWriteNop(StopUpdatingTimerMin);
-	directWriteNop(StopUpdatingTimerSec);
-	directWriteNop(StopUpdatingTimerMs);
+	directWrite32(StopUpdatingTimer, 0x4800001C);
 	directWriteBlr(StopUpdatingPosTracker);
 	directWriteNop(StopUpdatingPosTracker2);
 	directWriteNop(RaceAlonePatch);

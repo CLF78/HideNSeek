@@ -141,9 +141,7 @@ SECTIONS {
 	FinishPoints = 0x8052A0C4;
 	StopUpdatingPosTracker = 0x8052EB90;
 	StopUpdatingPosTracker2 = 0x8053A484;
-	StopUpdatingTimerMin = 0x8052FD58;
-	StopUpdatingTimerSec = 0x8052FD60;
-	StopUpdatingTimerMs = 0x8052FD68;
+	StopUpdatingTimer = 0x8052FD54;
 	RaceAlonePatch = 0x8053A6D4;
 
 	/* Force CC */
