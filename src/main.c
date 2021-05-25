@@ -124,6 +124,7 @@ void loadCodes() {
 	directWrite32(StopUpdatingPosTracker3, 0x38000000);
 	directWriteNop(StopUpdatingPosTracker4);
 	directWrite32(StopUpdatingPosTracker5, 0x3BE60001);
+	directWrite16(StopUpdatingPosTracker6, tempVal16);
 	directWriteNop(RaceAlonePatch);
 
 	// Force 150cc (by XeR, modified by CLF78)

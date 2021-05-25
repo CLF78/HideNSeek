@@ -147,6 +147,7 @@ SECTIONS {
 	StopUpdatingPosTracker3 = 0x80521F5C;
 	StopUpdatingPosTracker4 = 0x80520990; 
 	StopUpdatingPosTracker5 = 0x805245AC;
+	StopUpdatingPosTracker6 = 0x8052D814;
 	StopUpdatingTimer = 0x805228F4;
 	RaceAlonePatch = 0x8052DC68;
 
