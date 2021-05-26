@@ -70,6 +70,7 @@ void SetupHNS() {
 	// Get the Seekers!
     for (int amount = 0; amount < HideNSeekData.totalSeekers; amount++) {
         pid = pidHelper(pid, prevaid1, prevaid2, amount);
+		HideNSeekData.players[pid].isStopped = true;
         HideNSeekData.players[pid].isSeeker = true;
         HideNSeekData.players[pid].isRealSeeker = true;
         Racedata->main.scenarios[0].players[pid].team = 0;

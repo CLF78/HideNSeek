@@ -30,7 +30,7 @@ void PlayerKiller(char pid) {
 		// Remove Respawn Cooldown if present
 		if (HideNSeekData.players[pid].respawnTimer > 0) {
 			HideNSeekData.players[pid].respawnTimer = 0;
-			PlayerHolder->players[pid]->pointers.playerSub10->hardSpeedLimit = 0x42F00000;
+			HideNSeekData.players[pid].isStopped = false;
 		}
 
 		// Add 1 to items to prevent game from removing it

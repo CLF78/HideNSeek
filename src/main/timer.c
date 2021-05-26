@@ -18,22 +18,15 @@ void MainTimerUpdate(u32 timer) {
 		if (HideNSeekData.players[pid].respawnTimer > 0) {
 			HideNSeekData.players[pid].respawnTimer--;
 			if (HideNSeekData.players[pid].respawnTimer == 0)
-				PlayerHolder->players[pid]->pointers.playerSub10->hardSpeedLimit = 0x42F00000;
+				HideNSeekData.players[pid].isStopped = false;
 		}
 	}
 
 	// Some things happen before 30 seconds have passed
 	if (!Have30SecondsPassed) {
 
-		// If timer is 1800, set speed to 0 for all Seekers
-		if (timer == 1800) {
-			for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
-				if (HideNSeekData.players[pid].isRealSeeker)
-					PlayerHolder->players[pid]->pointers.playerSub10->hardSpeedLimit = 0;
-			}
-
 		// Play the countdown jingle again
-		} else if (timer % 60 == 0 && timer <= 180 && Raceinfo->raceState != 4)
+		if (timer % 60 == 0 && timer <= 180 && Raceinfo->raceState != 4)
 			CustomJingleFunc(0xD8);
 
 		// If timer is 1, reset it back to 10 minutes (minus 1 frame because it will give 1 point otherwise)
@@ -49,7 +42,7 @@ void MainTimerUpdate(u32 timer) {
 			// Allow the Seekers to move
 			for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
 				if (HideNSeekData.players[pid].isRealSeeker)
-					PlayerHolder->players[pid]->pointers.playerSub10->hardSpeedLimit = 0x42F00000;
+					HideNSeekData.players[pid].isStopped = false;
 			}
 
 			// Play the GO jingle again!

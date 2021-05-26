@@ -12,7 +12,7 @@ SECTIONS {
 	NETSHA1Init = 0x801D24F4;
 	NETSHA1Update = 0x801D2544;
 	NETSHA1GetDigest = 0x801D25F8;
-	
+
 	UtilRandomSeed = 0x800F2EC8;
 	UtilRandint = 0x800F2EE0;
 	RandomNextLimited = 0x805555CC;
@@ -131,9 +131,6 @@ SECTIONS {
 	/* Disable Track Music */
 	NoMusicHook = 0x8009130C;
 
-	/* Disable Wheelie */
-	DisableWheelieHook = 0x805887B8;
-
 	/* Enable Score */
 	EnableScore = 0x80858668;
 	UpdateScoreHook = 0x807F789C;
@@ -145,7 +142,7 @@ SECTIONS {
 	StopUpdatingPosTracker = 0x805336D8;
 	StopUpdatingPosTracker2 = 0x8053F9C0;
 	StopUpdatingPosTracker3 = 0x80533F04;
-	StopUpdatingPosTracker4 = 0x80532938; 
+	StopUpdatingPosTracker4 = 0x80532938;
 	StopUpdatingPosTracker5 = 0x80536554;
 	StopUpdatingPosTracker6 = 0x8053F7BC;
 	StopUpdatingTimer = 0x8053489C;
@@ -336,7 +333,12 @@ SECTIONS {
 	SpectatorModeHook = 0x805A2230;
 	ReplayCameraHook = 0x805A28C0;
 	BackwardsCameraHook = 0x805A2244;
-	
+
+	/* Speed Nullifier */
+	StopperHook = 0x8057AB68;
+	StopperHook2 = 0x8057B9BC;
+	StopperHook3 = 0x8058296C;
+
 	/* Starting Time Modifier */
 	TimerInit = 0x805358E4;
 	TimerInit2 = 0x80535890;

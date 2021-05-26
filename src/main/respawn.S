@@ -28,9 +28,9 @@ lbz r4, 0x1(r3)
 cmpwi r4, 1
 beqlr
 
-# Store 0 to hardSpeedLimit
-li r4, 0
-stw r4, 0x2C(r29)
+# Store 1 to isStopped
+li r4, 1
+stb r4, 0(r3)
 
 # Store 60 to respawnTimer
 li r4, 60

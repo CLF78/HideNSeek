@@ -104,9 +104,6 @@ void loadCodes() {
 	// Disable Title Demo Movie (by Diamond)
 	directWrite16(NoTitleDemo, tempVal16);
 
-	// Disable Wheelie (by Luis, modified by CLF78)
-	directWriteBranch(DisableWheelieHook, DisableWheelie, true);
-
 	// Enable Score (by CLF78)
 	directWriteNop(EnableScore);
 	directWriteBranch(UpdateScoreHook, UpdateScore, true);
@@ -309,6 +306,11 @@ void loadCodes() {
 	directWriteBranch(SpectatorModeHook, SpectatorModeFunc, false);
 	directWriteBranch(ReplayCameraHook, ReplayCameraManager, true);
 	directWriteBranch(BackwardsCameraHook, BackwardsCameraManager, true);
+
+	// Speed Nullifier (by tZ and CLF78)
+	directWriteBranch(StopperHook, Stopper1, false);
+	directWriteBranch(StopperHook2, Stopper2, false);
+	directWriteBranch(StopperHook3, Stopper3, true);
 
 	// Starting Time Modifier (by Bully, modified by CLF78)
 	directWriteBranch(TimerInit, StartingTime, true);

@@ -131,9 +131,6 @@ SECTIONS {
 	/* Disable Track Music */
 	NoMusicHook = 0x8009136C;
 
-	/* Disable Wheelie */
-	DisableWheelieHook = 0x80576810;
-
 	/* Enable Score */
 	EnableScore = 0x80846A28;
 	UpdateScoreHook = 0x807E5C5C;
@@ -145,7 +142,7 @@ SECTIONS {
 	StopUpdatingPosTracker = 0x80521730;
 	StopUpdatingPosTracker2 = 0x8052DA18;
 	StopUpdatingPosTracker3 = 0x80521F5C;
-	StopUpdatingPosTracker4 = 0x80520990; 
+	StopUpdatingPosTracker4 = 0x80520990;
 	StopUpdatingPosTracker5 = 0x805245AC;
 	StopUpdatingPosTracker6 = 0x8052D814;
 	StopUpdatingTimer = 0x805228F4;
@@ -336,7 +333,12 @@ SECTIONS {
 	SpectatorModeHook = 0x80590288;
 	ReplayCameraHook = 0x80590918;
 	BackwardsCameraHook = 0x8059029C;
-	
+
+	/* Speed Nullifier */
+	StopperHook = 0x80568BC0;
+	StopperHook2 = 0x80569A14;
+	StopperHook3 = 0x805709C4;
+
 	/* Starting Time Modifier */
 	TimerInit = 0x8052393C;
 	TimerInit2 = 0x805238E8;
