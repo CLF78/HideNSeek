@@ -186,6 +186,11 @@ SECTIONS {
 	HostCheckHelperHook = 0x800DC3B0;
 	Original30 = 0x80277050;
 
+	/* Improved Positioning */
+	ForceInterpolation = 0x8058BA38;
+	InterpolationHook = 0x8058BA50;
+	InterpolationHook2 = 0x8058BC30;
+
 	/* Increase Visual Distance */
 	DrawDistance = 0x80892320;
 

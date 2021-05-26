@@ -161,6 +161,11 @@ void loadCodes() {
 	directWriteBranch(HostCheckHelperHook, HostCheckHelper, true);
 	directWrite8(Version, 3);
 
+	// Improved Position Interpolation (by CLF78, Leseratte & stebler)
+	directWriteNop(ForceInterpolation);
+	directWriteBranch(InterpolationHook, InterpFunc, false);
+	directWriteBranch(InterpolationHook2, InterpFunc2, false);
+
 	// Increase Visual Distance (by davidevgen)
 	directWrite32(DrawDistance, 0x49742400);
 
