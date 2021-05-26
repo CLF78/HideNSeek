@@ -199,6 +199,7 @@ SECTIONS {
 	InfiniteStarHook2 = 0x8057FD88;
 	InfiniteStarHook3 = 0x8056B31C;
 	StarFunc = 0x807B66D8;
+	StarFix = 0x807B6708;
 
 	/* Instant Respawn */
 	InstantRespawn1 = 0x805737A8;
