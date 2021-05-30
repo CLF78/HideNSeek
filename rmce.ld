@@ -329,6 +329,9 @@ SECTIONS {
 	HNSDataHook = 0x8052BA60;
 	HNSDataHook2 = 0x8052D5D8;
 
+	/* Set Default Drift Type */
+	DefaultDriftType = 0x80540E30;
+
 	/* Spectator Mode */
 	SpectatorModeHook = 0x805971F8;
 	ReplayCameraHook = 0x80597888;

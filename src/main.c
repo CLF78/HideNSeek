@@ -302,6 +302,9 @@ void loadCodes() {
 	directWriteBranch(HNSDataHook, SetupHNS, false);
 	directWriteBranch(HNSDataHook2, DeleteHNS, false);
 
+	// Set Default Drift Type (by CLF78)
+	directWrite32(DefaultDriftType, 0x38600001);
+
 	// Spectator Mode (by tZ, Skullface, Geeh, EvilRobot and JoshuaMK, modified by CLF78)
 	directWriteBranch(SpectatorModeHook, SpectatorModeFunc, false);
 	directWriteBranch(ReplayCameraHook, ReplayCameraManager, true);
