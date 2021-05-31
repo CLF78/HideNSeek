@@ -212,7 +212,7 @@ void loadCodes() {
 	directWriteNop(MuteCharsHook3);
 
 	// No Clip (by Melg, modified by CLF78)
-	directWriteBranch(NoClipHook, NoClip, true);
+	directWriteBranch(NoClipHook, NoClipHelper, true);
 
 	// No Disconnect (by Bully)
 	tempVal32 = 0x38000000;
