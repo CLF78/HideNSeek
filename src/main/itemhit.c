@@ -37,6 +37,10 @@ void PlayerKiller(char pid) {
 		if (ItemHolder->ptr->players[pid].itemAmount > 0)
 			ItemHolder->ptr->players[pid].itemAmount++;
 
+		// Update tags in real time if i'm not Seeker
+		if (!HideNSeekData.players[Racedata->main.scenarios[0].settings.hudPlayerIds[0]].isSeeker)
+			UpdateTag(pid, TEAM_RED);
+
 	// If infection is not enabled, simply run the disconnection function
 	} else
 		DisconnectPlayer(Raceinfo, pid);

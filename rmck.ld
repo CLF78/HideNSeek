@@ -8,6 +8,7 @@ SECTIONS {
 	ItemHolder = 0x809B1C58;
 	MusicHandler = 0x809B0E38;
 	RKNetSelectHandler = 0x809B0740;
+	ScreenHUD = 0x809B2CC0;
 
 	NETSHA1Init = 0x801D2850;
 	NETSHA1Update = 0x801D28A0;
@@ -351,4 +352,7 @@ SECTIONS {
 	TagDistanceHook2 = 0x807E04A4;
 	TagShowHook = 0x807DF008;
 	TagFunc = 0x807DE404;
+	PlayAnim = 0x8062AC34;
+	TeamLineColors = 0x80898254;
+	ZeroFloat = 0x80898198;
 }

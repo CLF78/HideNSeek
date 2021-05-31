@@ -14,3 +14,4 @@ void CustomJingleFunc(int sfx);
 void TagFunc(void* something, int pid);
 
 void updatePlayerFinishTimes(void);
+void UpdateTag(int pid, int team);
