@@ -5,17 +5,10 @@
 
 bool MuteChars2(PlayerHolderPlayer* player) {
 
-	// Get pid
-	char pid = player->playerPointers->params->playerId;
-
-	// Check if it's myself
-	if (pid == Racedata->main.scenarios[0].settings.hudPlayerIds[0])
-		return 0;
-
-	// Check if Spectator Mode is on
-	if (SpectatorMode)
+	// Don't change anything if i'm hider
+	if (!HideNSeekData.players[Racedata->main.scenarios[0].settings.hudPlayerIds[0]].isSeeker)
 		return 0;
 
 	// Otherwise return True if not Seeker
-	return (!HideNSeekData.players[pid].isSeeker);
+	return (!HideNSeekData.players[player->playerPointers->params->playerId].isSeeker);
 }

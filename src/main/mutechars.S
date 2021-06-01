@@ -6,36 +6,33 @@
 # Did this one in ASM because lazy
 MuteChars:
 
-# Assume player is not Seeker
+# Assume mute
 li r0, 0x40
 
-# Check if Spectator Mode is on
-lis r30, SpectatorMode@ha
-lbz r30, SpectatorMode@l(r30)
-cmpwi r30, 1
+# Preload HideNSeekData in r6
+lis r6, HideNSeekData@h
+ori r6, r6, HideNSeekData@l+5
+
+# Get my pid
+lis r30, Racedata@ha
+lwz r30, Racedata@l(r30)
+lbz r30, 0xB84(r30)
+slwi r30, r30, 2
+
+# If i'm Seeker, always return 0
+lbzx r30, r30, r6
+cmpwi r30, 0
 beq returnZero
 
 # Get playerId
 lwz r4, 0(r4)
 lbz r4, 0x10(r4)
-
-# Check if it's myself
-lis r30, Racedata@ha
-lwz r30, Racedata@l(r30)
-lbz r30, 0xB84(r30)
-cmpw r4, r30
-beq returnZero
-
-# Check if the player is a Seeker
 slwi r4, r4, 2
-lis r30, HideNSeekData@h
-ori r30, r30, HideNSeekData@l+4
-add r30, r30, r4
-lbz r4, 0x1(r30)
 
-# If so, return
-cmpwi r4, 1
-bnelr+
+# If the player is a Hider, return
+lbzx r4, r4, r6
+cmpwi r4, 0
+beqlr+
 
 # Otherwise return 0
 returnZero:
