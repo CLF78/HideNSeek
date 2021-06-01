@@ -14,18 +14,18 @@ void InvisibilityFunc(RacePacket* packet, int length, int aid) {
 	if (packet->racedata_len != 0 && !Have30SecondsPassed && !HideNSeekData.players[Racedata->main.scenarios[0].settings.hudPlayerIds[0]].isSeeker && (aid == PrevSeekers[0] || aid == PrevSeekers[1])) {
 
 		// Overwrite the position in the packet
-		packet->data[index] = 0x9F;
-		packet->data[index+1] = 0x42;
-		packet->data[index+2] = 0x41;
-		packet->data[index+3] = 0x09;
-		packet->data[index+4] = 0xF4;
-		packet->data[index+5] = 0x24;
-		packet->data[index+6] = 0x10;
-		packet->data[index+7] = 0x9F;
-		packet->data[index+8] = 0x42;
-		packet->data[index+9] = 0x41;
+		packet->data[index] = 0xA0;
+		packet->data[index+1] = 0xA1;
+		packet->data[index+2] = 0x1F;
+		packet->data[index+3] = 0x8A;
+		packet->data[index+4] = 0x0A;
+		packet->data[index+5] = 0x11;
+		packet->data[index+6] = 0xF8;
+		packet->data[index+7] = 0xA0;
+		packet->data[index+8] = 0xA1;
+		packet->data[index+9] = 0x11;
 
-		// Since the last 4 bits overflow and their value is 0, clearing them will do the job.
+		// Since i'm lazy, clear the last 4 bits as that will barely change anything
 		packet->data[index+10] &= ~((1 << 7) | (1 << 6) | (1 << 5) | (1 << 4));
 	}
 
