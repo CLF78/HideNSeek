@@ -3,13 +3,8 @@
 .extern AlwaysWinVote
 .global VotePatch
 
-# Check that it's a friend room
-VotePatch:
-lwz r12, 0(r31)
-cmpwi r12, 3
-bne end
-
 # Check that the option was enabled
+VotePatch:
 lis r12, AlwaysWinVote@ha
 lbz r12, AlwaysWinVote@l(r12)
 cmpwi r12, 1

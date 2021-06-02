@@ -103,9 +103,9 @@ b return
 # Check for Main Menu (from Game Menus)
 not61:
 cmpwi r4, 0x41
+bne+ return
 
 # Switch to Main Menu (from Settings)
-bne+ return
 li r4, 0x43
 
 # Original instruction

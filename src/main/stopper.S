@@ -17,8 +17,7 @@ slwi r4, r4, 2
 # Get isStopped for player
 lis r5, HideNSeekData@ha
 ori r5, r5, HideNSeekData@l+4
-add r5, r5, r4
-lbz r4, 0(r5)
+lbzx r4, r4, r5
 cmpwi r4, 1
 beqlr
 
@@ -40,8 +39,7 @@ slwi r4, r4, 2
 # Get isStopped for player
 lis r5, HideNSeekData@ha
 ori r5, r5, HideNSeekData@l+4
-add r5, r5, r4
-lbz r4, 0(r5)
+lbzx r4, r4, r5
 cmpwi r4, 1
 beqlr
 
