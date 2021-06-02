@@ -13,6 +13,7 @@ SECTIONS {
 	Have30SecondsPassed = 0x800001E8;
 	UseReplayCams = 0x800001E9;
 	ExtraAreas = 0x800001EA;
+	MusicState = 0x800001EB;
 
 	/* HNS Per-GP Data */
 	IsInfection = 0x800002B0;

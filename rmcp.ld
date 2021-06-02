@@ -236,6 +236,9 @@ SECTIONS {
 	SomeJingleThing = 0x809C2850;
 	TimerFlash = 0x807F82F4;
 	BattleEnd = 0x8070B358;
+	MusicPitch = 0x808A10D8;
+	FastMusicEnableHook = 0x80712054;
+	FastMusicDisableHook = 0x807120E4;
 
 	/* Mute Characters */
 	MuteCharsHook = 0x8070756C;

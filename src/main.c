@@ -205,6 +205,8 @@ void loadCodes() {
 	directWriteNop(BattleCountdown);
 	directWriteBranch(TimerFlash, TimerFlashFix, false);
 	directWriteNop(BattleEnd);
+	directWriteBranch(FastMusicEnableHook, FastMusicEnable, true);
+	directWriteBranch(FastMusicDisableHook, FastMusicDisable, true);
 
 	// Mute Characters (by Melg, modified by CLF78)
 	directWriteBranch(MuteCharsHook, MuteChars, true);
