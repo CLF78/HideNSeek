@@ -12,9 +12,9 @@ DisableWallride:
 lwz r0, 0x4(r3)
 
 # Check if glitches are allowed
-lis r3, GlitchesAllowed@ha
-lbz r3, GlitchesAllowed@l(r3)
-cmpwi r3, 1
+lis r4, GlitchesAllowed@ha
+lbz r4, GlitchesAllowed@l(r4)
+cmpwi r4, 1
 beqlr
 
 # Check if we are hitting a wall
