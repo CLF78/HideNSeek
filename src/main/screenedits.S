@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern ScreenLoadHook, ScreenDSIFix1Hook, ScreenDSIFix4Hook
+.extern ScreenLoadHook, ScreenDSIFix1Hook, ScreenDSIFix4Hook, MusicPitch
 .extern createScreen, switchScreen
 .global ScreenLoad, CupScreenPatch, BattleCupScreenPatch, ScreenDSIFix1, ScreenDSIFix2, ScreenDSIFix3, SceneSwap
 
@@ -90,6 +90,11 @@ b ScreenDSIFix4Hook+8
 ###############
 # Screen Swap #
 ###############
+
+# Reset Music Pitch (for when someone quits the race in an irregular way)
+lis r31, 0x3F80
+lis r6, MusicPitch@ha
+stw r31, MusicPitch@l(r6)
 
 # Check for Friend Room Team VS
 SceneSwap:
