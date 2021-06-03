@@ -1,7 +1,7 @@
 .include "asm_setup.S"
 
 .extern TimerChecks, No5LimitHook2, No5LimitHook3, EndReason
-.global StartingTime, StartingTime2, TimerEnd
+.global StartingTime, StartingTime2, TimerEnd, TimerEndManager
 
 ##########################
 # Starting Time Modifier #
@@ -60,3 +60,18 @@ b No5LimitHook3
 # End the race
 endRace:
 b No5LimitHook2
+
+#####################
+# Timer End Manager #
+#####################
+
+# Get EndReason
+TimerEndManager:
+lis r3, EndReason@ha
+lbz r3, EndReason@l(r3)
+
+# Return (EndReason == 1)
+xori r3, r3, 1
+cntlzw r3, r3
+srwi r3, r3, 5
+blr

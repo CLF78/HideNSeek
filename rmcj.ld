@@ -284,6 +284,8 @@ SECTIONS {
 
 	/* Reversed Timer */
 	TimerManagerHook = 0x805355FC;
+	TimerEndManagerHook = 0x807F77EC;
+	TimerEndBranch = 0x807F77F6;
 
 	/* Room Message Handler */
 	HostFlagsHook = 0x8065A4DC;

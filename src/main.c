@@ -255,6 +255,8 @@ void loadCodes() {
 
 	// Reversed Timer (by CLF78)
 	directWriteBranch(TimerManagerHook, MainTimerUpdate, true);
+	directWriteBranch(TimerEndManagerHook, TimerEndManager, true);
+	directWrite16(TimerEndBranch, 0x98);
 
 	// Room Message Handler (by CLF78)
 	directWriteBranch(HostFlagsHook, HostFlags, false);
