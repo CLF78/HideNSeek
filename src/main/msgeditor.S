@@ -33,7 +33,7 @@ bl trick
 .string16 "\nTime's up!\nThe match has ended."
 .string16 "\nAll players have been caught.\nThe match has ended."
 .string16 "\nAll seekers left.\nThe match has ended."
-.string16 "Hide and Seek v1.7.2"
+.string16 "Hide and Seek v1.8"
 .string16 "Classic"
 .string16 "Infection"
 .string16 "In a Worldwide HnS match!"
@@ -141,29 +141,29 @@ addi r3, r12, 0x394
 not8422:
 cmpwi r14, 0x10D1
 bne+ not10D1
-addi r3, r12, 0x3BE
+addi r3, r12, 0x3BA
 
 not10D1:
 cmpwi r14, 0x10D4
 bne+ not10D4
-addi r3, r12, 0x3CE
+addi r3, r12, 0x3CA
 
 # Status messages
 not10D4:
 cmpwi r14, 0x14BD
 bne+ not14BD
-addi r3, r12, 0x3E2
+addi r3, r12, 0x3DE
 
 # Voting hints
 not14BD:
 cmpwi r14, 0xD21
 bne+ notD21
-addi r3, r12, 0x416
+addi r3, r12, 0x412
 
 notD21:
 cmpwi r14, 0xD23
 bne+ notD23
-addi r3, r12, 0x46A
+addi r3, r12, 0x466
 
 # Store pointer before it gets overwritten (original instruction)
 notD23:

@@ -156,7 +156,7 @@ void loadCodes() {
 	directWriteBranch(GuestSendHook, GuestSend, false);
 	directWriteBranch(HostCheckHook, HostCheck, true);
 	directWriteBranch(HostCheckHelperHook, HostCheckHelper, true);
-	directWrite8(Version, 3);
+	directWrite8(Version, 4);
 
 	// Improved Position Interpolation (by CLF78, Leseratte & stebler)
 	directWriteNop(ForceInterpolation);
