@@ -219,6 +219,7 @@ SECTIONS {
 	ItemRouletteHook = 0x807AB784;
 	ItemRouletteHook2 = 0x807AB9C8;
 	NoSpecialItems = 0x80790FB0;
+	NoSpecialItems2 = 0x8065EDD0;
 
 	/* License Unlocker */
 	LicenseUnlocker = 0x80544438;
@@ -237,8 +238,7 @@ SECTIONS {
 	TimerFlash = 0x807ED7F4;
 	BattleEnd = 0x807049B4;
 	MusicPitch = 0x8089C9D0;
-	FastMusicEnableHook = 0x8070A5B0;
-	FastMusicDisableHook = 0x8070A640;
+	FastMusicHook = 0x8070A03C;
 
 	/* Mute Characters */
 	MuteCharsHook = 0x80700BC8;

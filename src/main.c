@@ -156,7 +156,7 @@ void loadCodes() {
 	directWriteBranch(GuestSendHook, GuestSend, false);
 	directWriteBranch(HostCheckHook, HostCheck, true);
 	directWriteBranch(HostCheckHelperHook, HostCheckHelper, true);
-	directWrite8(Version, 4);
+	directWrite8(Version, 5);
 
 	// Improved Position Interpolation (by CLF78, Leseratte & stebler)
 	directWriteNop(ForceInterpolation);
@@ -186,11 +186,12 @@ void loadCodes() {
 	directWriteBranch(ItemHitRemoteHook, ItemHitRemote, true);
 	directWriteBranch(PlayerDCHook, PlayerDC, false);
 
-	// Item Mod (by CLF78)
+	// Item Mod (by CLF78 & XeR)
 	directWriteBranch(ItemModHook, ItemMod, true);
 	directWriteBranch(ItemRouletteHook, ItemMod, true);
 	directWriteBranch(ItemRouletteHook2, ItemMod, true);
 	directWriteBlr(NoSpecialItems);
+	directWrite32(NoSpecialItems2, 0x3A200020);
 	
 	// License Unlocker (by _tZ)
 	directWrite32(LicenseUnlocker, 0x38600001);
@@ -205,8 +206,7 @@ void loadCodes() {
 	directWriteNop(BattleCountdown);
 	directWriteBranch(TimerFlash, TimerFlashFix, false);
 	directWriteNop(BattleEnd);
-	directWriteBranch(FastMusicEnableHook, FastMusicEnable, true);
-	directWriteBranch(FastMusicDisableHook, FastMusicDisable, true);
+	directWriteBranch(FastMusicHook, FastMusic, true);
 
 	// Mute Characters (by Melg, modified by CLF78)
 	directWriteBranch(MuteCharsHook, MuteChars, true);
