@@ -1,5 +1,4 @@
 #include "common.h"
-#include "exception.h"
 
 // Forward declarations
 void CupScreenPatch();
@@ -15,7 +14,6 @@ void loadCodes() {
 
 	// Exception Handler (by Star)
 	directWrite32(ShowExceptions, 0);
-	directWrite16(ExcDispInfo, (u16)(EXCEPTION_INFO_DEFAULT | EXCEPTION_INFO_GPR));
 
 	// Wiimmfi Code Patches (by Leseratte)
 	directWriteNop(WiimmfiPatch1);

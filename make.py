@@ -4,98 +4,92 @@ from subprocess import call
 from elftools.elf.elffile import ELFFile as elf
 
 # Locate various things
-asm = 'powerpc-eabi-as'
 gcc = 'powerpc-eabi-gcc'
 objcopy = 'powerpc-eabi-objcopy'
+destdir = 'bin'
 
 # Initialize variables
 startHook = 0x8000629C
-debug = False
-regionlist = ['P', 'E', 'J', 'K']
+startFuncName = 'start'
+excludefile = 'excludes.txt'
+extensions = ['.s', '.S', '.c']
 
-def build(isBootStrap):
-    # Initialize lists
-    asmlist = []
-    cpplist = []
+def build(isBootStrap: bool):
 
+    # Initialize vars
     if isBootStrap:
         mainpath = 'bootstrap'
-        outname = 'Loader'
-        print('Building bootstrap...')
+        outname = ''
+        regionlist = ['Loader']
     else:
         mainpath = 'src'
         outname = 'HideNSeek'
-        print('Building payload...')
+        regionlist = ['P', 'E', 'J', 'K']
+
+    # Pretty print
+    print('Building', 'bootstrap...' if isBootStrap else 'payload...')
+
+    # Get excluded files
+    if os.path.isfile(excludefile):
+        with open(excludefile) as f:
+            excludes = [line.rstrip() for line in f.readlines()]
+    else:
+        excludes = []
 
     # Get all files in the source folder
-    for root, subfolder, files in os.walk(mainpath):
-        for item in files:
-            if item.lower().endswith('.s'):
-                filename = os.path.join(root, item)
-                asmlist.append(filename)
-            elif item.lower().endswith('.c'):
-                filename = os.path.join(root, item)
-                cpplist.append(filename)
+    filelist = [os.path.join(root, item) for root, s, files in os.walk(mainpath) for item in files if item not in excludes and os.path.splitext(item)[1] in extensions]
 
     for region in regionlist:
-        # Make a clean build folder
-        if os.path.isdir('build'):
-            rmtree('build')
-        os.mkdir('build')
+        # Assemble destination file
+        outputfile = f'{destdir}/{outname}{region}.'
 
         # Initialize GCC command
-        cc_command = [gcc, '-Iinclude', '-nostartfiles', '-nostdinc', '-D', 'REGION_{}'.format(region), '-D', 'REGION=\'{}\''.format(region), '-Os', '-Wl,-T,{}/mem.ld,-T,rmc.ld,-T,rmc{}.ld'.format(mainpath, region.lower()), '-ffunction-sections', '-fdata-sections', '-fcommon', '-mcpu=750', '-meabi', '-mhard-float']
-
-        # Add debug macro if debug is on
-        if debug:
-            cc_command += ['-D', 'DEBUG']
+        cc_command = [gcc, '-Iinclude', '-pipe', '-Os', f'-Wl,-T,{mainpath}/mem.ld,-T,rmc.ld']
+        
+        # Add other build-specific stuff
+        if not isBootStrap:
+            cc_command += ['-D', f'REGION_{region}', '-nostartfiles', '-nostdinc', f'-Wl,-T,rmc{region.lower()}.ld']
+        else:
+            cc_command.append('-nostdlib')
 
         # Add all cpp files and the destination
-        cc_command += cpplist
-        cc_command += asmlist
-        cc_command += ['-o', 'build/{}{}.o'.format(outname, region)]
+        cc_command += filelist
+        cc_command += ['-o', outputfile + 'o']
 
-        # Debug output for testing:
+        # Debug output for testing
         # print(*cc_command)
 
         # Call GCC to compile everything
         c = call(cc_command)
         if c != 0:
             print('Build failed!')
-            return
+            continue
 
         # Get offset to start function
         if isBootStrap:
-            with open('build/{}{}.o'.format(outname,region), 'rb') as f:
-                elfData = elf(f)
-                symtab = elfData.get_section_by_name('.symtab')
-                startFunc = symtab.get_symbol_by_name('start')[0].entry['st_value']
-                instruction = (((startFunc-startHook) & 0x3FFFFFF ) | 0x48000000)
-                print('New instruction is', hex(instruction))
+            with open(outputfile + 'o', 'rb') as f:
+                startFunc = elf(f).get_section_by_name('.symtab').get_symbol_by_name(startFuncName)[0]['st_value']
+            instruction = (((startFunc-startHook) & 0x3FFFFFC) | 0x48000000)
+            print('Insert', hex(instruction), 'at', hex(startHook))
 
-        c = call([objcopy, '-O', 'binary', '-R', '.eh_frame', '-R', '.eh_frame_hdr', 'build/{}{}.o'.format(outname, region), 'bin/{}{}.bin'.format(outname, region)])
+        # Convert to binary
+        c = call([objcopy, '-O', 'binary', '-R', '.eh_frame', '-R', '.eh_frame_hdr', outputfile + 'o', outputfile + 'bin'])
         if c != 0:
             print('Build failed!')
-            return
         else:
-            print('Built', region + '!')
-
-    # We're done!
-    rmtree('build')
-    print('All built!')
+            print(f'Built {region}!')
 
 def main():
-    # Debug prompt
-    global debug
-    debug = input('Enable debug mode? (Y/N): ').lower() == 'y'
-
-    # Make a clean bin folder
-    if os.path.isdir('bin'):
-        rmtree('bin')
-    os.mkdir('bin')
+    # Make a clean build folder
+    if os.path.isdir(destdir):
+        rmtree(destdir)
+    os.mkdir(destdir)
 
     # Build it!
     build(False)
     build(True)
+
+    # We're done!
+    print('Built all!')
 
 main()

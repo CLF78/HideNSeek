@@ -1,8 +1,9 @@
 SECTIONS {
 	/* Base Functions */
-	gameRegion = 0x80000003;
+	region = 0x800001EC;
 	_directWriteArray = 0x80005F34;
-	memset = 0x80006038;
+	CheckAddress = 0x8000620A;
+	StartFunc = 0x808DD400;
 
 	/* HnS Per-Race Data */
 	HideNSeekData = 0x800001B0;

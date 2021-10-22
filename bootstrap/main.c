@@ -1,65 +1,68 @@
 #include "common.h"
 
-// Forward declaration
-void runPayload();
+// Forward declarations (these strings were made in ASM to prevent random alignment zeroes)
+char filename, fatalstring;
+loaderFunctions funcs[4];
 
-// This function loads all the codes that HideNSeek uses after StaticR has loaded
+// External vars
+char region;
+u16 CheckAddress;
+void* StartFunc;
+
+// ASM Functions
+void ThirtyFPS1();
+
+// This function loads all the codes that HNS uses after StaticR has loaded
 void readPayload() {
 
 	// Compose filename
 	char buffer[32];
-	sprintf(buffer, "/hns/HideNSeek%c.bin", gameRegion);
+	funcs[region].sprintf(buffer, &filename, funcs[region].letter);
 
 	// Open the file
 	DVDHandle fd;
-	bool ret = DVDOpen(buffer, &fd);
+	bool ret = funcs[region].DVDOpen(buffer, &fd);
 
 	// Failsafe
 	if (!ret) {
 		u32 fataltextcolor = 0xFFFFFFFF;
 		u32 fatalbackcolor = 0;
-		OSFatal(&fataltextcolor, &fatalbackcolor, "Could not find Hide and Seek payload.\nPlease check that your installation is correct.");
+		funcs[region].OSFatal(&fataltextcolor, &fatalbackcolor, &fatalstring);
 	}
 
 	// Read the file (destination must be aligned by 32!)
-	DVDReadPrio(&fd, (void*)0x808DD400, fd.length, 0, 0);
+	funcs[region].DVDReadPrio(&fd, (void*)0x808DD400, fd.length, 0, 0);
 
 	// Close it
-	DVDClose(&fd);
+	funcs[region].DVDClose(&fd);
 
 	// Run the payload
-	runPayload();
+	((void(*)(void))StartFunc)();
 }
 
 // Initial function. This hooks at the end of init_registers
 void start() {
 
-	// "Anticheat"
-
-	#ifndef DEBUG
-	// Overwrite all commonly used hooks
-	directWriteBlr(VIHook);
-	directWriteBlr(KPADHook);
-	directWriteBlr(GXDrawHook);
-	directWriteBlr(GXFlushHook);
-	directWriteBlr(OSSleepHook);
-	directWriteBlr(AXNextFrameHook);
-
-	// Wipe area at 0x80001800-0x80003000
-	memset((void*)0x80001800, 0, 0x1800);
-
-	// Disable Dolphin's codehandler
-	_directWriteBlr((void*)0x800018A8);
-	#endif
+	// Detect region
+	if (CheckAddress == 0x54A9)			// PAL
+		region = 0;
+	else if (CheckAddress == 0x5409)	// NTSC-U
+		region = 1;
+	else if (CheckAddress == 0x53CD)	// NTSC-K
+		region = 2;
+	else if (CheckAddress == 0x5511)	// NTSC-K
+		region = 3;
+	else
+		do {} while (true);				// Failed to detect, enter infinite loop
 
 	// Main Hook
-	directWriteBranchEx(RelHook, readPayload, false);
+	_directWriteBranch(funcs[region].RelHook, readPayload, false);
 
 	// 30 FPS (by CLF78)
 	if (ThirtyFPS == 1) {
-		directWriteBranch(ThirtyFPSHook1, ThirtyFPS1, true);
-		directWrite8(ThirtyFPSHook2, 2);
-		directWrite8(ThirtyFPSHook3, 2);
+		_directWriteBranch(funcs[region].ThirtyFPS1, ThirtyFPS1, true);
+		_directWrite8(funcs[region].ThirtyFPS2, 2);
+		_directWrite8(funcs[region].ThirtyFPS2+0x1FC, 2);
 	}
 
 	// Flush cache

@@ -27,11 +27,9 @@ typedef double f64;
 
 /* Base Functions */
 void flushAddr(void* addr);
-void _directWrite8(u8* addr, u8 value);
-void _directWrite16(u16* addr, u16 value);
-void _directWrite32(u32* addr, u32 value);
-void _directWriteNop(void* addr);
-void _directWriteBlr(void* addr);
+void _directWrite8(void* addr, u8 value);
+void _directWrite16(void* addr, u16 value);
+void _directWrite32(void* addr, u32 value);
 void _directWriteBranch(void* addr, void* ptr, bool lk);
 void* _directWriteArray(void* dest, void* src, u32 count); // Actually memcpy but renamed so it isn't inlined
 
@@ -39,33 +37,56 @@ void* _directWriteArray(void* dest, void* src, u32 count); // Actually memcpy bu
 #define SIZEOF(object) (char *)(&object+1) - (char *)(&object)
 
 #define directWrite8(addr, value) extern void* (addr);\
-_directWrite8((u8*)&(addr), value)
+_directWrite8(&(addr), value);
+
+#define directWrite8Offset(addr, value, offset) extern void* (addr);\
+_directWrite8(&(addr)+(offset), value);
 
 #define directWrite16(addr, value) extern void* (addr);\
-_directWrite16((u16*)&(addr), value)
+_directWrite16(&(addr), value);
+
+#define directWrite16Offset(addr, value, offset) extern void* (addr);\
+_directWrite16(&(addr)+(offset), value);
 
 #define directWrite32(addr, value) extern void* (addr);\
-_directWrite32((u32*)&(addr), value)
+_directWrite32(&(addr), value);
+
+#define directWrite32Offset(addr, value, offset) extern void* (addr);\
+_directWrite32(&(addr)+(offset), value);
 
 #define directWriteNop(addr) extern void* (addr);\
-_directWriteNop(&(addr))
+_directWrite32(&(addr), 0x60000000);
+
+#define directWriteNopOffset(addr, offset) extern void* (addr);\
+_directWrite32(&(addr)+(offset), 0x60000000);
 
 #define directWriteBlr(addr) extern void* (addr);\
-_directWriteBlr(&(addr))
+_directWrite32(&(addr), 0x4E800020);
+
+#define directWriteBlrOffset(addr, offset) extern void* (addr);\
+_directWrite32(&(addr)+(offset), 0x4E800020);
 
 #define directWriteBranch(addr, ptr, lk) extern void* (addr);\
 void (ptr)();\
-_directWriteBranch(&(addr), ptr, lk)
+_directWriteBranch(&(addr), ptr, lk);
 
-#define directWriteBranchEx(addr, ptr, lk) extern void* (addr);\
-_directWriteBranch(&(addr), ptr, lk)
+#define directWriteBranchOffset(addr, ptr, lk, offset) extern void* (addr);\
+void (ptr)();\
+_directWriteBranch(&(addr)+(offset), ptr, lk);
 
 #define directWriteArray(dest, src, count) extern char (dest)[];\
 extern char (src)[];\
-_directWriteArray(&(dest), src, count)
+_directWriteArray(&(dest), src, count);
+
+#define directWriteArrayOffset(dest, src, count, offset) extern char (dest)[];\
+extern char (src)[];\
+_directWriteArray(&(dest)+(offset), src, count);
 
 #define directWriteString(dest, src) extern char (dest)[];\
-_directWriteArray(&(dest), src, SIZEOF(src))
+_directWriteArray(&(dest), src, SIZEOF(src));
+
+#define directWriteStringOffset(dest, src, offset) extern char (dest)[];\
+_directWriteArray(&(dest)+(offset), src, SIZEOF(src));
 
 /* Common Structures */
 typedef struct DVDHandle DVDHandle;
@@ -93,18 +114,30 @@ struct DVDHandle {
 	void* callback;			// 38
 };
 
+/* Loader Functions */
+typedef void (*OSFatal_t) (u32 *fg, u32 *bg, const char *str, ...);
+typedef int (*sprintf_t) (char *str, const char *format, ...);
+typedef bool (*DVDOpen_t) (const char* path, DVDHandle *handle);
+typedef bool (*DVDClose_t) (DVDHandle *handle);
+typedef int (*DVDReadPrio_t) (DVDHandle *handle, void *buffer, int length, int offset, int prio);
+
+typedef struct loaderFunctions loaderFunctions;
+
+struct loaderFunctions {
+	OSFatal_t OSFatal;
+	sprintf_t sprintf;
+	DVDOpen_t DVDOpen;
+	DVDClose_t DVDClose;
+	DVDReadPrio_t DVDReadPrio;
+	void* RelHook;
+	void* ThirtyFPS1;
+	void* ThirtyFPS2;
+	u8 letter;
+};
+
 /* Common Functions */
 void* memset(void* ptr, u32 value, u32 num);
 u32 CalcCRC32(void* data, u32 length);
 
-bool DVDOpen(const char* path, DVDHandle *fd);
-bool DVDClose(DVDHandle* fd);
-int DVDReadPrio(DVDHandle* fd, void* buffer, int length, int offset, int prio);
-
-void OSFatal(u32* textColor, u32* backColor, const char* message);
-
-int sprintf(char *s, const char *format, ...);
-
 /* Common Vars */
-char gameRegion;
 char NoMusic, CTSupport, ThirtyFPS;

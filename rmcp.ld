@@ -42,7 +42,6 @@ SECTIONS {
 
 	/* Exception Handler */
 	ShowExceptions = 0x802A7404;
-	ExcDispInfo = 0x802A7410;
 
 	/* Wiimmfi */
 	WiimmfiPatch1 = 0x800ED868;
