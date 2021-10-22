@@ -40,4 +40,4 @@ jobs:
         with: 
           name: Binaries
           path: |
-            bin
+            bin/*.bin
