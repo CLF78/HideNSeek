@@ -194,6 +194,19 @@ void loadCodes() {
 	// License Unlocker (by _tZ)
 	directWrite32(LicenseUnlocker, 0x38600001);
 
+	// Main Menu Mod (by CLF78)
+	directWriteBranch(MainMenuButtonSetup, MainMenuButtonSetup1, true); // Hides offline options and moves Wifi+Channel ones
+	directWrite8Offset(MainMenuButtonSetup, 0x2B, 0); // Disables the buttons for the hidden options
+	directWrite32Offset(MainMenuButtonSetup, 0x30, 0x480006DC);
+	directWrite8Offset(MainMenuButtonSetup, 0x127, 0);
+	directWrite32Offset(MainMenuButtonSetup, 0x12C, 0x480005E0);
+	directWrite8Offset(MainMenuButtonSetup, 0x413, 1); // Disables 2P Wifi button
+	directWrite8Offset(MainMenuButtonSetup, 0x48F, 0x18); // Expands 1P Wifi button to fill the empty space
+	directWrite8Offset(MainMenuButtonSetup, 0x4F7, 0xA4); // Fixes THP cropping
+	directWriteBranchOffset(MainMenuButtonSetup, 0x504, MainMenuButtonSetup2, false); // Removes text inside 1P Wifi button
+	directWriteBranch(MainMenuCrashFixHook, MainMenuCrashFix, true); // Alters default selected button to prevent crashes
+	directWrite8(MKChannelRedirect, 0x3B); // Redirects MK Channel to the Credits Part 2 scene
+
 	// Message Editor (by WhatIsLoaf & CLF78)
 	directWriteBranch(MessageEditorHook, MessageEditor, false);
 	directWriteBranch(MessageEditorHook2, MessageEditor2, true);
@@ -278,7 +291,6 @@ void loadCodes() {
 	directWriteBranch(ScreenDSIFix1Hook, ScreenDSIFix1, false);
 	directWriteBranch(ScreenDSIFix2Hook, ScreenDSIFix2, true);
 	directWriteBranch(ScreenDSIFix3Hook, ScreenDSIFix2, true);
-	directWriteBranch(ScreenDSIFix4Hook, ScreenDSIFix3, false);
 	directWrite32(CupScreenPatchHook, (u32)&CupScreenPatch);
 	directWrite32(BattleCupScreenPatchHook, (u32)&BattleCupScreenPatch);
 	directWriteNop(BattleCupScreenPatch2);
@@ -295,10 +307,6 @@ void loadCodes() {
 	directWrite32(TrackVoteLabel3, tempVal32);
 	directWrite32(TrackVoteLabel4, tempVal32);
 	directWrite32(TrackVoteLabel5, tempVal32);
-	directWriteBranch(MainMenuFix1, MainMenuFix1Dest, false);
-	directWrite32(MainMenuFix2, 0x38000004);
-	directWrite32(MainMenuFix3, 0x38800004);
-	directWrite32(MainMenuFix4, 0x3800FF9C);
 
 	// Seeker Picker (by CLF78)
 	directWriteBranch(HNSDataHook, SetupHNS, false);

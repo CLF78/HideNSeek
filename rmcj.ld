@@ -223,6 +223,12 @@ SECTIONS {
 	/* License Unlocker */
 	LicenseUnlocker = 0x805492F4;
 
+	/* Main Menu Mod */
+	MainMenuButtonSetup = 0x8084FC8C;
+	MainMenuCrashFixHook = 0x80850698;
+	MKChannelRedirect = 0x80850937;
+	ResetText = 0x8063D634;
+
 	/* Message Editor */
 	MessageEditorHook = 0x805CD6A0;
 	MessageEditorHook2 = 0x805CD634;
@@ -309,7 +315,6 @@ SECTIONS {
 	ScreenDSIFix1Hook = 0x80836DB0;
 	ScreenDSIFix2Hook = 0x80838AC8;
 	ScreenDSIFix3Hook = 0x8083C584;
-	ScreenDSIFix4Hook = 0x808374CC;
 	TrackVoteFix = 0x806439AA;
 	TrackVoteFix2 = 0x80643742;
 	TrackVoteFix3 = 0x8066159F;
@@ -323,11 +328,6 @@ SECTIONS {
 	TrackVoteLabel5 = 0x8083C4C0;
 	createScreen = 0x80622454;
 	switchScreen = 0x80836D8C;
-	MainMenuFix1 = 0x805EB41C;
-	MainMenuFix1Dest = 0x80850778;
-	MainMenuFix2 = 0x8085079C;
-	MainMenuFix3 = 0x808507B8;
-	MainMenuFix4 = 0x80850B48;
 	SceneSwapHook = 0x80621568;
 
 	/* Seeker Picker */

@@ -39,19 +39,19 @@ void* _directWriteArray(void* dest, void* src, u32 count); // Actually memcpy bu
 #define directWrite8(addr, value) extern void* (addr);\
 _directWrite8(&(addr), value);
 
-#define directWrite8Offset(addr, value, offset) extern void* (addr);\
+#define directWrite8Offset(addr, offset, value) extern void* (addr);\
 _directWrite8(&(addr)+(offset), value);
 
 #define directWrite16(addr, value) extern void* (addr);\
 _directWrite16(&(addr), value);
 
-#define directWrite16Offset(addr, value, offset) extern void* (addr);\
+#define directWrite16Offset(addr, offset, value) extern void* (addr);\
 _directWrite16(&(addr)+(offset), value);
 
 #define directWrite32(addr, value) extern void* (addr);\
 _directWrite32(&(addr), value);
 
-#define directWrite32Offset(addr, value, offset) extern void* (addr);\
+#define directWrite32Offset(addr, offset, value) extern void* (addr);\
 _directWrite32(&(addr)+(offset), value);
 
 #define directWriteNop(addr) extern void* (addr);\
@@ -70,7 +70,7 @@ _directWrite32(&(addr)+(offset), 0x4E800020);
 void (ptr)();\
 _directWriteBranch(&(addr), ptr, lk);
 
-#define directWriteBranchOffset(addr, ptr, lk, offset) extern void* (addr);\
+#define directWriteBranchOffset(addr, offset, ptr, lk) extern void* (addr);\
 void (ptr)();\
 _directWriteBranch(&(addr)+(offset), ptr, lk);
 
@@ -78,7 +78,7 @@ _directWriteBranch(&(addr)+(offset), ptr, lk);
 extern char (src)[];\
 _directWriteArray(&(dest), src, count);
 
-#define directWriteArrayOffset(dest, src, count, offset) extern char (dest)[];\
+#define directWriteArrayOffset(dest, src, offset, count) extern char (dest)[];\
 extern char (src)[];\
 _directWriteArray(&(dest)+(offset), src, count);
 

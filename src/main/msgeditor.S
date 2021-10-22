@@ -33,7 +33,7 @@ bl trick
 .string16 "\nTime's up!\nThe match has ended."
 .string16 "\nAll players have been caught.\nThe match has ended."
 .string16 "\nAll seekers left.\nThe match has ended."
-.string16 "Hide and Seek v1.8"
+.string16 "Hide and Seek v2.0"
 .string16 "Classic"
 .string16 "Infection"
 .string16 "In a Worldwide HnS match!"

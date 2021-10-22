@@ -2,7 +2,7 @@
 
 .extern ScreenLoadHook, ScreenDSIFix1Hook, ScreenDSIFix4Hook, MusicPitch
 .extern createScreen, switchScreen
-.global ScreenLoad, CupScreenPatch, BattleCupScreenPatch, ScreenDSIFix1, ScreenDSIFix2, ScreenDSIFix3, SceneSwap
+.global ScreenLoad, CupScreenPatch, BattleCupScreenPatch, ScreenDSIFix1, ScreenDSIFix2, SceneSwap
 
 ################################
 # Add Screens To Course Select #
@@ -71,47 +71,22 @@ beqlr
 lfs f1, 0(4)
 blr
 
-#######################
-# Fix DSI Exception 3 #
-#######################
-
-# Check if r5 is 0
-ScreenDSIFix3:
-cmpwi r5, 0
-beq skip2
-
-# Original instruction
-mr r3, r5
-b ScreenDSIFix4Hook+4
-
-skip2:
-b ScreenDSIFix4Hook+8
-
 ###############
 # Screen Swap #
 ###############
 
 # Reset Music Pitch (for when someone quits the race in an irregular way)
+SceneSwap:
 lis r31, 0x3F80
 lis r6, MusicPitch@ha
 stw r31, MusicPitch@l(r6)
 
 # Check for Friend Room Team VS
-SceneSwap:
 cmpwi r4, 0x61
-bne+ not61
+bne+ return
 
 # Switch to normal VS
 li r4, 0x60
-b return
-
-# Check for Main Menu (from Game Menus)
-not61:
-cmpwi r4, 0x41
-bne+ return
-
-# Switch to Main Menu (from Settings)
-li r4, 0x43
 
 # Original instruction
 return:
