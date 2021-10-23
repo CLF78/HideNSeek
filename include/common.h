@@ -35,36 +35,37 @@ void* _directWriteArray(void* dest, void* src, u32 count); // Actually memcpy bu
 
 /* A hack because i don't want to do a million typecasts and declarations */
 #define SIZEOF(object) (char *)(&object+1) - (char *)(&object)
+#define calcoffs(addr, offset) (void*)((int)&(addr))+(offset)
 
 #define directWrite8(addr, value) extern void* (addr);\
 _directWrite8(&(addr), value);
 
 #define directWrite8Offset(addr, offset, value) extern void* (addr);\
-_directWrite8(&(addr)+(offset), value);
+_directWrite8(calcoffs(addr, offset), value);
 
 #define directWrite16(addr, value) extern void* (addr);\
 _directWrite16(&(addr), value);
 
 #define directWrite16Offset(addr, offset, value) extern void* (addr);\
-_directWrite16(&(addr)+(offset), value);
+_directWrite16(calcoffs(addr, offset), value);
 
 #define directWrite32(addr, value) extern void* (addr);\
 _directWrite32(&(addr), value);
 
 #define directWrite32Offset(addr, offset, value) extern void* (addr);\
-_directWrite32(&(addr)+(offset), value);
+_directWrite32(calcoffs(addr, offset), value);
 
 #define directWriteNop(addr) extern void* (addr);\
 _directWrite32(&(addr), 0x60000000);
 
 #define directWriteNopOffset(addr, offset) extern void* (addr);\
-_directWrite32(&(addr)+(offset), 0x60000000);
+_directWrite32(calcoffs(addr, offset), 0x60000000);
 
 #define directWriteBlr(addr) extern void* (addr);\
 _directWrite32(&(addr), 0x4E800020);
 
 #define directWriteBlrOffset(addr, offset) extern void* (addr);\
-_directWrite32(&(addr)+(offset), 0x4E800020);
+_directWrite32(calcoffs(addr, offset), 0x4E800020);
 
 #define directWriteBranch(addr, ptr, lk) extern void* (addr);\
 void (ptr)();\
@@ -72,21 +73,21 @@ _directWriteBranch(&(addr), ptr, lk);
 
 #define directWriteBranchOffset(addr, offset, ptr, lk) extern void* (addr);\
 void (ptr)();\
-_directWriteBranch(&(addr)+(offset), ptr, lk);
+_directWriteBranch(calcoffs(addr, offset), ptr, lk);
 
-#define directWriteArray(dest, src, count) extern char (dest)[];\
-extern char (src)[];\
+#define directWriteArray(dest, src, count) extern void* (dest);\
+extern void* (src);\
 _directWriteArray(&(dest), src, count);
 
-#define directWriteArrayOffset(dest, src, offset, count) extern char (dest)[];\
-extern char (src)[];\
-_directWriteArray(&(dest)+(offset), src, count);
+#define directWriteArrayOffset(dest, offset, src, count) extern void* (dest);\
+extern void* (src);\
+_directWriteArray(calcoffs(dest, offset), src, count);
 
-#define directWriteString(dest, src) extern char (dest)[];\
+#define directWriteString(dest, src) extern void* (dest);\
 _directWriteArray(&(dest), src, SIZEOF(src));
 
-#define directWriteStringOffset(dest, src, offset) extern char (dest)[];\
-_directWriteArray(&(dest)+(offset), src, SIZEOF(src));
+#define directWriteStringOffset(dest, offset, src) extern void* (dest);\
+_directWriteArray(calcoffs(dest, offset), src, SIZEOF(src));
 
 /* Common Structures */
 typedef struct DVDHandle DVDHandle;

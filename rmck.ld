@@ -51,33 +51,13 @@ SECTIONS {
 
 	LoginRegion = 0x80372FD0;
 	VSRegion = 0x8064195C;
-	VSRegion2 = 0x806419C8;
-	VSRegion3 = 0x80647524;
-	VSRegion4 = 0x80647578;
-	VSRegion5 = 0x80647A3C;
-	VSRegion6 = 0x80647A90;
-	VSRegion7 = 0x8064834C;
-	VSRegion8 = 0x80648398;
+	VSRegion2 = 0x80647524;
+	VSRegion3 = 0x8064834C;
 
 	WiimmfiVersionString = 0x80263E34;
-	NaswiiURL = 0x802682B4;
-	NaswiiURL2 = 0x802682DC;
-	NaswiiURL3 = 0x8026835C;
-	NaswiiURL4 = 0x80268300;
-	AvailableURL = 0x80268C18;
-	GPCMURL = 0x80269388;
-	GPSPURL = 0x80269DA0;
-	MasterURL = 0x8026AF41;
-	NatnegURL = 0x8026BB5B;
-	NatnegURL2 = 0x8026BB77;
-	NatnegURL3 = 0x8026BB93;
-	MSURL = 0x8026BCE3;
-	GSURL = 0x8026BD67;
+	WiimmfiURLs = 0x802682B4;
 
 	/* 30 FPS */
-	ThirtyFPSHook1 = 0x80009B44;
-	ThirtyFPSHook2 = 0x800093FB;
-	ThirtyFPSHook3 = 0x800091FF;
 	ThirtyFPSHook4 = 0x80508FB4;
 	ThirtyFPSHook5 = 0x8050935C;
 	ThirtyFPSHook6 = 0x8050934B;
@@ -91,7 +71,6 @@ SECTIONS {
 	/* Battle Arena Fixes */
 	BattleSpawnFixHook = 0x8052435C;
 	BattleCCFixHook = 0x8056613C;
-	BattleCCFix2 = 0x80566140;
 
 	/* Battle Camera */
 	BattleCamera = 0x80596B63;

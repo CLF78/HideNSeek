@@ -1,6 +1,5 @@
 .include "asm_setup.S"
 
-.extern Racedata
 .global BattleSpawnFix, BattleCCFix
 
 # Original instruction
@@ -16,10 +15,11 @@ bltlr+
 li r0, 4
 blr
 
-# Load current track from Racedata
+# Get track slot
 BattleCCFix:
-lis r3, Racedata@ha
-lwz r3, Racedata@l(r3)
-lwz r3, 0xB68(r3)
-cmpwi r3, 0x20
+lwz r30, 0xB68(r4)
+
+# Check if battle arena and move condition to CR0+EQ
+cmpwi r30, 0x20
+crmove 2, 0
 blr

@@ -10,7 +10,7 @@ lbz r12, AlwaysWinVote@l(r12)
 cmpwi r12, 1
 bne end
 
-# If both conditions are satisfied, replace the player id with the host's
+# If so replace the player id with the host's
 li r4, 0
 
 # Original instruction

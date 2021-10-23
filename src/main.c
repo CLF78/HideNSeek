@@ -23,29 +23,29 @@ void loadCodes() {
 
 	// Wiimmfi Domain Name Patches (by Seeky)
 	directWriteString(WiimmfiVersionString, "LE-CODE GCT v1 ");
-	directWriteString(NaswiiURL, "://ca.nas.wiimmfi.de/ca");
-	directWriteString(NaswiiURL2, "://naswii.wiimmfi.de/ac");
-	directWriteString(NaswiiURL3, "://naswii.wiimmfi.de/pr");
+	directWriteString(WiimmfiURLs, "://ca.nas.wiimmfi.de/ca");
+	directWriteStringOffset(WiimmfiURLs, 0x28, "://naswii.wiimmfi.de/ac");
+	directWriteStringOffset(WiimmfiURLs, 0xA8, "://naswii.wiimmfi.de/pr");
 
 	#ifdef REGION_P
-	directWriteString(NaswiiURL4, "://main.nas.wiimmfi.de/pp");
+	directWriteStringOffset(WiimmfiURLs, 0x4C, "://main.nas.wiimmfi.de/pp");
 	#elif REGION_E
-	directWriteString(NaswiiURL4, "://main.nas.wiimmfi.de/pe");
+	directWriteStringOffset(WiimmfiURLs, 0x4C, "://main.nas.wiimmfi.de/pe");
 	#elif REGION_J
-	directWriteString(NaswiiURL4, "://main.nas.wiimmfi.de/pj");
+	directWriteStringOffset(WiimmfiURLs, 0x4C, "://main.nas.wiimmfi.de/pj");
 	#elif REGION_K
-	directWriteString(NaswiiURL4, "://main.nas.wiimmfi.de/pk");
+	directWriteStringOffset(WiimmfiURLs, 0x4C, "://main.nas.wiimmfi.de/pk");
 	#endif
 
-	directWriteString(AvailableURL, "wiimmfi.de");
-	directWriteString(GPCMURL, "wiimmfi.de");
-	directWriteString(GPSPURL, "wiimmfi.de");
-	directWriteString(MasterURL, "wiimmfi.de");
-	directWriteString(NatnegURL, "wiimmfi.de");
-	directWriteString(NatnegURL2, "wiimmfi.de");
-	directWriteString(NatnegURL3, "wiimmfi.de");
-	directWriteString(MSURL, "wiimmfi.de");
-	directWriteString(GSURL, "wiimmfi.de");
+	directWriteStringOffset(WiimmfiURLs, 0x964, "wiimmfi.de"); // Available
+	directWriteStringOffset(WiimmfiURLs, 0x10D4, "wiimmfi.de"); // GPCM
+	directWriteStringOffset(WiimmfiURLs, 0x1AEC, "wiimmfi.de"); // GPSP
+	directWriteStringOffset(WiimmfiURLs, 0x2C8D, "wiimmfi.de"); // Master
+	directWriteStringOffset(WiimmfiURLs, 0x38A7, "wiimmfi.de"); // Natneg
+	directWriteStringOffset(WiimmfiURLs, 0x38C3, "wiimmfi.de");
+	directWriteStringOffset(WiimmfiURLs, 0x38DF, "wiimmfi.de");
+	directWriteStringOffset(WiimmfiURLs, 0x3A2F, "wiimmfi.de"); // MS
+	directWriteStringOffset(WiimmfiURLs, 0x3AB3, "wiimmfi.de"); // SAKE
 
 	// Wiimmfi Login Region Changer (by Atlas)
 	directWriteString(LoginRegion, "120053");
@@ -53,13 +53,9 @@ void loadCodes() {
 	// VS Matchmaking Region Patch (by Leseratte)
 	tempVal32 = 0x38E04E55;
 	directWrite32(VSRegion, 0x38A04E55);
-	directWrite32(VSRegion2, 0x38C04E55);
-	directWrite32(VSRegion3, tempVal32);
-	directWrite32(VSRegion4, tempVal32);
-	directWrite32(VSRegion5, tempVal32);
-	directWrite32(VSRegion6, tempVal32);
-	directWrite32(VSRegion7, 0x38800055);
-	directWrite32(VSRegion8, 0x38800055);
+	directWrite32(VSRegion2, tempVal32);
+	directWrite32Offset(VSRegion2, 0x518, tempVal32);
+	directWrite32(VSRegion3, 0x38800055);
 
 	// Always Win Track Vote (by Star, modified by Seeky & CLF78)
 	directWriteBranch(AlwaysWinVoteHook, VotePatch, true);
@@ -70,7 +66,6 @@ void loadCodes() {
 	// Battle Arena Fixes (by CLF78)
 	directWriteBranch(BattleSpawnFixHook, BattleSpawnFix, true);
 	directWriteBranch(BattleCCFixHook, BattleCCFix, true);
-	directWrite16(BattleCCFix2, 0x41A0);
 
 	// Battle Close-up Camera (by tZ)
 	directWrite8(BattleCamera, 1);
