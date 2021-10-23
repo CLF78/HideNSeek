@@ -67,19 +67,12 @@ void loadCodes() {
 	directWriteBranch(BattleSpawnFixHook, BattleSpawnFix, true);
 	directWriteBranch(BattleCCFixHook, BattleCCFix, true);
 
-	// Battle Close-up Camera (by tZ)
+	// Battle Close-up Camera (by tZ and CLF78)
 	directWrite8(BattleCamera, 1);
+	directWrite8Offset(BattleCamera, 0x494, 1);
 
-	// Decrement Screen Elements (by stebler)
-	directWriteBranch(DecrementScreenElements, HideHUD, false);
-
-	// Disable Position, Lap and Minimap (by CLF78)
+	// Disable 5:56 Disconnection (by Ro)
 	tempVal16 = 0x4800;
-	directWrite16(DisablePosition, tempVal16);
-	directWrite16(DisableLap, tempVal16);
-	directWrite16(DisableMap, tempVal16);
-
-	// Disable 5:56 Disconnection (by CLF78)
 	directWrite16(No556DC, tempVal16);
 
 	// Disable Lakitu When Going Backwards (by CLF78)
@@ -91,14 +84,17 @@ void loadCodes() {
 	// Disable Luma (by CLF78)
 	directWrite16(NoLuma, tempVal16);
 
-	// Disable Star Power Music (by Anarion)
+	// Disable Star Power Music (by Anarion and Dea)
 	directWriteNop(NoStarMusic);
+	directWriteBranch(NoStarMusic2Hook, NoStarMusic2, true);
 
 	// Disable Title Demo Movie (by Diamond)
 	directWrite16(NoTitleDemo, tempVal16);
 
+	// Disable Various HUD Elements (by CLF78)
+	directWriteBranch(HUDEditsHook, HideHUD, true);
+
 	// Enable Score (by CLF78)
-	directWriteNop(EnableScore);
 	directWriteBranch(UpdateScoreHook, UpdateScore, true);
 	directWrite16(FixScoreColor, tempVal16);
 	directWriteNop(FixScoreSound);
@@ -336,9 +332,9 @@ void loadCodes() {
 
 	// 30 FPS (by CLF78)
 	if (ThirtyFPS == 1) {
-		directWrite32(ThirtyFPSHook4, 0x3BE00002);
-		directWriteNop(ThirtyFPSHook5);
-		directWrite8(ThirtyFPSHook6, 2);
+		directWrite32(ThirtyFPSHook, 0x3BE00002);
+		directWrite8Offset(ThirtyFPSHook, 0x397, 2);
+		directWriteNopOffset(ThirtyFPSHook, 0x3A0);
 	}
 
 	// Disable Track Patches (by CLF78)

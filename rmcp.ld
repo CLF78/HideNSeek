@@ -58,9 +58,7 @@ SECTIONS {
 	WiimmfiURLs = 0x8027A404;
 
 	/* 30 FPS */
-	ThirtyFPSHook4 = 0x8051AF94;
-	ThirtyFPSHook5 = 0x8051B33C;
-	ThirtyFPSHook6 = 0x8051B32B;
+	ThirtyFPSHook = 0x8051AF94;
 
 	/* Always Win Track Vote */
 	AlwaysWinVoteHook = 0x80661E20;
@@ -73,7 +71,7 @@ SECTIONS {
 	BattleCCFixHook = 0x805780E4;
 
 	/* Battle Camera */
-	BattleCamera = 0x805A8B0B;
+	BattleCamera = 0x805A8677;
 
 	/* Disable 5 Minute Limit */
 	No5LimitHook = 0x8053F3AC;
@@ -83,23 +81,18 @@ SECTIONS {
 	/* Disable 5:56 DC */
 	No556DC = 0x8053F478;
 
-	/* Disable HUD */
-	DecrementScreenElements = 0x8060245C;
-	DisablePosition = 0x80857D7C;
-	DisableLap = 0x80857DF4;
-	DisableMap = 0x80858190;
+	/* Disable Lakitu Backwards */
+	NoLakitu = 0x805355BC;
 
 	/* Disable Laps */
 	NoLaps = 0x805349EC;
-
-	/* Disable Lakitu Backwards */
-	NoLakitu = 0x805355BC;
 
 	/* Disable Luma */
 	NoLuma = 0x807C897C;
 
 	/* Disable Star Power Music */
 	NoStarMusic = 0x8071002C;
+	NoStarMusic2Hook = 0x80708054;
 
 	/* Disable Title Demo Movie */
 	NoTitleDemo = 0x806FA924;
@@ -110,8 +103,10 @@ SECTIONS {
 	/* Disable Track Music */
 	NoMusicHook = 0x8009130C;
 
+	/* Disable Various HUD Elements */
+	HUDEditsHook = 0x808562B8;
+
 	/* Enable Score */
-	EnableScore = 0x80858668;
 	UpdateScoreHook = 0x807F789C;
 	FixScoreColor = 0x807EBF48;
 	FixScoreSound = 0x807F78E0;

@@ -1,32 +1,19 @@
 .include "asm_setup.S"
 
-.extern DecrementScreenElements, HideNSeekData
+.extern HideNSeekData
 .global HideHUD, UpdateScore
 
 #############################
-# Decrement Screen Elements #
+# Disable Screen Elements #
 #############################
 
-# Load screen type
+# Turn off position, lap and minimap
 HideHUD:
-lwz r5, 0x4(r3)
+rlwinm r3, r3, 0, 29, 25
 
-# Froom VS
-cmpwi r5, 0x42
-beq decrement
-
-# WW VS
-cmpwi r5, 0x40
-bne+ end
-
-# Decrement
-decrement:
-subi r4, r4, 2
-
-# Original instruction
-end:
-mr r5, r4
-b DecrementScreenElements+4
+# Enable score
+ori r31, r3, 0x400
+blr
 
 ################
 # Update Score #
