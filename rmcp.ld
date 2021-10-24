@@ -109,21 +109,19 @@ SECTIONS {
 	/* End Race on Command */
 	No5LimitHook = 0x8053F3AC;
 	FinishPoints = 0x8052E9DB;
+	StopUpdatingTimer = 0x8053489C;
 	StopUpdatingPosTracker = 0x805336D8;
-	StopUpdatingPosTracker2 = 0x8053F9C0;
+	StopUpdatingPosTracker2 = 0x8053F7BC;
 	StopUpdatingPosTracker3 = 0x80533F04;
 	StopUpdatingPosTracker4 = 0x80532938;
-	StopUpdatingPosTracker5 = 0x80536554;
-	StopUpdatingPosTracker6 = 0x8053F7BC;
-	StopUpdatingTimer = 0x8053489C;
-	RaceAlonePatch = 0x8053FC10;
+	FixStartPosition = 0x80536554;
+	RaceAlonePatch = 0x8053FB98;
 
 	/* Force CC */
 	ForceCCHook = 0x80661404;
 
 	/* Force Teams On */
 	FixResults = 0x80645D58;
-	ForceTeams = 0x80530528;
 	ResetSeeker = 0x80530474;
 
 	/* Friend Room Race Count Modifier */

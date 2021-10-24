@@ -98,30 +98,31 @@ void loadCodes() {
 	directWrite32(InitScore, 0x809F01A0);
 	directWriteBranch(UpdateScoreHook, UpdateScore, true);
 	directWrite16(FixScoreColor, tempVal16);
-	directWriteBranchOffset(UpdateScoreHook, 0x30, ScoreSound, true);
+	directWriteBranchOffset(UpdateScoreHook, 0x30, ScoreSound, true); // Fixes sound
 
 	// End Race on Command (by CLF78 and Leseratte)
+	tempVal32 = 0x4800001C;
 	directWriteBranch(No5LimitHook, TimerEnd, false);
 	directWrite8(FinishPoints, 1);
 	directWrite8Offset(FinishPoints, 0xA0, 1);
 	directWrite8Offset(FinishPoints, 0x1BC, 1);
-	directWrite32Offset(FinishPoints, 0x229, 0x4800001C);
-	directWrite32(StopUpdatingTimer, 0x4800001C);
+	directWrite32Offset(FinishPoints, 0x229, tempVal32);
+	directWrite32(StopUpdatingTimer, tempVal32);
 	directWriteBlr(StopUpdatingPosTracker);
-	directWriteNop(StopUpdatingPosTracker2);
+	directWrite16(StopUpdatingPosTracker2, tempVal16);
+	directWriteNopOffset(StopUpdatingPosTracker2, 0x204);
 	directWrite32(StopUpdatingPosTracker3, 0x38000000);
 	directWriteNop(StopUpdatingPosTracker4);
-	directWrite32(StopUpdatingPosTracker5, 0x3BE60001);
-	directWrite16(StopUpdatingPosTracker6, tempVal16);
-	directWriteNop(RaceAlonePatch);
+	directWrite32(FixStartPosition, 0x3BE60001);
+	directWriteBlr(RaceAlonePatch);
 
 	// Force 150cc (by XeR, modified by CLF78)
 	directWriteBranch(ForceCCHook, ForceCC, true);
 
 	// Force Teams On (by CLF78)
-	directWrite32(FixResults, 0x38000000);
-	directWrite32(ForceTeams, 0x38E00002);
-	directWrite32(ResetSeeker, 0x38C00001);
+	directWrite32(FixResults, 0x38000000); // Disables team colors in the final room results
+	directWrite32(ResetSeeker, 0x38C00001); // Forces blue team on each player (written later)
+	directWrite32Offset(ResetSeeker, 0xB4, 0x38E00002); // Forces teams mode
 
 	// Friend Room Race Count Modifier (by MrBean)
 	directWrite16(FroomRaceCount1, 1);
