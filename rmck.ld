@@ -73,11 +73,6 @@ SECTIONS {
 	/* Battle Camera */
 	BattleCamera = 0x805966CF;
 
-	/* Disable 5 Minute Limit */
-	No5LimitHook = 0x8052D404;
-	No5LimitHook2 = 0x8052D454;
-	No5LimitHook3 = 0x8052D49C;
-
 	/* Disable 5:56 DC */
 	No556DC = 0x8052D4D0;
 
@@ -111,8 +106,9 @@ SECTIONS {
 	UpdateScoreHook = 0x807E5C5C;
 	FixScoreColor = 0x807DA308;
 
-	/* Finish Stuff */
-	FinishPoints = 0x8051CC64;
+	/* End Race on Command */
+	No5LimitHook = 0x8052D404;
+	FinishPoints = 0x8051CA33;
 	StopUpdatingPosTracker = 0x80521730;
 	StopUpdatingPosTracker2 = 0x8052DA18;
 	StopUpdatingPosTracker3 = 0x80521F5C;

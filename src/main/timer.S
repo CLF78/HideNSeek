@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern TimerChecks, No5LimitHook2, No5LimitHook3, EndReason
+.extern TimerChecks, No5LimitHook, EndReason
 .global StartingTime, StartingTime2, TimerEnd, TimerEndManager
 
 ##########################
@@ -55,11 +55,11 @@ bne endRace
 
 # Do not end the race yet
 noEndRace:
-b No5LimitHook3
+b No5LimitHook+0x98
 
 # End the race
 endRace:
-b No5LimitHook2
+b No5LimitHook+0x50
 
 #####################
 # Timer End Manager #

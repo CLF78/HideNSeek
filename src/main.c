@@ -100,11 +100,12 @@ void loadCodes() {
 	directWrite16(FixScoreColor, tempVal16);
 	directWriteBranchOffset(UpdateScoreHook, 0x30, ScoreSound, true);
 
-	// End Race on Command (by CLF78)
+	// End Race on Command (by CLF78 and Leseratte)
 	directWriteBranch(No5LimitHook, TimerEnd, false);
-
-	// Finish Position/Points Updater (by CLF78 and Leseratte)
-	directWrite32(FinishPoints, 0x48000014);
+	directWrite8(FinishPoints, 1);
+	directWrite8Offset(FinishPoints, 0xA0, 1);
+	directWrite8Offset(FinishPoints, 0x1BC, 1);
+	directWrite32Offset(FinishPoints, 0x229, 0x4800001C);
 	directWrite32(StopUpdatingTimer, 0x4800001C);
 	directWriteBlr(StopUpdatingPosTracker);
 	directWriteNop(StopUpdatingPosTracker2);

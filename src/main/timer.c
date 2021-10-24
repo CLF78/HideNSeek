@@ -79,12 +79,17 @@ void MainTimerUpdate(u32 timer) {
 
 u32 TimerChecks(_Raceinfo* rinfo) {
 
-	// Make some quick bools
-	bool timeOver = (rinfo->timerManager->frames == 0);
-	bool noSeekers = (HideNSeekData.totalSeekers == 0);
-	bool noSurvivors = (HideNSeekData.totalSurvivors == 0);
+	// Return a different value based on which condition is true
+	u32 ret = 0;
+	if (rinfo->timerManager->frames == 0)
+		ret = 1;
+	else if (HideNSeekData.totalSeekers == 0)
+		ret = 2;
+	else if (HideNSeekData.totalSurvivors == 0)
+		ret = 3;
 
-	if (timeOver || noSeekers || noSurvivors) {
+	// If any of the conditions is met, end the race
+	if (ret > 0) {
 
 		// Disable Spectator Mode
 		SpectatorMode = 0;
@@ -94,11 +99,10 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 		int seekerpos = 1;
 		for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
 
-			// For Seekers, set their position to be the amount of survivors + 1, and their points to the total amount of players caught (or 15 if all players were caught)
+			// For Seekers, set their position to be the amount of survivors + 1, and their points to the total amount of players caught (+ 2 if all players were caught)
 			if (HideNSeekData.players[pid].isRealSeeker) {
-				rinfo->players[pid]->battleScore = (noSurvivors) ? HideNSeekData.playerCount - SeekerCount + 2 : HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount;
+				rinfo->players[pid]->battleScore = HideNSeekData.playerCount - HideNSeekData.totalSurvivors - SeekerCount + (HideNSeekData.totalSurvivors == 0) * 2;
 				rinfo->players[pid]->position = HideNSeekData.totalSurvivors + seekerpos;
-				
 				seekerpos++;
 
 			// For all uncaught Hiders, set position to survivorpos and points to 15
@@ -107,28 +111,14 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 				rinfo->players[pid]->battleScore = HideNSeekData.playerCount - SeekerCount + 2;
 				survivorpos++;
 			}
-		}
 
-		updatePlayerFinishTimes();
+			rinfo->players[pid]->raceFinishTime->minutes = rinfo->players[pid]->position;
+		}
 	}
 
-	// Return a different value based on which bool is true
-	if (timeOver)
-		return 1;
-	else if (noSurvivors)
-		return 2;
-	else if (noSeekers)
-		return 3;
-	return 0;
+	return ret;
 }
 
 bool TimerFlashFix() {
 	return (Have30SecondsPassed && Raceinfo->timerManager->frames <= 3600);
-}
-
-void updatePlayerFinishTimes() {
-
-	// Set the player's finish time to their position in minutes
-	for (int pid = 0; pid < HideNSeekData.playerCount; pid++)
-		Raceinfo->players[pid]->raceFinishTime->minutes = Raceinfo->players[pid]->position;
 }
