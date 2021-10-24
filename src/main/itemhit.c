@@ -33,10 +33,6 @@ void PlayerKiller(char pid) {
 			HideNSeekData.players[pid].isStopped = false;
 		}
 
-		// Add 1 to items to prevent game from removing it
-		if (ItemHolder->ptr->players[pid].itemAmount > 0)
-			ItemHolder->ptr->players[pid].itemAmount++;
-
 		// Update tags in real time if i'm not Seeker
 		if (!HideNSeekData.players[Racedata->main.scenarios[0].settings.hudPlayerIds[0]].isSeeker)
 			UpdateTag(pid, TEAM_RED);

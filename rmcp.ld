@@ -107,9 +107,9 @@ SECTIONS {
 	HUDEditsHook = 0x808562B8;
 
 	/* Enable Score */
+	InitScore = 0x807F77A4;
 	UpdateScoreHook = 0x807F789C;
 	FixScoreColor = 0x807EBF48;
-	FixScoreSound = 0x807F78E0;
 
 	/* Finish Stuff */
 	FinishPoints = 0x8052EC0C;
@@ -169,8 +169,7 @@ SECTIONS {
 	InfiniteStarHook = 0x80579728;
 	InfiniteStarHook2 = 0x80580408;
 	InfiniteStarHook3 = 0x8056B99C;
-	StarFunc = 0x807B706C;
-	StarFix = 0x807B709C;
+	StarFunc = 0x80580268;
 
 	/* Instant Respawn */
 	InstantRespawn1 = 0x80573E28;

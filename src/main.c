@@ -95,9 +95,10 @@ void loadCodes() {
 	directWriteBranch(HUDEditsHook, HideHUD, true);
 
 	// Enable Score (by CLF78)
+	directWrite32(InitScore, 0x809F01A0);
 	directWriteBranch(UpdateScoreHook, UpdateScore, true);
 	directWrite16(FixScoreColor, tempVal16);
-	directWriteNop(FixScoreSound);
+	directWriteBranchOffset(UpdateScoreHook, 0x30, ScoreSound, true);
 
 	// End Race on Command (by CLF78)
 	directWriteBranch(No5LimitHook, TimerEnd, false);
@@ -159,7 +160,6 @@ void loadCodes() {
 	directWrite32(InfiniteStarHook, 0x7C601B78);
 	directWrite32(InfiniteStarHook2, 0x7C802378);
 	directWrite32(InfiniteStarHook3, 0x48000044);
-	directWrite16(StarFix, tempVal16);
 
 	// Instant Respawn (by davidevgen)
 	directWrite32(InstantRespawn1, 0x3800FFC3);

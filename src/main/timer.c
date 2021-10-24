@@ -72,7 +72,7 @@ void MainTimerUpdate(u32 timer) {
 		// Run the Star function for each Seeker (unless they already have a Star)
 		for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
 			if (HideNSeekData.players[pid].isSeeker && PlayerHolder->players[pid]->pointers.playerSub10->starTimer == 0)
-				StarFunc(&ItemHolder->ptr->players[pid]);
+				StarFunc(PlayerHolder->players[pid]->pointers.playerSub10);
 		}
 	}
 }
