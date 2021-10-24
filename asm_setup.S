@@ -16,15 +16,3 @@
 
 .set sp, 1
 .set rtoc, 2
-
-#ifdef REGION_P
-    .set REGION, 'P'
-#elif REGION_E
-    .set REGION, 'E'
-#elif REGION_J
-    .set REGION, 'J'
-#elif REGION_K
-    .set REGION, 'K'
-#else
-    #error "Region not set"
-#endif

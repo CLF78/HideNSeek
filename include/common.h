@@ -77,11 +77,11 @@ _directWriteBranch(calcoffs(addr, offset), ptr, lk);
 
 #define directWriteArray(dest, src, count) extern void* (dest);\
 extern void* (src);\
-_directWriteArray(&(dest), src, count);
+_directWriteArray(&(dest), &(src), count);
 
 #define directWriteArrayOffset(dest, offset, src, count) extern void* (dest);\
 extern void* (src);\
-_directWriteArray(calcoffs(dest, offset), src, count);
+_directWriteArray(calcoffs(dest, offset), &(src), count);
 
 #define directWriteString(dest, src) extern void* (dest);\
 _directWriteArray(&(dest), src, SIZEOF(src));

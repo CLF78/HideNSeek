@@ -5,13 +5,13 @@
 .extern NETSHA1Init, NETSHA1Update, NETSHA1GetDigest
 
 # Korea has some hardcoded r13 addresses, so here we go
-.if (REGION == 'K')
-	.set OFF1, -0x68A8
-	.set OFF2, -0x5E94
-.else
-	.set OFF1, -0x68C8
-	.set OFF2, -0x5EB4
-.endif
+#ifdef REGION_K
+.set OFF1, -0x68A8
+.set OFF2, -0x5E94
+#else
+.set OFF1, -0x68C8
+.set OFF2, -0x5EB4
+#endif
 
 ###########
 # Patch 1 #
