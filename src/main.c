@@ -164,6 +164,10 @@ void loadCodes() {
 	directWrite32(InfiniteStarHook3, 0x48000044);
 	directWriteNop(NoStarInvincibility);
 	directWrite8Offset(NoStarInvincibility, 4, 0x54);
+	directWrite8(NoStarInvincibility2, 0);
+	directWriteNop(NoStarInvincibility3);
+	directWrite8Offset(NoStarInvincibility3, 5, 0xA0);
+	directWrite16Offset(StarFunc, 0x74, tempVal16);
 
 	// Instant Respawn (by davidevgen)
 	directWrite32(InstantRespawn1, 0x3800FFC3);
