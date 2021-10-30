@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern GlitchesAllowed, Racedata, ExtraAreas, CTSupport
+.extern GlitchesAllowed, Racedata, CTSupport
 .global DisableWallride, DisableHWG, FallBoundary1, FallBoundary2
 
 ####################
@@ -44,10 +44,6 @@ blr
 FallBoundary1:
 lhz r30, 0x4(r4)
 
-# Store area amount to EVA
-lis r29, ExtraAreas@ha
-sth r30, ExtraAreas@l(r29)
-
 # Get track slot
 lis r29, Racedata@ha
 lwz r29, Racedata@l(r29)
@@ -83,10 +79,10 @@ blr
 # Fall Boundary Injector - Hook 2 #
 ###################################
 
-# Get original area count
+# Get original area count from the stack
 FallBoundary2:
-lis r27, ExtraAreas@ha
-lhz r27, ExtraAreas@l(r27)
+lwz r27, 0x1C(r1)
+lwz r27, 0x4(r27)
 
 # Subtract current count to it
 sub. r3, r29, r27

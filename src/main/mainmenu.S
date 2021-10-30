@@ -1,7 +1,7 @@
 .include "asm_setup.S"
 
 .extern MainMenuButtonSetup, ResetText
-.global MainMenuButtonSetup1, MainMenuButtonSetup2, MainMenuCrashFix
+.global MainMenuButtonSetup1, MainMenuButtonSetup2, #MainMenuCrashFix
 
 # Only keep buttons 2 and 3
 MainMenuButtonSetup1:
@@ -33,14 +33,14 @@ bl ResetText
 b MainMenuButtonSetup+0x70C
 
 # Check if button exists
-MainMenuCrashFix:
-cmpwi r0, 4
-bgt buttonExists
+#MainMenuCrashFix:
+#cmpwi r0, 4
+#bgt buttonExists
 
 # Set button to 1P Wifi
-li r0, 4
+#li r0, 4
 
 # Original instruction
-buttonExists:
-rlwinm r0,r0,2,0,29
-blr       
+#buttonExists:
+#rlwinm r0,r0,2,0,29
+#blr   

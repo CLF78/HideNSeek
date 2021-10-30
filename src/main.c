@@ -131,8 +131,8 @@ void loadCodes() {
 	// Glitch Prevention (by MrBean, stebler and CLF78)
 	directWriteBranch(DisableWallrideHook, DisableWallride, true);
 	directWriteBranch(DisableHWGHook, DisableHWG, true);
-	directWriteBranch(FallBoundaryHook1, FallBoundary1, true);
-	directWriteBranch(FallBoundaryHook2, FallBoundary2, true);
+	directWriteBranch(FallBoundaryHook, FallBoundary1, true);
+	directWriteBranchOffset(FallBoundaryHook, 0x40, FallBoundary2, true);
 
 	// Go To Friends Menu Automatically (by Chadderz)
 	directWrite8(AutoFriendsMenu, 0x8D);
@@ -158,10 +158,12 @@ void loadCodes() {
 	// Increase Visual Distance (by davidevgen)
 	directWrite32(DrawDistance, 0x49742400);
 
-	// Infinite Star Timer (by CLF78)
+	// Infinite Star Timer + No Star Invincibility (by CLF78)
 	directWrite32(InfiniteStarHook, 0x7C601B78);
 	directWrite32(InfiniteStarHook2, 0x7C802378);
 	directWrite32(InfiniteStarHook3, 0x48000044);
+	directWriteNop(NoStarInvincibility);
+	directWrite8Offset(NoStarInvincibility, 4, 0x54);
 
 	// Instant Respawn (by davidevgen)
 	directWrite32(InstantRespawn1, 0x3800FFC3);
@@ -197,7 +199,7 @@ void loadCodes() {
 	directWrite8Offset(MainMenuButtonSetup, 0x48F, 0x18); // Expands 1P Wifi button to fill the empty space
 	directWrite8Offset(MainMenuButtonSetup, 0x4F7, 0xA4); // Fixes THP cropping
 	directWriteBranchOffset(MainMenuButtonSetup, 0x504, MainMenuButtonSetup2, false); // Removes text inside 1P Wifi button
-	directWriteBranch(MainMenuCrashFixHook, MainMenuCrashFix, true); // Alters default selected button to prevent crashes
+	directWrite32Offset(MainMenuCrashFixHook, -0x24, 0x480000E8); // Skips default button selection to prevent crashes (TEMPORARY)
 	directWrite8(MKChannelRedirect, 0x3B); // Redirects MK Channel to the Credits Part 2 scene
 
 	// Message Editor (by WhatIsLoaf & CLF78)
@@ -219,6 +221,8 @@ void loadCodes() {
 
 	// No Clip (by Melg, modified by CLF78)
 	directWriteBranch(NoClipHook, NoClip, true);
+	directWrite16Offset(NoClipHook, 0x82A, 0xFFFF);
+	directWrite16Offset(NoClipHook, 0x9C6, 0xFFFF);
 
 	// No Disconnect (by Bully)
 	tempVal32 = 0x38000000;

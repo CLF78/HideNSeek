@@ -131,8 +131,7 @@ SECTIONS {
 	/* Glitch Prevention */
 	DisableWallrideHook = 0x805757B4;
 	DisableHWGHook = 0x8058EBC4;
-	FallBoundaryHook1 = 0x80511A10;
-	FallBoundaryHook2 = 0x80511A50;
+	FallBoundaryHook = 0x80511A10;
 
 	/* Go To Friends Menu Automatically */
 	AutoFriendsMenu = 0x8061514B;
@@ -164,6 +163,7 @@ SECTIONS {
 	InfiniteStarHook2 = 0x80579BA4;
 	InfiniteStarHook3 = 0x80566B4C;
 	StarFunc = 0x80579A04;
+	NoStarInvincibility = 0x8056338C;
 
 	/* Instant Respawn */
 	InstantRespawn1 = 0x8056EFD8;
