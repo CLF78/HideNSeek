@@ -220,7 +220,7 @@ SECTIONS {
 	MuteCharsHook3 = 0x80700BCC;
 
 	/* No Clip */
-	NoClipHook = 0x8056AA1C;
+	NoClipHook = 0x8056AB1C;
 
 	/* No Disconnect */
 	NoDisconnect1 = 0x8051CF94;
