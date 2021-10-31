@@ -107,8 +107,8 @@ lwzx r6, r6, r5
 lwz r5, 0x184(r7)
 stw r6, 0xD8(r5)
 stw r6, 0xDC(r5)
-stw r6, 0xC0(r5)
-stw r6, 0xC4(r5)
+stw r6, 0xE0(r5)
+stw r6, 0xE4(r5)
 
 # Call function to change text color
 lwz r3, 0x98(r7)
