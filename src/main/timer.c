@@ -83,9 +83,9 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 	u32 ret = 0;
 	if (rinfo->timerManager->frames == 0)
 		ret = 1;
-	else if (HideNSeekData.totalSeekers == 0)
-		ret = 2;
 	else if (HideNSeekData.totalSurvivors == 0)
+		ret = 2;
+	else if (HideNSeekData.totalSeekers == 0)
 		ret = 3;
 
 	// If any of the conditions is met, end the race

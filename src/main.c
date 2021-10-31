@@ -225,8 +225,8 @@ void loadCodes() {
 
 	// No Clip (by Melg, modified by CLF78)
 	directWriteBranch(NoClipHook, NoClip, true);
-	directWrite16Offset(NoClipHook, 0x72A, 0xFFFF);
-	directWrite16Offset(NoClipHook, 0x8C6, 0xFFFF);
+	directWriteNopOffset(NoClipHook, 0x698);
+	directWriteNopOffset(NoClipHook, 0x6B8);
 
 	// No Disconnect (by Bully)
 	tempVal32 = 0x38000000;
