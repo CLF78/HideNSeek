@@ -40,14 +40,10 @@ void PlayerKiller(char pid) {
 		DisconnectPlayer(Raceinfo, pid);
 }
 
-bool ItemHitLocal(bool result, PlayerHolderPlayer* player, PlayerSub18* player2) {
+void ItemHitLocalInner(char pid, char pid2) {
 
-	// Get pid
-	char pid = player->playerPointers->params->playerId;
-	char pid2 = player2->pointers->params->playerId;
-
-	// Check that a collision happened, that we're in the game, that the player is local, and that this function has not already run
-	if (result && Have30SecondsPassed && pid == Racedata->main.scenarios[0].settings.hudPlayerIds[0] && Raceinfo->players[pid]->position == 0 && !HideNSeekData.players[pid].isSeeker) {
+	// Check that the player is local, and that this function has not already run
+	if (Raceinfo->players[pid]->position == 0 && !HideNSeekData.players[pid].isSeeker) {
 
 		// Kill the player
 		PlayerKiller(pid);
@@ -62,8 +58,23 @@ bool ItemHitLocal(bool result, PlayerHolderPlayer* player, PlayerSub18* player2)
 		// Enable Spectator Mode is isInfection is false
 		if (!HideNSeekData.isInfection) {
 			SpectatorMode = true;
-			CurrentSpectated = pid;
+			CurrentSpectated = pid2;
 		}
+	}
+}
+
+bool ItemHitLocal(bool result, PlayerHolderPlayer* player, PlayerSub18* player2) {
+
+	// Get pids
+	char pid = player->playerPointers->params->playerId;
+	char pid2 = player2->pointers->params->playerId;
+
+	// Run the inner functions depending on which pid is the player's
+	if (result && Have30SecondsPassed) {
+		if (Racedata->main.scenarios[0].settings.hudPlayerIds[0] == pid)
+			ItemHitLocalInner(pid, pid2);
+		else if (Racedata->main.scenarios[0].settings.hudPlayerIds[0] == pid2)
+			ItemHitLocalInner(pid2, pid);
 	}
 
 	return result;

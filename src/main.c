@@ -203,7 +203,7 @@ void loadCodes() {
 	directWrite8Offset(MainMenuButtonSetup, 0x48F, 0x18); // Expands 1P Wifi button to fill the empty space
 	directWrite8Offset(MainMenuButtonSetup, 0x4F7, 0xA4); // Fixes THP cropping
 	directWriteBranchOffset(MainMenuButtonSetup, 0x504, MainMenuButtonSetup2, false); // Removes text inside 1P Wifi button
-	directWrite32Offset(MainMenuCrashFixHook, -0x24, 0x480000E8); // Skips default button selection to prevent crashes (TEMPORARY)
+	directWriteBranch(MainMenuCrashFixHook, MainMenuCrashFix, true); // Changes default button selection to prevent crashes
 	directWrite8(MKChannelRedirect, 0x3B); // Redirects MK Channel to the Credits Part 2 scene
 
 	// Message Editor (by WhatIsLoaf & CLF78)
