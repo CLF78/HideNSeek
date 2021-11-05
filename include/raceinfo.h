@@ -54,7 +54,7 @@ typedef struct {
 	*/
 	Timer** lapFinishTimes;
 	Timer* raceFinishTime;
-	u8 unk4[0x4];
+	u32 endReason;
 	void* controllerHolder;
 	u8 unk5[0x8];
 } RaceinfoPlayer;	// Total size 0x54

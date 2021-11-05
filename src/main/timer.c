@@ -116,6 +116,7 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 		}
 	}
 
+	rinfo->players[Racedata->main.scenarios[0].settings.hudPlayerIds[0]]->endReason = ret + 1;
 	return ret;
 }
 

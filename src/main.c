@@ -209,8 +209,6 @@ void loadCodes() {
 	// Message Editor (by WhatIsLoaf & CLF78)
 	directWriteBranch(MessageEditorHook, MessageEditor, false);
 	directWriteBranch(MessageEditorHook2, MessageEditor2, true);
-	directWriteBranch(MessageEditorHook3, MessageEditor3, true);
-	directWriteBranch(MessageEditorHook4, MessageEditor3, true);
 
 	// Music Patches (by CLF78)
 	directWriteNop(BattleCountdown);

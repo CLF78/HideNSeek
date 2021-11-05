@@ -201,8 +201,6 @@ SECTIONS {
 	/* Message Editor */
 	MessageEditorHook = 0x805C12A4;
 	MessageEditorHook2 = 0x805C1238;
-	MessageEditorHook3 = 0x80843288;
-	MessageEditorHook4 = 0x80843300;
 	MessageFunc = 0x805D840C;
 
 	/* Music Patches */

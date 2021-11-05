@@ -7,13 +7,12 @@ SECTIONS {
 
 	/* HnS Per-Race Data */
 	HideNSeekData = 0x800001B0;
-	EndReason = 0x800001E4;
-	SpectatorMode = 0x800001E5;
-	CurrentSpectated = 0x800001E6;
-	AmIDead = 0x800001E7;
-	Have30SecondsPassed = 0x800001E8;
-	UseReplayCams = 0x800001E9;
-	MusicState = 0x800001EA;
+	SpectatorMode = 0x800001E4;
+	CurrentSpectated = 0x800001E5;
+	AmIDead = 0x800001E6;
+	Have30SecondsPassed = 0x800001E7;
+	UseReplayCams = 0x800001E8;
+	MusicState = 0x800001E9;
 
 	/* HNS Per-GP Data */
 	IsInfection = 0x800002B0;

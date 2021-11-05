@@ -1,8 +1,7 @@
 .include "asm_setup.S"
 
-.extern EndReason
 .extern MessageEditorHook, MessageFunc, SCGetLanguage
-.global MessageEditor, MessageEditor2, MessageEditor3
+.global MessageEditor, MessageEditor2
 
 ###########
 # Patch 1 #
@@ -247,16 +246,4 @@ li r6, 8422
 # Original instruction
 return:
 mr r14, r6
-blr
-
-###########
-# Patch 3 #
-###########
-
-# Use EndReason rather than the field in RaceinfoPlayer to determine the message
-MessageEditor3:
-lis r3, EndReason@ha
-lbz r3, EndReason@l(r3)
-addi r3, r3, 1
-mr r0, r3
 blr

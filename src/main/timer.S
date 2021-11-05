@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern TimerChecks, No5LimitHook, EndReason
+.extern TimerChecks, No5LimitHook, Raceinfo
 .global StartingTime, StartingTime2, TimerEnd, TimerEndManager
 
 ##########################
@@ -45,10 +45,6 @@ blt noEndRace
 # Call function
 bl TimerChecks
 
-# Store r3 to EndReason
-lis r4, EndReason@ha
-stb r3, EndReason@l(r4)
-
 # Check if EndReason is not 0
 cmpwi r3, 0
 bne endRace
@@ -65,13 +61,18 @@ b No5LimitHook+0x50
 # Timer End Manager #
 #####################
 
-# Get EndReason
+# Get endReason
 TimerEndManager:
-lis r3, EndReason@ha
-lbz r3, EndReason@l(r3)
+lbz r4, 0xB84(r3)
+slwi r4, r4, 2
+lis r3, Raceinfo@ha
+lwz r3, Raceinfo@l(r3)
+lwz r3, 0xC(r3)
+lwzx r3, r3, r4
+lwz r3, 0x44(r3)
 
-# Return (EndReason == 1)
-xori r3, r3, 1
+# Return (endReason == 2)
+xori r3, r3, 2
 cntlzw r3, r3
 srwi r3, r3, 5
 blr
