@@ -1,5 +1,6 @@
 #include <common.h>
 #include <hidenseek.h>
+#include <killdata.h>
 #include <musichandler.h>
 #include <player.h>
 #include <racedata.h>
@@ -48,6 +49,9 @@ void ItemHitLocalInner(char pid, char pid2) {
 		// Kill the player
 		PlayerKiller(pid);
 
+		// Update KillData
+		AddNewKillData(1, (u16)pid, (u16)pid2);
+
 		// Store AmIDead along with the aid of who hit me
 		AmIDead = 1 | (RKNetController->aidsToPids[pid2] << 1);
 
@@ -94,6 +98,9 @@ void ItemHitRemote(void* something, ItemPacket* packet, int length) {
 			if (RKNetController->aidsToPids[pid2] == killeraid)
 				break;
 		}
+
+		// Update KillData
+		AddNewKillData(1, (u16)pid, (u16)pid2);
 		
 		// Assign the point bonus (again won't do anything on normal mode)
 		if (!HideNSeekData.players[pid2].isRealSeeker)
@@ -122,6 +129,9 @@ void PlayerDC() {
 
 		// Spectators in WW will not have a pid set, so they mustn't count
 		if (pid != -1) {
+
+			// Update KillData
+			AddNewKillData(2, (u16)pid, 0xFFFF);
 
 			// If the player is a Seeker, just decrease totalSeekers
 			if (HideNSeekData.players[pid].isSeeker)

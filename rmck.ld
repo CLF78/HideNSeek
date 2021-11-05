@@ -1,5 +1,6 @@
 SECTIONS {
 	/* Common Classes and Functions */
+	SystemManager = 0x80374020;
 	Racedata = 0x809ABD68;
 	Raceinfo = 0x809ABD70;
 	PlayerHolder = 0x809AFF38;
@@ -39,6 +40,7 @@ SECTIONS {
 	OSReport = 0x801A292C;
 	CalcCRC32 = 0x801D1FFC;
 	SCGetLanguage = 0x801B2068;
+	memmove = 0x8000F258;
 
 	/* Exception Handler */
 	ShowExceptions = 0x80295404;
@@ -188,6 +190,13 @@ SECTIONS {
 	ItemRouletteHook2 = 0x807A87E8;
 	NoSpecialItems = 0x8078837C;
 	NoSpecialItems2 = 0x8064C460;
+
+	/* Kill Data */
+	InitKillDataHook = 0x80846970;
+	NoKillDataHide = 0x80845DDC;
+	MenuDataGetPlayerName = 0x805E8D50;
+	SetMSGID = 0x8062C0CC;
+	screenText_construct = 0x805BB90C;
 
 	/* License Unlocker */
 	LicenseUnlocker = 0x805379CC;

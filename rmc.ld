@@ -27,6 +27,9 @@ SECTIONS {
 	/* Version */
 	Version = 0x800003B0;
 
+	/* Kill Data */
+	KillData = 0x800004B0;
+
 	/* Riivo Options */
 	NoMusic = 0x80004000;
 	CTSupport = 0x8000400E;

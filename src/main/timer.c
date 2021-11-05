@@ -1,5 +1,6 @@
 #include <common.h>
 #include <hidenseek.h>
+#include <killdata.h>
 #include <musichandler.h>
 #include <player.h>
 #include <racedata.h>
@@ -75,6 +76,9 @@ void MainTimerUpdate(u32 timer) {
 				StarFunc(PlayerHolder->players[pid]->pointers.playerSub10);
 		}
 	}
+
+	// Update KillData
+	UpdateKillData();
 }
 
 u32 TimerChecks(_Raceinfo* rinfo) {

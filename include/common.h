@@ -138,6 +138,7 @@ struct loaderFunctions {
 
 /* Common Functions */
 void* memset(void* ptr, u32 value, u32 num);
+void* memmove(void* dst, void* src, u32 num);
 u32 CalcCRC32(void* data, u32 length);
 
 /* Common Vars */

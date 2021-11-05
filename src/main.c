@@ -101,13 +101,12 @@ void loadCodes() {
 	directWriteBranchOffset(UpdateScoreHook, 0x30, ScoreSound, true); // Fixes sound
 
 	// End Race on Command (by CLF78 and Leseratte)
-	tempVal32 = 0x4800001C;
 	directWriteBranch(No5LimitHook, TimerEnd, false);
 	directWrite8(FinishPoints, 1);
 	directWrite8Offset(FinishPoints, 0xA0, 1);
 	directWrite8Offset(FinishPoints, 0x1BC, 1);
-	directWrite32Offset(FinishPoints, 0x229, tempVal32);
-	directWrite32(StopUpdatingTimer, tempVal32);
+	directWrite32Offset(FinishPoints, 0x229, 0x4800001C);
+	directWrite32(StopUpdatingTimer, 0x48000020);
 	directWriteBlr(StopUpdatingPosTracker);
 	directWrite16(StopUpdatingPosTracker2, tempVal16);
 	directWriteNopOffset(StopUpdatingPosTracker2, 0x204);
@@ -189,6 +188,10 @@ void loadCodes() {
 	directWriteBranch(ItemRouletteHook2, ItemMod, true);
 	directWriteBlr(NoSpecialItems);
 	directWrite32(NoSpecialItems2, 0x3A200020);
+
+	// Kill Data (by CLF78)
+	directWriteBranch(InitKillDataHook, InitKillData, true);
+	directWrite16(NoKillDataHide, tempVal16);
 	
 	// License Unlocker (by _tZ)
 	directWrite32(LicenseUnlocker, 0x38600001);

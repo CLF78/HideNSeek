@@ -11,8 +11,8 @@
 HideHUD:
 rlwinm r3, r3, 0, 29, 25
 
-# Enable score
-ori r31, r3, 0x400
+# Enable score and kill info text
+ori r31, r3, 0x1400
 blr
 
 ################
