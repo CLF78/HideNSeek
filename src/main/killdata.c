@@ -40,8 +40,8 @@ void UpdateKillDataText() {
 }
 
 void UpdateKillData() {
-	UpdateKillDataVisibility();
 
+	// Update timers
 	for (int i = 0; i < 3; i++) {
 		if (KillData.entries[i].timer != 0) {
 			KillData.entries[i].timer--;
@@ -49,7 +49,8 @@ void UpdateKillData() {
 				KillData.needsUpdate = true;
 		}
 	}
-	
+
+	// If any timer goes to 0, update texts
 	if (KillData.needsUpdate) {
 		UpdateKillDataText();
 		KillData.needsUpdate = false;

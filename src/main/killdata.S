@@ -1,8 +1,8 @@
 .include "asm_setup.S"
 
-.extern SystemManager, Racedata, Raceinfo, PlayerHolder, ScreenHUD, Menudata
+.extern SystemManager, Racedata, PlayerHolder, ScreenHUD, Menudata
 .extern KillData, MenuDataGetPlayerName, SetMSGID
-.global InitKillData, GetBMGPlayer, ApplyKillData, UpdateKillDataVisibility
+.global InitKillData, GetBMGPlayer, ApplyKillData
 
 #################################
 # Change Element Position/Scale #
@@ -30,7 +30,7 @@ lis r4, 0xC1F0
 widescreen:
 stw r4, 0x1C(r3)
 
-# Y Position = -125.0f
+# Y Position = -160.0f
 lis r4, 0xC320
 stw r4, 0x20(r3)
 
@@ -67,35 +67,6 @@ bdnz+ loop
 
 # Original instruction
 addi r3, r1, 0x28
-blr
-
-##################
-# Set Visibility #
-##################
-
-# Get screen element
-UpdateKillDataVisibility:
-lis r3, ScreenHUD@ha
-lwz r3, ScreenHUD@l(r3)
-lwz r3, 0x5C(r3)
-
-# Default value
-li r0, 0
-
-# Check if the race has ended
-lis r4, Raceinfo@ha
-lwz r4, Raceinfo@l(r4)
-lwz r4, 0x28(r4)
-cmpwi r4, 2
-beq+ noHide
-
-# Hide if so
-hide:
-li r0, 1
-
-# Store result
-noHide:
-stb r0, 0x85(r3)
 blr
 
 ##################

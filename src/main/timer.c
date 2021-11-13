@@ -98,6 +98,10 @@ u32 TimerChecks(_Raceinfo* rinfo) {
 		// Disable Spectator Mode
 		SpectatorMode = 0;
 
+		// Move KillData text upwards so it doesn't clash with the race ended text
+		memmove(&KillData.entries[0], &KillData.entries[1], 16);
+		KillData.entries[2].timer = 1;
+
 		// Setup loop
 		int survivorpos = 1;
 		int seekerpos = 1;
