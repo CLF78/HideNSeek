@@ -1,11 +1,10 @@
 .include "asm_setup.S"
 
-.global funcs, filename, fatalstring
+.global funcs, filename
 
 # PAL Functions
 funcs:
 .long 0x801A4EC4
-.long 0x80011A2C
 .long 0x8015E2BC
 .long 0x8015E568
 .long 0x8015E834
@@ -17,7 +16,6 @@ funcs:
 
 # NTSC-U Functions
 .long 0x801A4E24
-.long 0x80010ECC
 .long 0x8015E21C
 .long 0x8015E4C8
 .long 0x8015E794
@@ -29,7 +27,6 @@ funcs:
 
 # NTSC-J Functions
 .long 0x801A4DE4
-.long 0x80011950
 .long 0x8015E1DC
 .long 0x8015E488
 .long 0x8015E754
@@ -41,7 +38,6 @@ funcs:
 
 # NTSC-K Functions
 .long 0x801A5220
-.long 0x80011A94
 .long 0x8015E334
 .long 0x8015E5E0
 .long 0x8015E8AC
@@ -49,10 +45,8 @@ funcs:
 .long 0x80009B44
 .long 0x800091FF
 .byte 'K'
+.align 2
 
 filename:
-.string "/hns/HideNSeek%c.bin"
-
-fatalstring:
-.string "Could not find Hide and Seek payload.\nPlease check that your installation is correct."
+.string "/hns/HideNSeekX.bin"
 .align 2

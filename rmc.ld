@@ -1,8 +1,7 @@
 SECTIONS {
 	/* Base Functions */
-	region = 0x800001EC;
 	_directWriteArray = 0x80005F34;
-	CheckAddress = 0x8000620A;
+	memset = 0x80005F84;
 	StartFunc = 0x808DD400;
 
 	/* HnS Per-Race Data */

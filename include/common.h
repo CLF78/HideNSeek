@@ -89,53 +89,6 @@ _directWriteArray(&(dest), src, SIZEOF(src));
 #define directWriteStringOffset(dest, offset, src) extern void* (dest);\
 _directWriteArray(calcoffs(dest, offset), src, SIZEOF(src));
 
-/* Common Structures */
-typedef struct DVDHandle DVDHandle;
-typedef struct DVDCommandBlock DVDCommandBlock;
-
-struct DVDCommandBlock {
-	DVDCommandBlock* next;	// 00
-	DVDCommandBlock* prev;	// 04
-	u32 command;			// 08
-	s32 state;				// 0C
-	u32 offset;				// 10
-	u32 length;				// 14
-	void* addr;				// 18
-	u32 currTransferSize;	// 1C
-	u32 transferredSize;	// 20
-	void* id;				// 24
-	void* cb;				// 28
-	void* userData;			// 2C
-};
-
-struct DVDHandle {
-	DVDCommandBlock block;	// 00
-	int address;			// 30
-	int length;				// 34
-	void* callback;			// 38
-};
-
-/* Loader Functions */
-typedef void (*OSFatal_t) (u32 *fg, u32 *bg, const char *str, ...);
-typedef int (*sprintf_t) (char *str, const char *format, ...);
-typedef bool (*DVDOpen_t) (const char* path, DVDHandle *handle);
-typedef bool (*DVDClose_t) (DVDHandle *handle);
-typedef int (*DVDReadPrio_t) (DVDHandle *handle, void *buffer, int length, int offset, int prio);
-
-typedef struct loaderFunctions loaderFunctions;
-
-struct loaderFunctions {
-	OSFatal_t OSFatal;
-	sprintf_t sprintf;
-	DVDOpen_t DVDOpen;
-	DVDClose_t DVDClose;
-	DVDReadPrio_t DVDReadPrio;
-	void* RelHook;
-	void* ThirtyFPS1;
-	void* ThirtyFPS2;
-	u8 letter;
-};
-
 /* Common Functions */
 void* memset(void* ptr, u32 value, u32 num);
 void* memmove(void* dst, void* src, u32 num);

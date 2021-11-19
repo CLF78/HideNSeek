@@ -44,13 +44,13 @@ def build(isBootStrap: bool):
         outputfile = f'{destdir}/{outname}{region}.'
 
         # Initialize GCC command
-        cc_command = [gcc, '-Iinclude', '-pipe', '-Os', f'-Wl,-T,{mainpath}/mem.ld,-T,rmc.ld']
+        cc_command = [gcc, '-Iinclude', '-pipe', '-nostartfiles', '-nostdinc', f'-Wl,-T,{mainpath}/mem.ld,-T,rmc.ld']
         
         # Add other build-specific stuff
         if not isBootStrap:
-            cc_command += ['-D', f'REGION_{region}', '-nostartfiles', '-nostdinc', f'-Wl,-T,rmc{region.lower()}.ld']
+            cc_command += ['-D', f'REGION_{region}', '-Os', f'-Wl,-T,rmc{region.lower()}.ld']
         else:
-            cc_command.append('-nostdlib')
+            cc_command.append('-O2')
 
         # Add all cpp files and the destination
         cc_command += filelist
