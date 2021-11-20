@@ -24,7 +24,7 @@ typedef struct {
 typedef struct {
 	void* vtable;
 	PlayerPointers *pointers;
-	// Incomplete, needs research
+	// Incomplete
 } PlayerSub18;
 
 typedef struct {
@@ -47,20 +47,46 @@ typedef struct {
 	u8 unk2[0x4];
 } PlayerParams;			// Total size 0x3c
 
+typedef struct {
+	u8 unk[0x6C0];
+	PlayerSub14* playerSub14;
+	u8 unk2[0x28];
+	u8 pid;
+	u8 unk3[0xF];
+	u8 mute;
+	// Incomplete and most likely not only about sound
+} PlayerSoundSub;
+
+typedef struct {
+	u8 unk[0xC];
+	PlayerSoundSub* soundSub;
+	// See sub comment
+} PlayerSound;
+
+typedef struct {
+	u8 unk[0xE1];
+	u8 muteEngine; // Actually isGhost but who cares
+	// Incomplete once again
+} PlayerSound2;
+
 struct PlayerPointers {
 	PlayerParams* params;
-	u8 unk[0x24];
+	u8 unk[0x10];
+	PlayerSound* playerSound;
+	u8 unk2[0x4];
+	PlayerSound2* playerSound2;
+	u8 unk3[0x8];
 	PlayerSub10* playerSub10;
 	PlayerSub14* playerSub14;
 	PlayerSub18* playerSub18;
-	u8 unk2[0x2C];
-};		// Total size 0x64
+	u8 unk4[0x30];
+};	// Total size 0x64
 
 typedef struct {
 	PlayerPointers* playerPointers;
 	u8 unk[0x10];
 	PlayerParams* params;
-	u8 unk2[0x4];
+	PlayerSound* sound;
 	PlayerPointers pointers;
 } PlayerHolderPlayer;	// Total size 0x80
 

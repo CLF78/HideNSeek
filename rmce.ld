@@ -221,11 +221,6 @@ SECTIONS {
 	MusicPitch = 0x8089C9D0;
 	FastMusicHook = 0x8070A03C;
 
-	/* Mute Characters */
-	MuteCharsHook = 0x80700BC8;
-	MuteCharsHook2 = 0x8070E764;
-	MuteCharsHook3 = 0x80700BCC;
-
 	/* No Clip */
 	NoClipHook = 0x8056AB1C;
 

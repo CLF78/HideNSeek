@@ -3,12 +3,15 @@
 #include <player.h>
 #include <racedata.h>
 
-bool MuteChars2(PlayerHolderPlayer* player) {
+void UpdateMutes() {
 
-	// Don't change anything if i'm hider
-	if (!HideNSeekData.players[Racedata->main.scenarios[0].settings.hudPlayerIds[0]].isSeeker)
-		return 0;
+	// If hider, don't do anything
+	if (HideNSeekData.players[Racedata->main.scenarios[0].settings.hudPlayerIds[0]].isSeeker) {
 
-	// Otherwise return True if not Seeker
-	return (!HideNSeekData.players[player->playerPointers->params->playerId].isSeeker);
+		// Mute characters and engines of every hider
+		for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
+			PlayerHolder->players[pid]->sound->soundSub->mute = !(HideNSeekData.players[pid].isSeeker);
+			PlayerHolder->players[pid]->pointers.playerSound2->muteEngine = !(HideNSeekData.players[pid].isSeeker);
+		}
+	}
 }

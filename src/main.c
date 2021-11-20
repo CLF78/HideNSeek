@@ -219,11 +219,6 @@ void loadCodes() {
 	directWriteNop(BattleEnd);
 	directWriteBranch(FastMusicHook, FastMusic, true);
 
-	// Mute Characters (by Melg, modified by CLF78)
-	directWriteBranch(MuteCharsHook, MuteChars, true);
-	directWriteBranch(MuteCharsHook2, MuteChars2, true);
-	directWriteNop(MuteCharsHook3);
-
 	// No Clip (by Melg, modified by CLF78)
 	directWriteBranch(NoClipHook, NoClip, true);
 	directWriteNopOffset(NoClipHook, 0x698);

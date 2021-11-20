@@ -7,6 +7,9 @@
 #include <raceinfo.h>
 #include <utils.h>
 
+// Forward declarations
+void UpdateMutes();
+
 void MainTimerUpdate(u32 timer) {
 	register TimerManager* tmanager asm("r29");
 
@@ -79,6 +82,9 @@ void MainTimerUpdate(u32 timer) {
 
 	// Update KillData
 	UpdateKillData();
+
+	// Update Character/Vehicle sounds
+	UpdateMutes();
 }
 
 u32 TimerChecks(_Raceinfo* rinfo) {
