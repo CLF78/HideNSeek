@@ -1,7 +1,7 @@
 .include "asm_setup.S"
 
-.extern HideNSeekData, Racedata
-.global HideHUD, UpdateScore, ScoreSound
+.extern HideNSeekData, UpdateScoreHook, ScoreSound
+.global HideHUD, UpdateScore, ScoreSoundASM
 
 #############################
 # Disable Screen Elements #
@@ -28,14 +28,24 @@ blr
 # Score Sound #
 ###############
 
-# Check if we are not a Seeker
-ScoreSound:
-lis r3, Racedata@ha
-lwz r3, Racedata@l(r3)
-lbz r3, 0xB84(r3)
-slwi r3, r3, 2
-lis r4, HideNSeekData@ha
-ori r4, r4, HideNSeekData@l+5
-lbzx r3, r3, r4
+# Call C function
+ScoreSoundASM:
+mr r3, r31
+bl ScoreSound
+
+# Check result
 cmpwi r3, 0
-blr
+beq noSound
+cmpwi r3, 1
+beq yesSound
+
+# Negative jingle
+b UpdateScoreHook+0x4C
+
+# Positive jingle
+yesSound:
+b UpdateScoreHook+0x38
+
+# No jingle
+noSound:
+b UpdateScoreHook+0x5C

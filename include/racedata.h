@@ -47,6 +47,12 @@ typedef enum {
 } GameMode;
 
 typedef enum {
+    TYPE_TT,
+    TYPE_CPU_RACE = 5,
+    TYPE_ONLINE_SPECTATOR,
+} GameType;
+
+typedef enum {
     CC_50,
     CC_100,
     CC_150,
@@ -70,7 +76,7 @@ typedef struct {
     u32 courseId;
     EngineClass engineClass;
     GameMode gamemode;
-    u32 unknown_0xC;
+    GameType gameType;
     BattleType battleType;
     CpuMode cpuMode;
     ItemMode itemMode;

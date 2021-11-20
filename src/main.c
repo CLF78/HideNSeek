@@ -98,7 +98,7 @@ void loadCodes() {
 	directWrite32(InitScore, 0x809F01A0);
 	directWriteBranch(UpdateScoreHook, UpdateScore, true);
 	directWrite16(FixScoreColor, tempVal16);
-	directWriteBranchOffset(UpdateScoreHook, 0x30, ScoreSound, true); // Fixes sound
+	directWriteBranchOffset(UpdateScoreHook, 0x34, ScoreSoundASM, false); // Fixes sound
 
 	// End Race on Command (by CLF78 and Leseratte)
 	directWriteBranch(No5LimitHook, TimerEnd, false);
