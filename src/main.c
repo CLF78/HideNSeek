@@ -127,11 +127,9 @@ void loadCodes() {
 	directWrite16(FroomRaceCount1, 1);
 	directWrite16(FroomRaceCount2, 1);
 
-	// Glitch Prevention (by MrBean, stebler and CLF78)
+	// Glitch Prevention (by MrBean and stebler)
 	directWriteBranch(DisableWallrideHook, DisableWallride, true);
 	directWriteBranch(DisableHWGHook, DisableHWG, true);
-	directWriteBranch(FallBoundaryHook, FallBoundary1, true);
-	directWriteBranchOffset(FallBoundaryHook, 0x40, FallBoundary2, true);
 
 	// Go To Friends Menu Automatically (by Chadderz)
 	directWrite8(AutoFriendsMenu, 0x8D);
@@ -192,6 +190,16 @@ void loadCodes() {
 	// Kill Data (by CLF78)
 	directWriteBranch(InitKillDataHook, InitKillData, true);
 	directWrite16(NoKillDataHide, tempVal16);
+
+	// KMP - Track Identifier (by CLF78)
+	directWriteBranch(TrackIdentifierHook, TrackIdentifier, false);
+	directWrite32(TrackIdentifierHook2, 0x48000010);	// These initialize the ENPH/ENPT sections before the others so other sections can use the ENPT CRC to apply patches
+	directWriteBranchOffset(TrackIdentifierHook2, 0x30, TrackIdentifier2, false);
+	directWriteBranchOffset(TrackIdentifierHook2, 0xC, TrackIdentifier3, false);
+
+	// KMP Injector - AREA (by CLF78)
+	directWriteBranch(AREAHook, AREA1, true);
+	directWriteBranchOffset(AREAHook, 0x40, AREA2, true);
 	
 	// License Unlocker (by _tZ)
 	directWrite32(LicenseUnlocker, 0x38600001);
@@ -330,12 +338,6 @@ void loadCodes() {
 	directWriteBranch(TagDistanceHook, TagDistanceFunc, true);
 	directWriteBranch(TagDistanceHook2, TagDistanceFunc, true);
 	directWriteBranch(TagShowHook, HandleTags, true);
-
-	// Track Identifier (by CLF78)
-	directWriteBranch(TrackIdentifierHook, TrackIdentifier, false);
-	directWrite32(TrackIdentifierHook2, 0x48000010);	// These initialize the ENPH/ENPT sections before the others so other sections can use the ENPT CRC to apply patches
-	directWriteBranchOffset(TrackIdentifierHook2, 0x30, TrackIdentifier2, false);
-	directWriteBranchOffset(TrackIdentifierHook2, 0xC, TrackIdentifier3, false);
 
 	// Disable Track Music (by CosmoCourtney)
 	if (NoMusic == 1) {

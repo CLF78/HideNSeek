@@ -130,7 +130,6 @@ SECTIONS {
 	/* Glitch Prevention */
 	DisableWallrideHook = 0x8057C018;
 	DisableHWGHook = 0x805953E8;
-	FallBoundaryHook = 0x80515E84;
 
 	/* Go To Friends Menu Automatically */
 	AutoFriendsMenu = 0x8064795B;
@@ -194,6 +193,13 @@ SECTIONS {
 	MenuDataGetPlayerName = 0x805FA930;
 	SetMSGID = 0x8063DDB4;
 	screenText_construct = 0x805CD94C;
+
+	/* KMP - Track Identifier */
+	TrackIdentifierHook = 0x80513DC0;
+	TrackIdentifierHook2 = 0x80512848;
+
+	/* KMP Injector - AREA */
+	AREAHook = 0x80515E84;
 
 	/* License Unlocker */
 	LicenseUnlocker = 0x80549974;
@@ -327,8 +333,4 @@ SECTIONS {
 	PlayAnim = 0x8063C91C;
 	TeamLineColors = 0x808A9DF4;
 	ZeroFloat = 0x808A9D38;
-
-	/* Track Identifier */
-	TrackIdentifierHook = 0x80513DC0;
-	TrackIdentifierHook2 = 0x80512848;
 }
