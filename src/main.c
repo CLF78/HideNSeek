@@ -202,6 +202,7 @@ void loadCodes() {
 	directWriteBranch(GOBJGeyserFixHook, GOBJGeyserFix, true);
 	directWriteBranch(GOBJTwanwanFixHook, GOBJTwanwanFix, true);
 	directWriteBranchOffset(GOBJTwanwanFixHook, 0xC, GOBJTwanwanFix2, true);
+	directWriteBranch(GOBJVenicenamiFixHook, GOBJVenicenamiFix, true);
 
 	// License Unlocker (by _tZ)
 	directWrite32(LicenseUnlocker, 0x38600001);

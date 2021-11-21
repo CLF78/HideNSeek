@@ -5,10 +5,11 @@
 .set ToadFactoryCRC, 0x9F470CD9
 .set BlockPlazaCRC, 0x3D92B8D7
 .set ChainChompWheelCRC, 0xED1EB462
+.set DelfinoPierCRC, 0x72836BEE
 
 .extern MapleTreewayArea, ToadFactoryAreas
 .extern GlitchesAllowed, ENPTCRC
-.global AREA1, AREA2, GOBJRockFix, GOBJGeyserFix, GOBJTwanwanFix, GOBJTwanwanFix2
+.global AREA1, AREA2, GOBJRockFix, GOBJGeyserFix, GOBJTwanwanFix, GOBJTwanwanFix2, GOBJVenicenamiFix
 
 ##########################
 # AREA Injector - Hook 1 #
@@ -179,4 +180,44 @@ bnelr+ cr7
 
 # Override
 li r0, 660
+blr
+
+#####################################
+# GOBJ Patcher - Delfino Pier Water #
+#####################################
+
+.set VnamiS1, 0x00101068
+.set VnamiS2, 0x03981518
+.set VnamiS3, 0x0A281C20
+.set VnamiS4, 0x00050000
+
+# Original instruction
+GOBJVenicenamiFix:
+lwz r6, 0(r31)
+
+# Get CRC
+lis r12, ENPTCRC@ha
+lwz r12, ENPTCRC@l(r12)
+
+# Check for Delfino Pier
+lis r11, DelfinoPierCRC@h
+ori r11, r11, DelfinoPierCRC@l
+cmpw r11, r12
+bnelr+ 
+
+# Override all KMP settings
+lis r7, VnamiS1@h
+ori r7, r7, VnamiS1@l
+stw r7, 0x2A(r6)
+
+lis r7, VnamiS2@h
+ori r7, r7, VnamiS2@l
+stw r7, 0x2E(r6)
+
+lis r7, VnamiS3@h
+ori r7, r7, VnamiS3@l
+stw r7, 0x32(r6)
+
+lis r7, VnamiS4@h
+stw r7, 0x36(r6)
 blr
