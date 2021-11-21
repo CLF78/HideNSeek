@@ -82,7 +82,7 @@ blr
 # Get original area count from the stack
 FallBoundary2:
 lwz r27, 0x1C(r1)
-lwz r27, 0x4(r27)
+lhz r27, 0x4(r27)
 
 # Subtract current count to it
 sub. r3, r29, r27
