@@ -9,7 +9,7 @@
 
 .extern MapleTreewayArea, ToadFactoryAreas
 .extern GlitchesAllowed, ENPTCRC
-.global AREA1, AREA2, GOBJRockFix, GOBJGeyserFix, GOBJTwanwanFix, GOBJTwanwanFix2, GOBJVenicenamiFix
+.global AREA1, AREA2, GOBJRockFix, GOBJGeyserFix, GOBJTwanwanFix, GOBJTwanwanFix2, GOBJVenicenamiFix, GOBJVenicesakuFix, GOBJVenicehasiFix
 
 ##########################
 # AREA Injector - Hook 1 #
@@ -220,4 +220,48 @@ stw r7, 0x32(r6)
 
 lis r7, VnamiS4@h
 stw r7, 0x36(r6)
+blr
+
+#####################################
+# GOBJ Patcher - Delfino Pier Gates #
+#####################################
+
+# Original instruction
+GOBJVenicesakuFix:
+lha r7, 0x2A(r8)
+
+# Get CRC
+lis r12, ENPTCRC@ha
+lwz r12, ENPTCRC@l(r12)
+
+# Check for Delfino Pier
+lis r11, DelfinoPierCRC@h
+ori r11, r11, DelfinoPierCRC@l
+cmpw r11, r12
+bnelr+ 
+
+# Override delay
+li r7, 0x708
+blr
+
+######################################
+# GOBJ Patcher - Delfino Pier Bridge #
+######################################
+
+# Original instruction
+GOBJVenicehasiFix:
+lha r0, 0x2A(r6)
+
+# Get CRC
+lis r12, ENPTCRC@ha
+lwz r12, ENPTCRC@l(r12)
+
+# Check for Delfino Pier
+lis r11, DelfinoPierCRC@h
+ori r11, r11, DelfinoPierCRC@l
+cmpw r11, r12
+bnelr+ 
+
+# Override delay
+li r0, 0x708
 blr

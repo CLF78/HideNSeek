@@ -202,6 +202,8 @@ SECTIONS {
 	GOBJGeyserFixHook = 0x806C3B28;
 	GOBJTwanwanFixHook = 0x8088A548;
 	GOBJVenicenamiFixHook = 0x8082E8AC;
+	GOBJVenicesakuFixHook = 0x80817970;
+	GOBJVenicehasiFixHook = 0x80816718;
 
 	/* License Unlocker */
 	LicenseUnlocker = 0x80549974;
