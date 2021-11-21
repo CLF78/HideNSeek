@@ -200,6 +200,7 @@ SECTIONS {
 	GOBJRockFixHook = 0x806E31B8;
 	GOBJRockFix2Hook = 0x80817588;
 	GOBJGeyserFixHook = 0x806C3194;
+	GOBJTwanwanFixHook = 0x80889BB4;
 
 	/* License Unlocker */
 	LicenseUnlocker = 0x805492F4;

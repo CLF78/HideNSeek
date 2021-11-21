@@ -4,10 +4,11 @@
 .set GrumbleVolcanoCRC, 0x7E2BB3AA
 .set ToadFactoryCRC, 0x9F470CD9
 .set BlockPlazaCRC, 0x3D92B8D7
+.set ChainChompWheelCRC, 0xED1EB462
 
 .extern MapleTreewayArea, ToadFactoryAreas
 .extern GlitchesAllowed, ENPTCRC
-.global AREA1, AREA2, GOBJRockFix, GOBJGeyserFix
+.global AREA1, AREA2, GOBJRockFix, GOBJGeyserFix, GOBJTwanwanFix, GOBJTwanwanFix2
 
 ##########################
 # AREA Injector - Hook 1 #
@@ -145,4 +146,37 @@ ori r0, r0, 39600
 # Original instruction
 exit:
 stw r0, 0xE0(r30)
+blr
+
+##################################################
+# GOBJ Patcher - Chain Chomp Wheel Rolling Chomp #
+##################################################
+
+# Original instruction
+GOBJTwanwanFix:
+lha r0, 0x32(r4)
+
+# Get CRC
+lis r12, ENPTCRC@ha
+lwz r12, ENPTCRC@l(r12)
+
+# Check for Chain Chomp Wheel (use cr7 to preserve cr0)
+lis r11, ChainChompWheelCRC@h
+ori r11, r11, ChainChompWheelCRC@l
+cmpw cr7, r11, r12
+bnelr+ cr7
+
+# Override
+li r0, 600
+blr
+
+# Original instruction
+GOBJTwanwanFix2:
+lhz r0, 0x34(r4)
+
+# Since r11, r12 and cr7 have been unchanged since the last hook, brutally branch back
+bnelr+ cr7
+
+# Override
+li r0, 660
 blr
