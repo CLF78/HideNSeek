@@ -1,11 +1,13 @@
 .include "asm_setup.S"
 
 .set MapleTreewayCRC, 0x3897A817
+.set GrumbleVolcanoCRC, 0x7E2BB3AA
 .set ToadFactoryCRC, 0x9F470CD9
+.set BlockPlazaCRC, 0x3D92B8D7
 
 .extern MapleTreewayArea, ToadFactoryAreas
 .extern GlitchesAllowed, ENPTCRC
-.global AREA1, AREA2
+.global AREA1, AREA2, GOBJRockFix, GOBJGeyserFix
 
 ##########################
 # AREA Injector - Hook 1 #
@@ -90,4 +92,57 @@ ori r3, r3, MapleTreewayArea@l
 # Subtract 8 to account for later addi, then return
 return:
 subi r3, r3, 8
+blr
+
+####################################################
+# GOBJ Patcher - Grumble Rocks/Block Plaza Statues #
+####################################################
+
+# Original instruction
+GOBJRockFix:
+lha r4, 0x2A(r4)
+
+# Get CRC
+lis r12, ENPTCRC@ha
+lwz r12, ENPTCRC@l(r12)
+
+# Check for Grumble Volcano
+lis r11, GrumbleVolcanoCRC@h
+ori r11, r11, GrumbleVolcanoCRC@l
+cmpw r11, r12
+beq override
+
+# Check for Block Plaza
+lis r11, BlockPlazaCRC@h
+ori r11, r11, BlockPlazaCRC@l
+cmpw r11, r12
+bnelr+
+
+# Override if applicable
+override:
+li r4, 660
+blr
+
+##################################
+# GOBJ Patcher - Grumble Geysers #
+##################################
+
+# Get CRC
+GOBJGeyserFix:
+lis r12, ENPTCRC@ha
+lwz r12, ENPTCRC@l(r12)
+
+# Check for Grumble Volcano
+lis r11, GrumbleVolcanoCRC@h
+ori r11, r11, GrumbleVolcanoCRC@l
+cmpw r11, r12
+bne+ exit
+
+# Replace value
+li r0, 0
+ori r0, r0, 39600
+
+# Original instruction
+exit:
+stw r0, 0xE0(r30)
 blr

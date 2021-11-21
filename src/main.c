@@ -136,11 +136,6 @@ void loadCodes() {
 	directWrite16(AutoFriendsMenu2, 0x28);
 	directWrite16(AutoFriendsMenu3, 0x30);
 
-	// Grumble Volcano Fixes (by CLF78 & Ismy)
-	directWriteBranch(RockFixHook, RockFix, true);
-	directWriteBranch(RockFix2Hook, RockFix, true);
-	directWriteBranch(GeyserFixHook, GeyserFix, true);
-
 	// Host Version Check (by CLF78 & Seeky)
 	directWriteBranch(GuestSendHook, GuestSend, false);
 	directWriteBranch(HostCheckHook, HostCheck, true);
@@ -200,7 +195,12 @@ void loadCodes() {
 	// KMP Injector - AREA (by CLF78)
 	directWriteBranch(AREAHook, AREA1, true);
 	directWriteBranchOffset(AREAHook, 0x40, AREA2, true);
-	
+
+	// KMP Patcher - GOBJ Fixes (by CLF78 & Ismy)
+	directWriteBranch(GOBJRockFixHook, GOBJRockFix, true);
+	directWriteBranch(GOBJRockFix2Hook, GOBJRockFix, true);
+	directWriteBranch(GOBJGeyserFixHook, GOBJGeyserFix, true);
+
 	// License Unlocker (by _tZ)
 	directWrite32(LicenseUnlocker, 0x38600001);
 

@@ -136,11 +136,6 @@ SECTIONS {
 	AutoFriendsMenu2 = 0x8061A302;
 	AutoFriendsMenu3 = 0x8061A206;
 
-	/* Grumble Volcano Patches */
-	RockFixHook = 0x806EE988;
-	RockFix2Hook = 0x80805170;
-	GeyserFixHook = 0x806E5814;
-
 	/* Host Version Check */
 	GuestSendHook = 0x800DBC98;
 	HostCheckHook = 0x800DC3FC;
@@ -200,6 +195,11 @@ SECTIONS {
 
 	/* KMP Injector - AREA */
 	AREAHook = 0x80511A10;
+
+	/* KMP Patcher - GOBJ Fixes */
+	GOBJRockFixHook = 0x806EE988;
+	GOBJRockFix2Hook = 0x80805170;
+	GOBJGeyserFixHook = 0x806E5814;
 
 	/* License Unlocker */
 	LicenseUnlocker = 0x80544438;
