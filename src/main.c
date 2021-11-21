@@ -333,6 +333,9 @@ void loadCodes() {
 
 	// Track Identifier (by CLF78)
 	directWriteBranch(TrackIdentifierHook, TrackIdentifier, false);
+	directWrite32(TrackIdentifierHook2, 0x48000010);	// These initialize the ENPH/ENPT sections before the others so other sections can use the ENPT CRC to apply patches
+	directWriteBranchOffset(TrackIdentifierHook2, 0x30, TrackIdentifier2, false);
+	directWriteBranchOffset(TrackIdentifierHook2, 0xC, TrackIdentifier3, false);
 
 	// Disable Track Music (by CosmoCourtney)
 	if (NoMusic == 1) {
@@ -344,11 +347,6 @@ void loadCodes() {
 		directWrite32(ThirtyFPSHook, 0x3BE00002);
 		directWrite8Offset(ThirtyFPSHook, 0x397, 2);
 		directWriteNopOffset(ThirtyFPSHook, 0x3A0);
-	}
-
-	// Disable Track Patches (by CLF78)
-	if (CTSupport == 1){
-		directWrite32(PatchFilename, 0x5F434C46);
 	}
 
 	sync();
