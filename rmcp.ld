@@ -330,4 +330,7 @@ SECTIONS {
 	PlayAnim = 0x8063C91C;
 	TeamLineColors = 0x808A9DF4;
 	ZeroFloat = 0x808A9D38;
+
+	/* Track Identifier */
+	TrackIdentifierHook = 0x80513DC0;
 }

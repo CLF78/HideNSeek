@@ -331,6 +331,9 @@ void loadCodes() {
 	directWriteBranch(TagDistanceHook2, TagDistanceFunc, true);
 	directWriteBranch(TagShowHook, HandleTags, true);
 
+	// Track Identifier (by CLF78)
+	directWriteBranch(TrackIdentifierHook, TrackIdentifier, false);
+
 	// Disable Track Music (by CosmoCourtney)
 	if (NoMusic == 1) {
 		directWrite32(NoMusicHook, 0x38600000);

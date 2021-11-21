@@ -12,6 +12,7 @@ SECTIONS {
 	Have30SecondsPassed = 0x800001E7;
 	UseReplayCams = 0x800001E8;
 	MusicState = 0x800001E9;
+	ENPTCRC = 0x800001EC;
 
 	/* HNS Per-GP Data */
 	IsInfection = 0x800002B0;
