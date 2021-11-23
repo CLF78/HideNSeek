@@ -36,8 +36,8 @@ jobs:
           PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro python3 make.py
 
       - name: Upload Result
-        uses: actions/upload-artifact@v2
-        with: 
-          name: Binaries
-          path: |
-            bin/*.bin
+        uses: ToppleTheNun/discord-scm-action@version
+        with:
+          discordWebhookId: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          discordWebhookToken: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          artifacts: bin/*.bin
