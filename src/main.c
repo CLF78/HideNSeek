@@ -114,6 +114,7 @@ void loadCodes() {
 	directWriteNop(StopUpdatingPosTracker4);
 	directWrite32(FixStartPosition, 0x3BE60001);
 	directWriteBlr(RaceAlonePatch);
+	directWrite8(NoCheckpointsFix, 1);
 
 	// Force 150cc (by XeR, modified by CLF78)
 	directWriteBranch(ForceCCHook, ForceCC, true);

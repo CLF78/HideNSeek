@@ -115,6 +115,7 @@ SECTIONS {
 	StopUpdatingPosTracker4 = 0x80520990;
 	FixStartPosition = 0x805245AC;
 	RaceAlonePatch = 0x8052DBF0;
+	NoCheckpointsFix = 0x8052DAD7;
 
 	/* Force CC */
 	ForceCCHook = 0x8064F71C;
