@@ -1,24 +1,40 @@
 .include "asm_setup.S"
 
-.extern HideNSeekData, StopperHook, StopperHook2
-.global Stopper1, Stopper2, Stopper3
+.extern HideNSeekData, StopperHook, StopperHook2, StopperHook3, StopperHook4
+.global Stopper1, Stopper2, Stopper3, Stopper4
+
+###############
+# Stopper Sub #
+###############
+
+# Get player id
+StopperSub:
+lwz r11, 0(r3)
+lwz r11, 0(r11)
+lbz r11, 0x10(r11)
+slwi r11, r11, 2
+
+# Get HideNSeekPlayer struct
+lis r12, HideNSeekData@h
+ori r12, r12, HideNSeekData@l+4
+add r12, r12, r11
+blr
 
 #############
 # Stopper 1 #
 #############
 
-# Get player id
+# Save LR
 Stopper1:
-lwz r4, 0(r3)
-lwz r4, 0(r4)
-lbz r4, 0x10(r4)
-slwi r4, r4, 2
+mflr r4
 
 # Get isStopped for player
-lis r5, HideNSeekData@ha
-ori r5, r5, HideNSeekData@l+4
-lbzx r4, r4, r5
-cmpwi r4, 1
+bl StopperSub
+lbz r12, 0(r12)
+cmpwi r12, 1
+
+# Restore LR
+mtlr r4
 beqlr
 
 # If false, execute original instruction and resume function
@@ -29,18 +45,17 @@ b StopperHook+4
 # Stopper 2 #
 #############
 
-# Get player id
+# Save LR
 Stopper2:
-lwz r4, 0(r3)
-lwz r4, 0(r4)
-lbz r4, 0x10(r4)
-slwi r4, r4, 2
+mflr r4
 
 # Get isStopped for player
-lis r5, HideNSeekData@ha
-ori r5, r5, HideNSeekData@l+4
-lbzx r4, r4, r5
-cmpwi r4, 1
+bl StopperSub
+lbz r12, 0(r12)
+cmpwi r12, 1
+
+# Restore LR
+mtlr r4
 beqlr
 
 # If false, execute original instruction and resume function
@@ -51,29 +66,30 @@ b StopperHook2+4
 # Stopper 3 #
 #############
 
-# Get player id
+# Get isStopped for player
 Stopper3:
-lwz r11, 0(r3)
-lwz r11, 0(r11)
-lbz r11, 0x10(r11)
-slwi r11, r11, 2
+bl StopperSub
 
-# Get HideNSeekPlayer struct
-lis r12, HideNSeekData@ha
-ori r12, r12, HideNSeekData@l+4
-add r12, r12, r11
-
-# Check that the player is stopped
-lbz r11, 0(r12)
-cmpwi r11, 1
-bne+ allowSSMT
-
-# But if respawn cooldown is on, let the player charge SSMTs anyway
+# Addendum = (respawnTimer > 0) | !(isStopped)
 lbz r11, 0x3(r12)
-cmpwi r11, 0
-beqlr
+lbz r12, 0(r12)
+neg r11, r11
+xori r12, r12, 1
+srwi r11, r11, 31
+or r11, r11, r12
+rlwinm r11, r11, 0, 0xFF
 
-# Execute original instruction and return
-allowSSMT:
-addi r4, r4, 1
-blr
+# Add resulting value
+add r4, r4, r11
+b StopperHook3+4
+
+#############
+# Stopper 4 #
+#############
+
+# Don't allow start boost if Seeker
+Stopper4:
+bl StopperSub
+lbz r11, 0x1(r12)
+cmpwi r11, 1
+b StopperHook4+0x24
