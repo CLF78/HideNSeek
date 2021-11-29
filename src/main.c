@@ -66,6 +66,7 @@ void loadCodes() {
 	// Battle Arena Fixes (by CLF78)
 	directWriteBranch(BattleSpawnFixHook, BattleSpawnFix, true);
 	directWriteBranch(BattleCCFixHook, BattleCCFix, true);
+	directWriteBranch(BattleRespawnFixHook, BattleRespawnFixASM, false);
 
 	// Battle Close-up Camera (by tZ and CLF78)
 	directWrite8(BattleCamera, 1);

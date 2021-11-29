@@ -11,4 +11,5 @@ typedef struct {
 } _HideNSeekData;
 
 extern _HideNSeekData HideNSeekData;
-extern char SeekerCount, PrevSeekers[2], IsInfection, HalfTimer, GlitchesAllowed, BtGlitch, AlwaysWinVote, AlwaysSeeker, SpectatorMode, CurrentSpectated, AmIDead, Have30SecondsPassed, UseReplayCams;
+extern char SeekerCount, PrevSeekers[2], IsInfection, HalfTimer, GlitchesAllowed, BtGlitch, AlwaysWinVote, AlwaysSeeker, SpectatorMode, CurrentSpectated, AmIDead, Have30SecondsPassed, UseReplayCams, MusicState;
+extern u32 ENPTCRC;

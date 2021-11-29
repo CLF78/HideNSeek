@@ -1,6 +1,7 @@
 .include "asm_setup.S"
 
-.global BattleSpawnFix, BattleCCFix
+.extern BattleRespawnFixHook, BattleRespawnFix
+.global BattleSpawnFix, BattleCCFix, BattleRespawnFixASM, InfinityFloat
 
 # Original instruction
 BattleSpawnFix:
@@ -23,3 +24,20 @@ lwz r30, 0xB68(r4)
 cmpwi r30, 0x20
 crmove 2, 0
 blr
+
+# Modified original instruction
+BattleRespawnFixASM:
+bne returnOg
+
+# Get respawn data from r5 and call our custom function
+lwz r4, 0x34(r5)
+bl BattleRespawnFix
+b BattleRespawnFixHook+0x2B0
+
+# Branch back if checkpoints are present
+returnOg:
+b BattleRespawnFixHook+4
+
+InfinityFloat:
+.align 4
+.long 0x7F800000

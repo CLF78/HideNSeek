@@ -11,6 +11,8 @@ SECTIONS {
 	RKNetSelectHandler = 0x809C1160;
 	ScreenHUD = 0x809C36E0;
 
+	PSVECSquareDistance = 0x8019AD00;
+
 	NETSHA1Init = 0x801D2414;
 	NETSHA1Update = 0x801D2464;
 	NETSHA1GetDigest = 0x801D2518;
@@ -18,6 +20,8 @@ SECTIONS {
 	UtilRandomSeed = 0x800F2DE8;
 	UtilRandint = 0x800F2E00;
 	RandomNextLimited = 0x80554F4C;
+
+	GetPlayerPosition = 0x8058FB8C;
 
 	/* Codehandler Hooks */
 	VIHook = 0x801BAA40;
@@ -71,6 +75,7 @@ SECTIONS {
 	/* Battle Arena Fixes */
 	BattleSpawnFixHook = 0x80535C84;
 	BattleCCFixHook = 0x80577A64;
+	BattleRespawnFixHook = 0x80534D4C;
 
 	/* Battle Camera */
 	BattleCamera = 0x805A7FF7;
