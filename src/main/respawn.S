@@ -5,37 +5,30 @@
 
 # Original instruction
 RespawnCooldown:
-lha r0, 0x236(r29)
+lhz r3, 0x234(r30)
 
 # Check if 30 seconds have passed
-lis r4, Have30SecondsPassed@ha
-lbz r4, Have30SecondsPassed@l(r4)
-cmpwi r4, 0
+lis r5, Have30SecondsPassed@ha
+lbz r5, Have30SecondsPassed@l(r5)
+cmpwi r5, 0
 beqlr
 
 # Get player id
-lwz r3, 0(r3)
-lbz r4, 0x10(r3)
-slwi r4, r4, 2
+lwz r5, 0(r30)
+lwz r5, 0(r5)
+lbz r5, 0x10(r5)
+slwi r5, r5, 2
 
 # Get offset of player in HideNSeekData
-lis r3, HideNSeekData@ha
-ori r3, r3, HideNSeekData@l+4
-add r3, r3, r4
+lis r6, HideNSeekData@ha
+ori r6, r6, HideNSeekData@l+4
+add r5, r5, r6
 
 # Check if player is seeker
-lbz r4, 0x1(r3)
-cmpwi r4, 1
+lbz r5, 0x1(r5)
+cmpwi r5, 1
 beqlr
 
-# Store 1 to isStopped
-li r4, 1
-stb r4, 0(r3)
-
-# Store 60 to respawnTimer
-li r4, 60
-stb r4, 0x3(r3)
-
-# Disable the boost and return
-li r0, 0
+# Add 60 to respawn timer if not
+addi r4, r4, 60
 blr

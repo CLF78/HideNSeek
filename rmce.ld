@@ -158,16 +158,15 @@ SECTIONS {
 
 	/* Infinite Star */
 	InfiniteStarHook = 0x80572EC4;
-	InfiniteStarHook2 = 0x80579BA4;
-	InfiniteStarHook3 = 0x80566B4C;
+	InfiniteStarHook2 = 0x80566B4C;
 	StarFunc = 0x80579A04;
 	NoStarInvincibility = 0x8056338C;
 	NoStarInvincibility2 = 0x808170DB;
 	NoStarInvincibility3 = 0x8058E870;
 
 	/* Instant Respawn */
-	InstantRespawn1 = 0x8056EFD8;
-	InstantRespawn2 = 0x805733C4;
+	InstantRespawn1 = 0x8056EFDB;
+	InstantRespawn2 = 0x805733BC;
 
 	/* Invisibility */
 	InvisibilityHook = 0x80653AAC;
@@ -266,9 +265,6 @@ SECTIONS {
 
 	/* Remove Mushroom Bug */
 	NoMushroomBug = 0x807AB617;
-
-	/* Respawn Cooldown */
-	RespawnCooldownHook = 0x8057B498;
 
 	/* Reversed Timer */
 	TimerManagerHook = 0x80531134;

@@ -2,7 +2,7 @@
 #include <common.h>
 
 typedef struct {
- 	u8 isStopped, isSeeker, isRealSeeker, respawnTimer;
+ 	u8 isStopped, isSeeker, isRealSeeker, unused;
 } HideNSeekPlayer;
 
 typedef struct {

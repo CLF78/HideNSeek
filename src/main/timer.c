@@ -17,23 +17,14 @@ void MainTimerUpdate(u32 timer) {
 	if (timer > 0)
 		tmanager->frames = timer-1;
 
-	// Update respawn timer for each player
-	for (int pid = 0; pid < HideNSeekData.playerCount; pid++) {
-		if (HideNSeekData.players[pid].respawnTimer > 0) {
-			HideNSeekData.players[pid].respawnTimer--;
-			if (HideNSeekData.players[pid].respawnTimer == 0)
-				HideNSeekData.players[pid].isStopped = false;
-		}
-	}
-
 	// Some things happen before 30 seconds have passed
 	if (!Have30SecondsPassed) {
 
 		// Play the countdown jingle again
-		if (timer % 60 == 0 && timer <= 180 && Raceinfo->raceState != 4)
+		if (timer % 60 == 0 && timer <= 180)
 			CustomJingleFunc(0xD8);
 
-		// If timer is 1, reset it back to 10 minutes (minus 1 frame because it will give 1 point otherwise)
+		// If timer is 1, reset it back to 10 minutes
 		else if (timer == 2) {
 
 			if (HalfTimer)
@@ -50,27 +41,22 @@ void MainTimerUpdate(u32 timer) {
 			}
 
 			// Play the GO jingle again!
-			if (Raceinfo->raceState != 4)
-				CustomJingleFunc(0xD9);
+			CustomJingleFunc(0xD9);
 		}
 	}
 
 	else {
 
-		// Only play sounds if the race has not ended
-		if (Raceinfo->raceState != 4) {
+		// If one minute is remaining, play the final lap jingle and enable faster music
+		if (timer == 3600 && Raceinfo->raceState != 4)
+			JingleFunc(MusicHandler, 5);
 
-			// If one minute is remaining, play the final lap jingle and enable faster music
-			if (timer == 3600)
-				JingleFunc(MusicHandler, 5);
-
-			// Play the countdown jingle in the last 10 seconds
-			else if (timer % 60 == 0) {
-				if (timer >= 240 && timer <= 600)
-					CustomJingleFunc(0xEB);
-				else if (timer > 0 && timer <= 180)
-					CustomJingleFunc(0xEC);
-			}
+		// Play the countdown jingle in the last 10 seconds
+		else if (timer % 60 == 0) {
+			if (timer >= 240 && timer <= 600)
+				CustomJingleFunc(0xEB);
+			else if (timer > 0 && timer <= 180)
+				CustomJingleFunc(0xEC);
 		}
 
 		// Run the Star function for each Seeker (unless they already have a Star)

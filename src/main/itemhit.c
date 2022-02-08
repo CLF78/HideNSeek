@@ -26,12 +26,6 @@ void PlayerKiller(char pid) {
 		HideNSeekData.players[pid].isSeeker = true;
 		HideNSeekData.totalSeekers++;
 
-		// Remove Respawn Cooldown if present
-		if (HideNSeekData.players[pid].respawnTimer > 0) {
-			HideNSeekData.players[pid].respawnTimer = 0;
-			HideNSeekData.players[pid].isStopped = false;
-		}
-
 		// Update tags in real time if i'm not Seeker
 		if (!HideNSeekData.players[Racedata->main.scenarios[0].settings.hudPlayerIds[0]].isSeeker)
 			UpdateTag(pid, TEAM_RED);
@@ -101,7 +95,7 @@ void ItemHitRemote(void* something, ItemPacket* packet, int length) {
 
 		// Update KillData
 		AddNewKillData(1, (u16)pid, (u16)pid2);
-		
+
 		// Assign the point bonus (again won't do anything on normal mode)
 		if (!HideNSeekData.players[pid2].isRealSeeker)
 			Raceinfo->players[pid2]->battleScore++;
@@ -145,7 +139,7 @@ void PlayerDC() {
 
 				// Update totalSurvivors
 				HideNSeekData.totalSurvivors--;
-				
+
 				// If infection is on, turn said player red
 				if (HideNSeekData.isInfection)
 					Racedata->main.scenarios[0].players[pid].team = TEAM_RED;

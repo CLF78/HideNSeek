@@ -3,8 +3,15 @@
 .extern SomeJingleThing
 .global CustomJingleFunc
 
-# Move sfx id to r4
+# Check if race is still going
 CustomJingleFunc:
+lis r4, Raceinfo@ha
+lwz r4, Raceinfo@l(r4)
+lwz r4, 0x28(r4)
+cmpwi r4, 4
+beqlr
+
+# If so, move sfx id to r4
 mr r4, r3
 
 # Instructions copied from original game
