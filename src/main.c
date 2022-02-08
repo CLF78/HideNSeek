@@ -131,7 +131,7 @@ void loadCodes() {
 
 	// Glitch Prevention (by MrBean and stebler)
 	directWriteBranch(DisableWallrideHook, DisableWallride, true);
-	directWriteBranch(DisableHWGHook, DisableHWG, true);
+	directWriteBranch(DisableHWGHook, DisableHWG, false);
 
 	// Go To Friends Menu Automatically (by Chadderz)
 	directWrite8(AutoFriendsMenu, 0x8D);

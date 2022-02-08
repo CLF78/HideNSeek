@@ -135,7 +135,8 @@ SECTIONS {
 
 	/* Glitch Prevention */
 	DisableWallrideHook = 0x8056A070;
-	DisableHWGHook = 0x80583440;
+	DisableHWGHook = 0x80582CD0;
+	ActivateOob = 0x80561B58;
 
 	/* Go To Friends Menu Automatically */
 	AutoFriendsMenu = 0x80635C73;
