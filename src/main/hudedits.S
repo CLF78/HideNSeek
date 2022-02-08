@@ -35,11 +35,12 @@ bl ScoreSound
 
 # Check result
 cmpwi r3, 0
-beq noSound
+beq zeroSound
 cmpwi r3, 1
 beq yesSound
 
 # Negative jingle
+noSound:
 b UpdateScoreHook+0x4C
 
 # Positive jingle
@@ -47,5 +48,5 @@ yesSound:
 b UpdateScoreHook+0x38
 
 # No jingle
-noSound:
+zeroSound:
 b UpdateScoreHook+0x5C

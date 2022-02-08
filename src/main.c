@@ -64,7 +64,7 @@ void loadCodes() {
 	directWriteBranch(AutoBRSARHook, AutoBRSAR, true);
 
 	// Battle Arena Fixes (by CLF78)
-	directWriteBranch(BattleSpawnFixHook, BattleSpawnFix, true);
+	directWriteBranch(BattleStartFixHook, BattleStartFix, true);
 	directWriteBranch(BattleCCFixHook, BattleCCFix, true);
 	directWriteBranch(BattleRespawnFixHook, BattleRespawnFixASM, false);
 
@@ -126,8 +126,8 @@ void loadCodes() {
 	directWrite32Offset(ResetSeeker, 0xB4, 0x38E00002); // Forces teams mode
 
 	// Friend Room Race Count Modifier (by MrBean)
-	directWrite16(FroomRaceCount1, 1);
-	directWrite16(FroomRaceCount2, 1);
+	directWriteBranch(FroomRaceCount1, RaceCountMod, true);
+	directWriteBranch(FroomRaceCount2, RaceCountMod, true);
 
 	// Glitch Prevention (by MrBean and stebler)
 	directWriteBranch(DisableWallrideHook, DisableWallride, true);
@@ -144,10 +144,8 @@ void loadCodes() {
 	directWriteBranch(HostCheckHelperHook, HostCheckHelper, true);
 	directWrite8(Version, 5);
 
-	// Improved Position Interpolation (by CLF78, Leseratte & stebler)
-	directWriteNop(ForceInterpolation);
-	directWriteBranch(InterpolationHook, InterpFunc, false);
-	directWriteBranch(InterpolationHook2, InterpFunc2, false);
+	// Improved Position Interpolation (by stebler)
+	directWrite32(NoInterpolation, 0x3F800000);
 
 	// Increase Visual Distance (by davidevgen)
 	directWrite32(DrawDistance, 0x49742400);

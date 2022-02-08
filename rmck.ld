@@ -73,7 +73,7 @@ SECTIONS {
 	AutoBRSARHook = 0x80091334;
 
 	/* Battle Arena Fixes */
-	BattleSpawnFixHook = 0x8052435C;
+	BattleStartFixHook = 0x8052435C;
 	BattleCCFixHook = 0x8056613C;
 	BattleRespawnFixHook = 0x80523424;
 
@@ -130,8 +130,8 @@ SECTIONS {
 	ResetSeeker = 0x8051E4CC;
 
 	/* Friend Room Race Count Modifier */
-	FroomRaceCount1 = 0x806343D2;
-	FroomRaceCount2 = 0x8063D836;
+	FroomRaceCount1 = 0x806343D0;
+	FroomRaceCount2 = 0x8063D834;
 
 	/* Glitch Prevention */
 	DisableWallrideHook = 0x8056A070;
@@ -150,9 +150,7 @@ SECTIONS {
 	Original30 = 0x80264E30;
 
 	/* Improved Positioning */
-	ForceInterpolation = 0x80579A90;
-	InterpolationHook = 0x80579AA8;
-	InterpolationHook2 = 0x80579C88;
+	NoInterpolation = 0x8087FF30;
 
 	/* Increase Visual Distance */
 	DrawDistance = 0x80880728;

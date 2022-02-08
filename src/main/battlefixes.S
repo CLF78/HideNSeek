@@ -1,10 +1,10 @@
 .include "asm_setup.S"
 
 .extern BattleRespawnFixHook, BattleRespawnFix
-.global BattleSpawnFix, BattleCCFix, BattleRespawnFixASM, InfinityFloat
+.global BattleStartFix, BattleCCFix, BattleRespawnFixASM, InfinityFloat
 
 # Original instruction
-BattleSpawnFix:
+BattleStartFix:
 lwz r0, 0xB70(r7)
 
 # Check if the track is a battle arena
