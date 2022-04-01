@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern HideNSeekData, Have30SecondsPassed
+.extern HideNSeekData, Have30SecondsPassed, RespawnCooldownDuration
 .global RespawnCooldown
 
 # Original instruction
@@ -29,6 +29,23 @@ lbz r5, 0x1(r5)
 cmpwi r5, 1
 beqlr
 
-# Add 60 to respawn timer if not
+# Check duration of cooldown
+# 0 = Normal
+# 1 = Double
+# 2 = None
+lis r5, RespawnCooldownDuration@ha
+lbz r5, RespawnCooldownDuration@l(r5)
+cmpwi r5, 0
+beq normalCooldown
+cmpwi r5, 1
+beq doubleCooldown
+cmpwi r5, 2
+beqlr
+
+normalCooldown:
 addi r4, r4, 60
+blr
+
+doubleCooldown:
+addi r4, r4, 120
 blr
