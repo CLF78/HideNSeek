@@ -23,6 +23,7 @@ SECTIONS {
 	GlitchesAllowed = 0x800002B6;
 	BtGlitch = 0x800002B7;
 	AlwaysWinVote = 0x800002B8;
+	NoCooldown = 0x800002B9;
 
 	/* Version */
 	Version = 0x800003B0;

@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern HideNSeekData, Have30SecondsPassed
+.extern HideNSeekData, Have30SecondsPassed, NoCooldown
 .global RespawnCooldown
 
 # Original instruction
@@ -11,6 +11,12 @@ lhz r3, 0x234(r30)
 lis r5, Have30SecondsPassed@ha
 lbz r5, Have30SecondsPassed@l(r5)
 cmpwi r5, 0
+beqlr
+
+# Check if respawn cooldown was disabled
+lis r5, NoCooldown@ha
+lbz r5, NoCooldown@l(r5)
+cmpwi r5, 1
 beqlr
 
 # Get player id
