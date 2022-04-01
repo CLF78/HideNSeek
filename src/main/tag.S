@@ -1,8 +1,10 @@
 .include "asm_setup.S"
 
 .extern ScreenHUD, TeamLineColors, ZeroFloat, PlayAnim
-.extern BtGlitch, Racedata
+.extern BtGlitch, Racedata, ENPTCRC
 .global TagDistanceFunc, UpdateTag
+.set FunkyStadiumCRC, 0x36512E93
+.set N64SkyscraperCRC, 0x90C1118E
 
 #########################
 # Tag Distance Modifier #
@@ -26,25 +28,19 @@ lis r4, BtGlitch@ha
 lbz r4, BtGlitch@l(r4)
 slwi r4, r4, 2
 
-# Check if CTSupport was enabled
-lis r12, CTSupport@ha
-lbz r12, CTSupport@l(r12)
-cmpwi r12, 1
-beq continue
+# Get CRC
+lis r11, ENPTCRC@ha
+lwz r11, ENPTCRC@l(r11)
 
-# Get track slot
-lis r12, Racedata@ha
-lwz r12, Racedata@l(r12)
-lwz r12, 0xB68(r12)
-
-# Check if it's Funky Stadium, Chain Chomp Wheel or N64 Skyscraper
-cmpwi r12, 0x22
+# Check if it's Funky Stadium or N64 Skyscraper
+lis r12, FunkyStadiumCRC@h
+ori r12, r12, FunkyStadiumCRC@l
+cmpw r11, r12
 beq apply
 
-cmpwi r12, 0x23
-beq apply
-
-cmpwi r12, 0x29
+lis r12, N64SkyscraperCRC@h
+ori r12, r12, N64SkyscraperCRC@l
+cmpw r11, r12
 bne+ continue
 
 # OR with 4 to load second float regardless

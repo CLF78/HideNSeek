@@ -32,6 +32,6 @@ SECTIONS {
 
 	/* Riivo Options */
 	NoMusic = 0x80004000;
-	CTSupport = 0x8000400E;
+	/* (DEPRECATED) CTSupport = 0x8000400E; */
 	ThirtyFPS = 0x8000400F;
 }
