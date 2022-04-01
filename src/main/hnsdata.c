@@ -11,16 +11,20 @@ int pidHelper(char currentpid, char prevaid1, char prevaid2, int index) {
 	u32 pid;
 
     do {
-		// If AlwaysSeeker, this will return 0 and the next available aid (aid 1 isn't guaranteed to be present)
-		if (AlwaysSeeker)
+		// 0 = any player can seek
+		// 1 = host always seeks
+		// 2 = host never seeks
+		if (AlwaysSeeker == 0)
+			aid = UtilRandint(0, 12);
+		else if (AlwaysSeeker == 1)
 			aid++;
 		else
-			aid = UtilRandint(0, 12);
+			aid = UtilRandint(SeekerCount+1, 12);
 
 		// Check if the aid meets the conditions
         for (pid = 0; pid < 12; pid++) {
             if (RKNetController->aidsToPids[pid] == aid && pid != currentpid) {
-				if (AlwaysSeeker || Racedata->main.scenarios[0].settings.gamemode == MODE_PUBLIC_VS) {
+				if (AlwaysSeeker == 1 || Racedata->main.scenarios[0].settings.gamemode == MODE_PUBLIC_VS) {
 					PrevSeekers[index] = aid;
 					break;
 				} else if (aid != prevaid1 && aid != prevaid2) {
