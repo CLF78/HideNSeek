@@ -7,6 +7,9 @@
 #include <raceinfo.h>
 #include <utils.h>
 
+// External timer values
+extern u32 TimerVals[3];
+
 // Forward declarations
 void UpdateMutes();
 
@@ -26,12 +29,7 @@ void MainTimerUpdate(u32 timer) {
 
 		// If timer is 1, reset it back to 10 minutes
 		else if (timer == 2) {
-
-			if (HalfTimer)
-				tmanager->frames = 0x4650;
-			else
-				tmanager->frames = 0x8CA0;
-
+			tmanager->frames = TimerVals[HalfTimer];
 			Have30SecondsPassed = true;
 
 			// Allow the Seekers to move

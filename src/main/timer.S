@@ -1,17 +1,25 @@
 .include "asm_setup.S"
 
 .extern TimerChecks, No5LimitHook, Raceinfo
-.global StartingTime, StartingTime2, TimerEnd, TimerEndManager
+.global StartingTime, StartingTime2, TimerEnd, TimerEndManager, TimerVals
 
 ##########################
 # Starting Time Modifier #
 ##########################
 
-# Set timer
+# Assume regular start timer
 StartingTime:
 li r31, 1800
 
+# Check if HalfTimer is 2
+cmpwi r11, 2
+bne+ end2
+
+# Set it to 3600 if so
+slwi r31, r31, 1
+
 # Original instruction
+end2:
 stw r31, 0x48(r29)
 blr
 
@@ -19,11 +27,22 @@ blr
 # Starting Time Modifier 2 #
 ############################
 
-# Load 30 in r12
+# Assume regular timer
 StartingTime2:
 li r12, 30
 
+# Check if HalfTimer is 2
+lis r11, HalfTimer@ha
+lbz r11, HalfTimer@l(r11)
+cmpwi r11, 2
+bne+ end
+
+# Set seconds to 0 and minutes to 1
+mr r12, r31
+stb r30, 0x14(r3)
+
 # Modified original instruction
+end:
 stb r12, 0x16(r3)
 blr
 
@@ -76,3 +95,10 @@ xori r3, r3, 2
 cntlzw r3, r3
 srwi r3, r3, 5
 blr
+
+################
+# Timer Values #
+################
+
+TimerVals:
+.long 0x8CA0, 0x4650, 0x34BC0
