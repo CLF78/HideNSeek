@@ -1,7 +1,7 @@
 .include "asm_setup.S"
 
 .extern BattleRespawnFixHook, BattleRespawnFix
-.global BattleStartFix, BattleCCFix, BattleRespawnFixASM, InfinityFloat
+.global BattleStartFix, BattleCCFix, BattleRespawnFixASM
 
 # Original instruction
 BattleStartFix:
@@ -37,7 +37,3 @@ b BattleRespawnFixHook+0x2B0
 # Branch back if checkpoints are present
 returnOg:
 b BattleRespawnFixHook+4
-
-InfinityFloat:
-.align 4
-.long 0x7F800000

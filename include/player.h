@@ -1,7 +1,7 @@
 #pragma once
 #include <common.h>
 
-// Documentation by stebler, SwareJonge and 1superchip 
+// Documentation by stebler, SwareJonge and 1superchip
 
 typedef struct PlayerPointers PlayerPointers;
 
@@ -26,6 +26,17 @@ typedef struct {
 	PlayerPointers *pointers;
 	// Incomplete
 } PlayerSub18;
+
+typedef struct {
+	void* vtable;
+	u32 bitfield0;
+	u32 bitfield1;
+	u32 bitfield2;
+	u32 bitfield3;
+	u32 bitfield4;
+	PlayerPointers **pointers;
+	// Incomplete
+} PlayerSub1c;
 
 typedef struct {
 	u32 isBike;

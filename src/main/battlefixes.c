@@ -7,14 +7,13 @@
 
 #define DELFINOPIERCRC 0x72836BEE
 
-float InfinityFloat;
 VEC3* GetPlayerPosition(PlayerPointers**);
 
 void BattleRespawnFix(RaceinfoPlayer* player, JGPTSection* respawns) {
 
 	// Initial data
 	s8 respawn = -1;
-	float minDistance = InfinityFloat;
+	float minDistance;
 	VEC3* playerPos = GetPlayerPosition(&PlayerHolder->players[player->id]->playerPointers);
 	int respawnCount = respawns->pointCount;
 	JGPT*** respawnArray = respawns->pointArray;
@@ -30,12 +29,12 @@ void BattleRespawnFix(RaceinfoPlayer* player, JGPTSection* respawns) {
 		float currDistance = PSVECSquareDistance(playerPos, &respawnArray[i][0]->pos);
 
 		// If distance is less than the one previously found, pick this respawn
-		if (currDistance < minDistance) {
+		if (currDistance < minDistance || i == 0) {
 			minDistance = currDistance;
 			respawn = i;
 		}
 	}
-	
+
 	// Set the respawn we found as the player's current respawn point
 	player->respawn = (u8)respawn;
 }

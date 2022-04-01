@@ -26,7 +26,7 @@ void InvisibilityFunc(RacePacket* packet, int length, int aid) {
 		packet->data[index+9] = 0x11;
 
 		// Since i'm lazy, clear the last 4 bits as that will barely change anything
-		packet->data[index+10] &= ~((1 << 7) | (1 << 6) | (1 << 5) | (1 << 4));
+		packet->data[index+10] &= 0xF;
 	}
 
 	if (packet->item_len != 0) {

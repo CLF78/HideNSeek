@@ -331,6 +331,7 @@ void loadCodes() {
 	directWriteBranch(StopperHook2, Stopper2, false);
 	directWriteBranch(StopperHook3, Stopper3, false);
 	directWriteBranch(StopperHook4, Stopper4, false);
+	directWriteBranch(StopperHook5, Stopper5, false);
 
 	// Starting Time Modifier (by Bully, modified by CLF78)
 	directWriteBranch(TimerInit, StartingTime, true);

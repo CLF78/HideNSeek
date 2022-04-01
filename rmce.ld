@@ -326,6 +326,7 @@ SECTIONS {
 	StopperHook2 = 0x80575158;
 	StopperHook3 = 0x8057C108;
 	StopperHook4 = 0x8058F1DC;
+	StopperHook5 = 0x8058E058;
 
 	/* Starting Time Modifier */
 	TimerInit = 0x80530D9C;

@@ -1,7 +1,9 @@
 .include "asm_setup.S"
 
-.extern HideNSeekData, StopperHook, StopperHook2, StopperHook3, StopperHook4
-.global Stopper1, Stopper2, Stopper3, Stopper4
+.extern ENPTCRC, Raceinfo, HideNSeekData, StopperHook, StopperHook2, StopperHook3, StopperHook4, StopperHook5
+.global Stopper1, Stopper2, Stopper3, Stopper4, Stopper5
+.set ChainChompWheelCRC, 0xED1EB462
+.set FunkyStadiumCRC, 0x36512E93
 
 ###############
 # Stopper Sub #
@@ -93,3 +95,40 @@ bl StopperSub
 lbz r11, 0x1(r12)
 cmpwi r11, 1
 b StopperHook4+0x24
+
+#############
+# Stopper 5 #
+#############
+
+# If player is not local, ignore
+Stopper5:
+lwz r12, 0x14(r3)
+rlwinm. r12, r12, 0, 28, 28
+bne+ end
+
+# If timer is past 3 seconds in the race, ignore
+lis r12, Raceinfo@ha
+lwz r12, Raceinfo@l(r12)
+lwz r12, 0x20(r12)
+cmpwi r12, 360
+bgt+ end
+
+# Load ENPTCRC
+lis r11, ENPTCRC@ha
+lwz r11, ENPTCRC@l(r11)
+
+# If CRC matches Funky Stadium or Chain Chomp Wheel, ignore any input
+lis r12, FunkyStadiumCRC@h
+ori r12, r12, FunkyStadiumCRC@l
+cmpw r11, r12
+beqlr
+
+lis r12, ChainChompWheelCRC@h
+ori r12, r12, ChainChompWheelCRC@l
+cmpw r11, r12
+beqlr
+
+# Original instruction
+end:
+stwu r1, -0x30(r1)
+b StopperHook5+4
