@@ -1,115 +1,146 @@
 .include "asm_setup.S"
 
-.extern SeekerCount, IsInfection, HalfTimer, AlwaysSeeker, GlitchesAllowed, BtGlitch, AlwaysWinVote, HostFlagsHook, PrevSeekers
+.extern SeekerCount, IsInfection, HalfTimer, AlwaysSeeker, GlitchesAllowed, BtGlitch, AlwaysWinVote, HostFlagsHook, PrevSeekers, NoCooldown
 .global HostFlags
 
-# Get message type
+# Load 0x8000 in r5
 HostFlags:
-srwi r11, r4, 24
-cmpwi r11, 1
-bne+ normalRoomMessage
+lis r5, IsInfection@ha
 
-# It's a Room Start message, attach all flags! Load 0x8000 in r11
-lis r11, SeekerCount@ha
+# Move mainType to r12
+srwi r12, r4, 24
 
-# Store IsInfection
-rlwinm r12, r4, 24, 31, 31
-stb r12, IsInfection@l(r11)
+# Check mainType 1 (ROOM START)
+cmplwi r12, 1
+bne+ continueMainCheck
+
+##############
+# Room Start #
+##############
 
 # Reset PrevSeekers
 li r12, -1
-sth r12, PrevSeekers@l(r11)
+sth r12, PrevSeekers@l(r5)
 
-# Attach SeekerCount
-lbz r12, SeekerCount@l(r11)
-slwi r12, r12, 23
-or r4, r4, r12
-
-# Attach HalfTimer
-lbz r12, HalfTimer@l(r11)
-slwi r12, r12, 22
-or r4, r4, r12
-
-# Attach AlwaysSeeker
-lbz r12, AlwaysSeeker@l(r11)
-slwi r12, r12, 21
-or r4, r4, r12
-
-# Attach GlitchesAllowed
-lbz r12, GlitchesAllowed@l(r11)
-slwi r12, r12, 20
-or r4, r4, r12
-
-# Attach BtGlitch
-lbz r12, BtGlitch@l(r11)
-slwi r12, r12, 19
-or r4, r4, r12
-
-# Attach Always Win Vote
-lbz r12, AlwaysWinVote@l(r11)
-slwi r12, r12, 18
-or r4, r4, r12
-
-# Return
-b end
-
-# Check if it's a Room Message
-normalRoomMessage:
-cmpwi r11, 4
-bne end
-
-# It's a Room Chat message! Get message subtype
+# Save game mode
+ori r5, r5, IsInfection@l
 srwi r11, r4, 8
-rlwinm r12, r11, 0, 0xFFFF
+stb r11, 0(r5)
 
-# Flag = !(subtype & 1)
-rlwinm r11, r11, 0, 31, 31
-xori r11, r11, 1
+# Setup loop
+li r12, 7
+mtctr r12
+lis r12, shifts@h
+ori r12, r12, shifts@l-1
 
-# Load 0x8000 in r6
-lis r6, SeekerCount@ha
+# Load flag and shift
+loop:
+lbzu r11, 1(r5)
+lbzu r6, 1(r12)
 
-# Check if it's SeekerCount
+# Shift and OR
+slw r11, r11, r6
+or r4, r4, r11
+
+# Continue the loop
+bdnz+ loop
+
+# Go to end
+b end
+
+################
+# Room Message #
+################
+
+# Check mainType 4 (ROOM MESSAGE)
+continueMainCheck:
+cmplwi r12, 4
+bne+ end
+
+# Move subtype to r12
+rlwinm r12, r4, 24, 16, 31
+
+# Store SeekerCount
 cmpwi r12, 1
-bgt+ notSeekerCount
-stb r11, SeekerCount@l(r6)
+bgt continueSubCheck
+
+# Flag = !MSG
+xori r12, r12, 1
+stb r12, SeekerCount@l(r5)
 b end
 
-# Check if it's HalfTimer
-notSeekerCount:
+# Store AlwaysWinVote
+continueSubCheck:
 cmpwi r12, 3
-bgt+ notHalfTimer
-stb r11, HalfTimer@l(r6)
+bgt continueSubCheck2
+
+# Flag = !(MSG & 1)
+rlwinm r12, r12, 0, 31, 31
+xori r12, r12, 1
+stb r12, AlwaysWinVote@l(r5)
 b end
 
-# Check if it's AlwaysSeeker
-notHalfTimer:
-cmpwi r12, 5
-bgt+ notAlwaysSeeker
-stb r11, AlwaysSeeker@l(r6)
+# Store HalfTimer
+continueSubCheck2:
+cmpwi r12, 6
+bgt continueSubCheck3
+
+# Flag = MSG & 3
+rlwinm r12, r12, 0, 30, 31
+stb r12, HalfTimer@l(r5)
 b end
 
-# Check if it's GlitchesAllowed
-notAlwaysSeeker:
-cmpwi r12, 7
-bgt+ notGlitchesAllowed
-stb r11, GlitchesAllowed@l(r6)
-b end
-
-# Check if it's BtGlitch
-notGlitchesAllowed:
+# Store AlwaysSeeker
+continueSubCheck3:
 cmpwi r12, 9
-bgt+ notBtGlitch
-stb r11, BtGlitch@l(r6)
+bgt continueSubCheck4
+
+# Flag = (MSG - 7)
+subi r12, r12, 7
+stb r12, AlwaysSeeker@l(r5)
 b end
 
-# Check if it's AlwaysWinVote
-notBtGlitch:
+# Store GlitchesAllowed
+continueSubCheck4:
 cmpwi r12, 11
-bgt+ end
-stb r11, AlwaysWinVote@l(r6)
+bgt continueSubCheck5
 
-# Original instruction (we cannot use BL here since the function doesn't save the LR)
+# Flag = !(MSG & 1)
+rlwinm r12, r12, 0, 31, 31
+xori r12, r12, 1
+stb r12, GlitchesAllowed@l(r5)
+b end
+
+# Store BtGlitch
+continueSubCheck5:
+cmpwi r12, 13
+bgt continueSubCheck6
+
+# Flag = !(MSG & 1)
+rlwinm r12, r12, 0, 31, 31
+xori r12, r12, 1
+stb r12, BtGlitch@l(r5)
+b end
+
+# Store NoCooldown
+continueSubCheck6:
+cmpwi r12, 13
+bgt end
+
+# Flag = !(MSG & 1)
+rlwinm r12, r12, 0, 31, 31
+xori r12, r12, 1
+stb r12, NoCooldown@l(r5)
+
+# Original instruction
 end:
 li r0, 2
 b HostFlagsHook+4
+
+########
+# Data #
+########
+
+shifts:
+.byte 23, 22, 20, 18, 17, 16, 15
+.align 4

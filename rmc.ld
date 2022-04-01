@@ -17,13 +17,13 @@ SECTIONS {
 	/* HNS Per-GP Data */
 	IsInfection = 0x800002B0;
 	SeekerCount = 0x800002B1;
-	PrevSeekers = 0x800002B2;
-	HalfTimer = 0x800002B4;
-	AlwaysSeeker = 0x800002B5;
-	GlitchesAllowed = 0x800002B6;
-	BtGlitch = 0x800002B7;
-	AlwaysWinVote = 0x800002B8;
-	NoCooldown = 0x800002B9;
+	AlwaysWinVote = 0x800002B2;
+	HalfTimer = 0x800002B3;
+	AlwaysSeeker = 0x800002B4;
+	GlitchesAllowed = 0x800002B5;
+	BtGlitch = 0x800002B6;
+	NoCooldown = 0x800002B7;
+	PrevSeekers = 0x800002B8;
 
 	/* Version */
 	Version = 0x800003B0;

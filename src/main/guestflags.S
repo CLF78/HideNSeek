@@ -1,7 +1,7 @@
 .include "asm_setup.S"
 
 .extern RKNetController
-.extern SeekerCount, IsInfection, HalfTimer, AlwaysSeeker, GlitchesAllowed, BtGlitch, AlwaysWinVote
+.extern SeekerCount, IsInfection, HalfTimer, AlwaysSeeker, GlitchesAllowed, BtGlitch, AlwaysWinVote, NoCooldown
 .global GuestFlags
 
 # Check if mainType is 1
@@ -35,25 +35,29 @@ stb r11, IsInfection@l(r12)
 rlwinm r11, r3, 9, 31, 31
 stb r11, SeekerCount@l(r12)
 
-# Store HalfTimer
+# Store AlwaysWinVote
 rlwinm r11, r3, 10, 31, 31
+stb r11, AlwaysWinVote@l(r12)
+
+# Store HalfTimer
+rlwinm r11, r3, 12, 30, 31
 stb r11, HalfTimer@l(r12)
 
 # Store AlwaysSeeker
-rlwinm r11, r3, 11, 31, 31
+rlwinm r11, r3, 14, 30, 31
 stb r11, AlwaysSeeker@l(r12)
 
 # Store GlitchesAllowed
-rlwinm r11, r3, 12, 31, 31
+rlwinm r11, r3, 15, 31, 31
 stb r11, GlitchesAllowed@l(r12)
 
 # Store BtGlitch
-rlwinm r11, r3, 13, 31, 31
+rlwinm r11, r3, 16, 31, 31
 stb r11, BtGlitch@l(r12)
 
-# Store AlwaysWinVote
-rlwinm r11, r3, 14, 31, 31
-stb r11, AlwaysWinVote@l(r12)
+# Store NoCooldown
+rlwinm r11, r3, 17, 31, 31
+stb r11, NoCooldown@l(r12)
 
 # Finally, clean up the subType to remove any flag
 rlwinm r3, r3, 0, 22, 7
