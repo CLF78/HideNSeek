@@ -1,1 +1,7 @@
+build/ISO/hns
+build/ISO/wit
+build/Riivo/hns
 src/bin
+files/UIPatches/*.szs
+__pycache__/
+*.zip

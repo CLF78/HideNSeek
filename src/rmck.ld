@@ -39,6 +39,7 @@ SECTIONS {
 	DVDReadPrio = 0x8015E8AC;
 	DVDClose = 0x8015E5E0;
 	sprintf = 0x80011A94;
+	snprintf = 0x800119A0;
 	swprintf = 0x8001787C;
 	OSFatal = 0x801A5220;
 	OSReport = 0x801A292C;
@@ -109,6 +110,7 @@ SECTIONS {
 	InitScore = 0x807E5B64;
 	UpdateScoreHook = 0x807E5C5C;
 	FixScoreColor = 0x807DA308;
+	ScoreCTR = 0x80898C17;
 
 	/* End Race on Command */
 	No5LimitHook = 0x8052D404;
@@ -219,9 +221,8 @@ SECTIONS {
 	ResetText = 0x8062C2E0;
 
 	/* Message Editor */
-	MessageEditorHook = 0x805BBD84;
+	MessageEditorHook = 0x805E6FEC;
 	MessageEditorHook2 = 0x805BBD18;
-	MessageFunc = 0x805E7110;
 
 	/* Music Patches */
 	BattleCountdown = 0x80704A74;

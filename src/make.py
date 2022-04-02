@@ -92,4 +92,5 @@ def main():
     # We're done!
     print('Built all!')
 
-main()
+if __name__ == '__main__':
+	main()

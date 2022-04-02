@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern snprintf, SystemManager, FilenameEndings, PatchSZSHook
+.extern snprintf, SystemManager, FilenameEndings, DefaultFileEnding, PatchSZSHook
 .global PatchSZS
 
 # Get sourceCount and skip if less than 3
@@ -17,6 +17,26 @@ stw r0, 0x8(r3)
 # Call snprintf
 lwz r3, 0x10(r31)
 lwz r3, 0x8(r3)
+li r4, 0x80
+lis r5, PatchFilename@h
+ori r5, r5, PatchFilename@l
+lis r6, DefaultFileEnding@h
+ori r6, r6, DefaultFileEnding@l
+bl snprintf
+
+# Get sourceCount and skip if less than 4
+lhz r0, 0x8(r31)
+cmplwi r0, 0x3
+ble end
+
+# Set state to 1 to replace name entirely
+lwz r3, 0x18(r31)
+li r0, 1
+stw r0, 0xC(r3)
+
+# Call snprintf
+lwz r3, 0x10(r31)
+lwz r3, 0xC(r3)
 li r4, 0x80
 lis r5, PatchFilename@h
 ori r5, r5, PatchFilename@l

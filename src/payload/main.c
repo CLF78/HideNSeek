@@ -100,6 +100,7 @@ void loadCodes() {
 	directWriteBranch(UpdateScoreHook, UpdateScore, true);
 	directWrite16(FixScoreColor, tempVal16);
 	directWriteBranchOffset(UpdateScoreHook, 0x34, ScoreSoundASM, false); // Fixes sound
+	directWrite8(ScoreCTR, 'p');
 
 	// End Race on Command (by CLF78 and Leseratte)
 	directWriteBranch(No5LimitHook, TimerEnd, false);
@@ -221,8 +222,8 @@ void loadCodes() {
 	directWriteBranch(MainMenuCrashFixHook, MainMenuCrashFix, true); // Changes default button selection to prevent crashes
 	directWrite8(MKChannelRedirect, 0x3B); // Redirects MK Channel to the Credits Part 2 scene
 
-	// Message Editor (by WhatIsLoaf & CLF78)
-	directWriteBranch(MessageEditorHook, MessageEditor, false);
+	// Message Editor (by CLF78)
+	directWriteBranch(MessageEditorHook, MessageEditor, true);
 	directWriteBranch(MessageEditorHook2, MessageEditor2, true);
 
 	// Music Patches (by CLF78)
@@ -268,7 +269,7 @@ void loadCodes() {
 	directWrite16(VersionString8, tempVal16);
 
     // Patch.szs (by CLF78)
-    directWrite8(SZSCount, 3);
+    directWrite8(SZSCount, 4);
     directWriteBranch(PatchSZSHook, PatchSZS, false);
 
 	// Remove Mushroom Bug (by Vega)

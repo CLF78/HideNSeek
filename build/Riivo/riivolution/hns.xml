@@ -1,0 +1,66 @@
+<wiidisc version="1">
+	<id game="RMC"/>
+	<options>
+		<section name="Hide and Seek">
+			<option name="Hide and Seek">
+				<choice name="Enabled">
+					<patch id="hns" />
+				</choice>
+			</option>
+			<option name="My Stuff">
+				<choice name="HNS">
+					<patch id="mystuffhns" />
+				</choice>
+				<choice name="HNS (Music Only)">
+					<patch id="mystuffhnsnrt" />
+				</choice>
+				<choice name="CTGP">
+					<patch id="mythingsctgp" />
+				</choice>
+				<choice name="CTGP (Music Only)">
+					<patch id="mythingsctgpnrt" />
+				</choice>
+			</option>
+			<option name="No Track Music">
+				<choice name="Enabled">
+					<patch id="nahmusic" />
+				</choice>
+			</option>
+			<option name="30 FPS (Dolphin ONLY)">
+				<choice name="Enabled">
+					<patch id="thirstyfps" />
+				</choice>
+			</option>
+		</section>
+	</options>
+	<patch id="hns">
+		<!--File Replacements-->
+		<folder disc="/Scene/UI" external="/hns/UI" create="true" />
+		<!--Load Code-->
+		<memory valuefile="/hns/Loader.bin" offset="0x80004010" />
+		<memory offset="0x8000629C" value="4BFFDF4C" />
+		<folder external="/hns/hns" disc="/hns" create="true"/>
+	</patch>
+	<patch id="mythingsctgp">
+		<folder external="/ctgpr/My Stuff" recursive="false" />
+		<folder external="/ctgpr/My Stuff" disc="/" />
+	</patch>
+	<patch id="mythingsctgpnrt">
+		<folder external="/ctgpr/My Stuff" recursive="false" disc="/sound" />
+		<folder external="/ctgpr/My Stuff" recursive="false" disc="/sound/strm" />
+	</patch>
+	<patch id="mystuffhns">
+		<folder external="/hns/My Stuff" recursive="false" />
+		<folder external="/hns/My Stuff" disc="/" />
+	</patch>
+	<patch id="mystuffhnsnrt">
+		<folder external="/hns/My Stuff" recursive="false" disc="/sound" />
+		<folder external="/hns/My Stuff" recursive="false" disc="/sound/strm" />
+	</patch>
+	<patch id="nahmusic">
+		<memory offset="0x80004000" value="01"/>
+	</patch>
+	<patch id="thirstyfps">
+		<memory offset="0x8000400F" value="01"/>
+	</patch>
+</wiidisc>
