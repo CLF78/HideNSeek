@@ -10,18 +10,10 @@
 # Tag Distance Modifier #
 #########################
 
-# Backup LR
+# Load float array address
 TagDistanceFunc:
-mflr r11
-
-# Do bl trick
-bl trick
-
-.float 7500.0
-.float 75000.0
-
-trick:
-mflr r3
+lis r3, TheFuckingFloats@h
+ori r3, r3, TheFuckingFloats@l
 
 # Get whether BtGlitch is on
 lis r4, BtGlitch@ha
@@ -53,6 +45,7 @@ lfsx f0, r3, r4
 
 # Return one instruction later
 end:
+mflr r11
 addi r11, r11, 4
 mtlr r11
 blr
@@ -112,3 +105,7 @@ addi r3, r3, 0x44
 lis r5, ZeroFloat@ha
 lfs f1, ZeroFloat@l(r5)
 b PlayAnim
+
+TheFuckingFloats:
+.float 7500.0
+.float 75000.0

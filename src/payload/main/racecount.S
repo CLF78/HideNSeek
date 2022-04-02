@@ -17,5 +17,5 @@ lbzx r0, r7, r12
 blr
 
 RaceCounts:
-.byte 3, 1, 0
+.byte 1, 3, 0
 .align 4

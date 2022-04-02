@@ -74,29 +74,29 @@ echo.
 echo Copying mod files...
 
 mkdir mkw.d\files\hns
-copy /y fkw\code\HideNSeek%LETTER%.bin mkw.d\files\hns >nul
-copy /y fkw\Patch.szs mkw.d\files\Scene\UI >nul
+copy /y hns\code\HideNSeek%LETTER%.bin mkw.d\files\hns >nul
+copy /y hns\Patch.szs mkw.d\files\Scene\UI >nul
 
 IF %LETTER%==P (
-	copy /y fkw\Patch_E.szs mkw.d\files\Scene\UI >nul
-	copy /y fkw\Patch_F.szs mkw.d\files\Scene\UI >nul
-	copy /y fkw\Patch_G.szs mkw.d\files\Scene\UI >nul
-	copy /y fkw\Patch_I.szs mkw.d\files\Scene\UI >nul
-	copy /y fkw\Patch_S.szs mkw.d\files\Scene\UI >nul
+	copy /y hns\Patch_E.szs mkw.d\files\Scene\UI >nul
+	copy /y hns\Patch_F.szs mkw.d\files\Scene\UI >nul
+	copy /y hns\Patch_G.szs mkw.d\files\Scene\UI >nul
+	copy /y hns\Patch_I.szs mkw.d\files\Scene\UI >nul
+	copy /y hns\Patch_S.szs mkw.d\files\Scene\UI >nul
 )
 
 IF %LETTER%==E (
-	copy /y fkw\Patch_M.szs mkw.d\files\Scene\UI >nul
-	copy /y fkw\Patch_Q.szs mkw.d\files\Scene\UI >nul
-	copy /y fkw\Patch_U.szs mkw.d\files\Scene\UI >nul
+	copy /y hns\Patch_M.szs mkw.d\files\Scene\UI >nul
+	copy /y hns\Patch_Q.szs mkw.d\files\Scene\UI >nul
+	copy /y hns\Patch_U.szs mkw.d\files\Scene\UI >nul
 )
 
 IF %LETTER%==J (
-	copy /y fkw\Patch_J.szs mkw.d\files\Scene\UI >nul
+	copy /y hns\Patch_J.szs mkw.d\files\Scene\UI >nul
 )
 
 IF %LETTER%==K (
-	copy /y fkw\Patch_K.szs mkw.d\files\Scene\UI >nul
+	copy /y hns\Patch_K.szs mkw.d\files\Scene\UI >nul
 )
 
 echo.

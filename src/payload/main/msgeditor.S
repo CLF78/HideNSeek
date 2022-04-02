@@ -2,22 +2,6 @@
 
 .global MessageEditor, MessageEditor2
 
-.macro .message str
-Message\@:
-.string16 "\str"
-.endm
-
-.macro getOffs id
-addi r3, r12, (Message\id - StartOfMessages)
-.endm
-
-.macro checkMsg bmg id
-cmpwi r14, \bmg
-bne+ not\bmg
-getOffs \id
-not\bmg :
-.endm
-
 ###########
 # Patch 1 #
 ###########
