@@ -33,7 +33,9 @@ jobs:
 
       - name: Compile
         run: |
-          PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro python3 src/make.py
+          PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro
+          cd src
+          python3 make.py
 
       - name: Upload Result
         uses: sinshutu/upload-to-discord@v2.0.0
