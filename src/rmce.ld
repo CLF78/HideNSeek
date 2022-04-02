@@ -263,6 +263,12 @@ SECTIONS {
 	VersionString7 = 0x805C75CA;
 	VersionString8 = 0x805C8B4E;
 
+	/* Patch.szs */
+	SZSCount = 0x80525D17;
+	PatchSZSHook = 0x80525EE4;
+	FilenameEndings = 0x808AEAD8;
+	DefaultFileEnding = 0x8088B9A0;
+
 	/* Remove Mushroom Bug */
 	NoMushroomBug = 0x807AB617;
 

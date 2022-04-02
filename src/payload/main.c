@@ -125,7 +125,7 @@ void loadCodes() {
 	directWrite32(ResetSeeker, 0x38C00001); // Forces blue team on each player (written later)
 	directWrite32Offset(ResetSeeker, 0xB4, 0x38E00002); // Forces teams mode
 
-	// Friend Room Race Count Modifier (by MrBean)
+	// Friend Room Race Count Modifier (by MrBean, modified by CLF78)
 	directWriteBranch(FroomRaceCount1, RaceCountMod, true);
 	directWriteBranch(FroomRaceCount2, RaceCountMod, true);
 
@@ -266,6 +266,10 @@ void loadCodes() {
 	directWrite16(VersionString6, tempVal16);
 	directWrite16(VersionString7, tempVal16);
 	directWrite16(VersionString8, tempVal16);
+
+    // Patch.szs (by CLF78)
+    directWrite8(SZSCount, 3);
+    directWriteBranch(PatchSZSHook, PatchSZS, false);
 
 	// Remove Mushroom Bug (by Vega)
 	directWrite8(NoMushroomBug, 0);

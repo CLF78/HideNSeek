@@ -22,12 +22,12 @@ def build(isBootStrap: bool):
         outname = ''
         regionlist = ['Loader']
     else:
-        mainpath = 'src'
+        mainpath = 'payload'
         outname = 'HideNSeek'
         regionlist = ['P', 'E', 'J', 'K']
 
     # Pretty print
-    print('Building', 'bootstrap...' if isBootStrap else 'payload...')
+    print('Building', mainpath + '...')
 
     # Get excluded files
     if os.path.isfile(excludefile):
@@ -45,7 +45,7 @@ def build(isBootStrap: bool):
 
         # Initialize GCC command
         cc_command = [gcc, '-Iinclude', '-pipe', '-nostartfiles', '-nostdinc', f'-Wl,-T,{mainpath}/mem.ld,-T,rmc.ld']
-        
+
         # Add other build-specific stuff
         if not isBootStrap:
             cc_command += ['-D', f'REGION_{region}', '-Os', f'-Wl,-T,rmc{region.lower()}.ld']

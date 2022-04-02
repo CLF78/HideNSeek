@@ -18,13 +18,13 @@ jobs:
 
       - name: Download devkitPPC r33
         if: steps.cache-1.outputs.cache-hit != 'true'
-        run: | 
+        run: |
           mkdir cache && cd cache
           wget "https://wii.leseratte10.de/devkitPro/file.php/devkitPPC-r33-1-linux.pkg.tar.xz"
           cd ..
 
       - name: Extract devkitPPC
-        run: | 
+        run: |
           tar -xf cache/devkitPPC-r33-1-linux.pkg.tar.xz opt/devkitpro/devkitPPC --strip-components=1
 
       - name: Install PyELFTools
@@ -33,11 +33,11 @@ jobs:
 
       - name: Compile
         run: |
-          PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro python3 make.py
+          PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro python3 src/make.py
 
       - name: Upload Result
         uses: sinshutu/upload-to-discord@v2.0.0
         env:
             DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-            args: bin/*.bin
+            args: src/bin/*.bin
