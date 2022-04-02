@@ -257,7 +257,7 @@ void loadCodes() {
 	directWrite8(BattleButton2, 0x6A);
 	directWrite8(BattleButton3, 0x10);
 	directWrite16(BattleButton4, 0x4800);
-	tempVal16 = 8422;
+	tempVal16 = 8426;
 	directWrite16(VersionString1, tempVal16);
 	directWrite16(VersionString2, tempVal16);
 	directWrite16(VersionString3, tempVal16);
@@ -282,7 +282,7 @@ void loadCodes() {
 	directWriteBranch(FlagResetHook2, FlagReset, false);
 	directWriteBranch(FlagResetHook3, FlagReset, false);
 	directWriteBranch(FlagResetHook4, FlagReset, false);
-	directWrite8(MessageButtons, 0x6C);
+	directWrite8(MessageButtons, 0x70);
 	directWriteArray(MessageButtons2Hook, MessageButtons2, 8);
 	directWriteBranch(MessageButtons3Hook, MessageButtons3, false);
 	tempVal8 = 2;

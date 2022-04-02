@@ -3,6 +3,22 @@
 .extern MessageEditorHook, MessageFunc, SCGetLanguage
 .global MessageEditor, MessageEditor2
 
+.macro .message str
+Message\@:
+.string16 "\str"
+.endm
+
+.macro getOffs id
+addi r3, r12, (Message\id - StartOfMessages)
+.endm
+
+.macro checkMsg bmg id
+cmpwi r14, \bmg
+bne+ not\bmg
+getOffs \id
+not\bmg :
+.endm
+
 ###########
 # Patch 1 #
 ###########
@@ -15,208 +31,82 @@ bl MessageFunc
 bl trick
 
 # Messages go here
-.string16 "We're playing a Classic HnS!"
-.string16 "We're playing an Infection HnS!"
-.string16 "Double Seeker: ON!"
-.string16 "Double Seeker: OFF!"
-.string16 "Halved Timer: ON!"
-.string16 "Halved Timer: OFF!"
-.string16 "Host Always Seeker: ON!"
-.string16 "Host Always Seeker: OFF!"
-.string16 "Allow Glitches: ON!"
-.string16 "Allow Glitches: OFF!"
-.string16 "Long Distance Names: ON!"
-.string16 "Long Distance Names: OFF!"
-.string16 "Host Always Wins Vote: ON!"
-.string16 "Host Always Wins Vote: OFF!"
-.string16 "\nTime's up!\nThe match has ended."
-.string16 "\nAll players have been caught.\nThe match has ended."
-.string16 "\nAll seekers left.\nThe match has ended."
-.string16 "Hide and Seek v2.0"
-.string16 "Classic"
-.string16 "Infection"
-.string16 "In a Worldwide HnS match!"
-.string16 "Press +/START to vote for a Battle Arena!"
-.string16 "Press +/START to vote for a Track!"
+StartOfMessages:
+.message "We're playing a Classic HnS!"
+.message "We're playing an Infection HnS!"
+.message "Double Seeker: ON!"
+.message "Double Seeker: OFF!"
+.message "Always Win Vote: ON!"
+.message "Always Win Vote: OFF!"
+.message "Timer: NORMAL!"
+.message "Timer: HALF!"
+.message "Timer: EXTREME!"
+.message "Host Always: NORMAL!"
+.message "Host Always: SEEKER!"
+.message "Host Always: HIDER!"
+.message "Allow Glitches: ON!"
+.message "Allow Glitches: OFF!"
+.message "Long Distance Names: ON!"
+.message "Long Distance Names: OFF!"
+.message "Respawn Cooldown: ON!"
+.message "Respawn Cooldown: OFF!"
+.message "\nTime's up!\nThe match has ended."
+.message "\nAll players have been caught.\nThe match has ended."
+.message "\nAll seekers left.\nThe match has ended."
+.message "Hide and Seek v2.0"
+.message "Classic"
+.message "Infection"
+.message "In a Worldwide HnS match!"
+.message "Press +/START to vote for a Battle Arena!"
+.message "Press +/START to vote for a Track!"
 .align 2
 
 trick:
 mflr r12
 
-# Friend Room Start messages
-cmpwi r14, 4110
-bne+ not4110
-mr r3, r12
+# Friend Room Start
+checkMsg 4110, 0
+checkMsg 4111, 1
 
-not4110:
-cmpwi r14, 4111
-bne+ not4111
-addi r3, r12, 0x3A
+# Friend Room
+checkMsg 8410, 2
+checkMsg 8411, 3
+checkMsg 8412, 4
+checkMsg 8413, 5
+checkMsg 8414, 6
+checkMsg 8415, 7
+checkMsg 8416, 8
+checkMsg 8417, 9
+checkMsg 8418, 10
+checkMsg 8419, 11
+checkMsg 8420, 12
+checkMsg 8421, 13
+checkMsg 8422, 14
+checkMsg 8423, 15
+checkMsg 8424, 16
+checkMsg 8425, 17
 
-# Room Flag messages
-not4111:
-cmpwi r14, 8410
-bne+ not8410
-addi r3, r12, 0x7A
+# Race End
+checkMsg 1340, 18
+checkMsg 1342, 19
+checkMsg 1341, 20
 
-not8410:
-cmpwi r14, 8411
-bne+ not8411
-addi r3, r12, 0xA0
+# Version String
+checkMsg 8426, 21
 
-not8411:
-cmpwi r14, 8412
-bne+ not8412
-addi r3, r12, 0xC8
+# VS/Battle Button
+checkMsg 4305, 22
+checkMsg 4308, 23
 
-not8412:
-cmpwi r14, 8413
-bne+ not8413
-addi r3, r12, 0xEC
+# Online Status
+checkMsg 5309, 24
 
-not8413:
-cmpwi r14, 8414
-bne+ not8414
-addi r3, r12, 0x112
-
-not8414:
-cmpwi r14, 8415
-bne+ not8415
-addi r3, r12, 0x142
-
-not8415:
-cmpwi r14, 8416
-bne+ not8416
-addi r3, r12, 0x174
-
-not8416:
-cmpwi r14, 8417
-bne+ not8417
-addi r3, r12, 0x19C
-
-not8417:
-cmpwi r14, 8418
-bne+ not8418
-addi r3, r12, 0x1C6
-
-not8418:
-cmpwi r14, 8419
-bne+ not8419
-addi r3, r12, 0x1F8
-
-not8419:
-cmpwi r14, 8420
-bne+ not8420
-addi r3, r12, 0x22C
-
-not8420:
-cmpwi r14, 8421
-bne+ not8421
-addi r3, r12, 0x262
-
-# Race end messages
-not8421:
-cmpwi r14, 1340
-bne+ not1340
-addi r3, r12, 0x29A
-
-not1340:
-cmpwi r14, 1342
-bne+ not1342
-addi r3, r12, 0x2DC
-
-not1342:
-cmpwi r14, 1341
-bne+ not1341
-addi r3, r12, 0x344
-
-# Version string
-not1341:
-cmpwi r14, 8422
-bne+ not8422
-addi r3, r12, 0x394
-
-# VS/Battle Buttons
-not8422:
-cmpwi r14, 0x10D1
-bne+ not10D1
-addi r3, r12, 0x3BA
-
-not10D1:
-cmpwi r14, 0x10D4
-bne+ not10D4
-addi r3, r12, 0x3CA
-
-# Status messages
-not10D4:
-cmpwi r14, 0x14BD
-bne+ not14BD
-addi r3, r12, 0x3DE
-
-# Voting hints
-not14BD:
-cmpwi r14, 0xD21
-bne+ notD21
-addi r3, r12, 0x412
-
-notD21:
-cmpwi r14, 0xD23
-bne+ notD23
-addi r3, r12, 0x466
+# Voting Hints
+checkMsg 3361, 25
+checkMsg 3363, 26
 
 # Store pointer before it gets overwritten (original instruction)
-notD23:
 stw r3, 0x20(r1)
-
-# Friend status messages
-.if (REGION == 'P' || REGION == 'E')
-
-	# Call SCGetLanguage
-	bl SCGetLanguage
-
-	# Check if language is Spanish
-	cmpwi r3, 4
-
-	# This snippet differs between PAL and NTSC-U
-	.if (REGION == 'P')
-		li r4, 55
-		beq messageChecks2
-		
-		# Check if language is English
-		cmpwi r3, 1
-		li r4, 57
-	.else
-		li r4, 53
-	.endif
-
-	# Shared branch
-	bne+ end
-
-	# Check that the messages match
-	cmpwi r14, 0x14C7
-	beq doReplacement
-
-	cmpwi r14, 0x14C8
-	beq doReplacement
-
-	messageChecks2:
-	cmpwi r14, 0x14BF
-	beq doReplacement
-
-	cmpwi r14, 0x14C0
-	bne+ end
-
-	# Load character we want to replace
-	doReplacement:
-	li r12, '2'
-
-	# Reload pointer
-	lwz r3, 0x20(r1)
-
-	# Store byte at index
-	stbx r12, r4, r3
-
-.endif
 
 # Return
 end:
@@ -229,7 +119,7 @@ b MessageEditorHook+8
 # Check if BMG is 4001
 MessageEditor2:
 cmplwi cr7, r6, 4001
-bne+ cr7, not4001 
+bne+ cr7, not4001
 
 # If so replace it with 4000
 subi r6, r6, 1
@@ -240,8 +130,8 @@ not4001:
 cmplwi cr7, r6, 0x7F1
 bne+ cr7, return
 
-# If so replace it with 8422
-li r6, 8422
+# If so replace it with 8426
+li r6, 8426
 
 # Original instruction
 return:

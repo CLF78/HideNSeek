@@ -127,9 +127,8 @@ continueSubCheck6:
 cmpwi r12, 13
 bgt end
 
-# Flag = !(MSG & 1)
+# Flag = (MSG & 1)
 rlwinm r12, r12, 0, 31, 31
-xori r12, r12, 1
 stb r12, NoCooldown@l(r5)
 
 # Original instruction

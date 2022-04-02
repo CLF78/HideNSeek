@@ -4,26 +4,26 @@
 
 # Update limit
 MessageButtons2:
-li r7, 0x6C
-xori r0, r0, 0x6C
+li r7, 0x70
+xori r0, r0, 0x70
 
 # Original instruction
 MessageButtons3:
 rlwinm r0, r0, 0x18, 0x10, 0x1F
 
 # Custom messages
-cmplwi r0, 0xC
+cmplwi r0, 0x10
 blt useCustomIndexes
 
 # Normal messages
-cmplwi r0, 0x6C
+cmplwi r0, 0x70
 blt returnOriginal
 
 # Original failsafe
 li r3, 0
 b end
 
-# Custom messages go from 8410 to 8421
+# Custom messages go from 8410 to 8425
 useCustomIndexes:
 li r3, 8410
 add r3, r3, r0
@@ -32,7 +32,7 @@ b end
 # Copy of game's instruction (plus the subtraction)
 returnOriginal:
 mr r3, r0
-subi r3, r3, 0xC
+subi r3, r3, 0x10
 mr r0, r3
 slwi r0, r0, 2
 addi r3, r1, 0x18
