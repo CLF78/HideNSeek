@@ -154,12 +154,10 @@ void loadCodes() {
 	// Infinite Star Timer + No Star Invincibility (by CLF78)
 	directWrite32(InfiniteStarHook, 0x7C601B78);
 	directWrite32(InfiniteStarHook2, 0x48000044);
-	directWriteNop(NoStarInvincibility); // enable damage from items
-	directWrite8Offset(NoStarInvincibility, 4, 0x54);
-	directWrite8(NoStarInvincibility2, 0); // enable damage from objects
-	directWriteNop(NoStarInvincibility3); // enable damage from players
-	directWrite8Offset(NoStarInvincibility3, 5, 0xA0);
 	directWrite16Offset(StarFunc, 0x74, tempVal16); // remove offroad invincibility
+	directWriteBranch(NoStarInvincibilityHook, NoStarInvincibility, false); // enable damage from items
+	directWriteBranch(NoStarInvincibilityHook2, NoStarInvincibility2, true); // enable damage from objects
+	directWriteBranch(NoStarInvincibilityHook3, NoStarInvincibility3, true); // enable damage from players
 
 	// Instant Respawn + Respawn Cooldown (by davidevgen, CLF78 and stebler)
 	directWrite8(InstantRespawn1, 0);

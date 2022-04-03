@@ -162,9 +162,9 @@ SECTIONS {
 	InfiniteStarHook = 0x80572EC4;
 	InfiniteStarHook2 = 0x80566B4C;
 	StarFunc = 0x80579A04;
-	NoStarInvincibility = 0x8056338C;
-	NoStarInvincibility2 = 0x808170DB;
-	NoStarInvincibility3 = 0x8058E870;
+	NoStarInvincibilityHook = 0x8056338C;
+	NoStarInvincibilityHook2 = 0x808170D8;
+	NoStarInvincibilityHook3 = 0x8058E870;
 
 	/* Instant Respawn */
 	InstantRespawn1 = 0x8056EFDB;

@@ -1,6 +1,6 @@
 .include "asm_setup.S"
 
-.extern SeekerCount, IsInfection, HalfTimer, AlwaysSeeker, GlitchesAllowed, BtGlitch, AlwaysWinVote, HostFlagsHook, PrevSeekers, NoCooldown
+.extern SeekerCount, IsInfection, HalfTimer, AlwaysSeeker, GlitchesAllowed, BtGlitch, AlwaysWinVote, HostFlagsHook, PrevSeekers, NoInvincibility
 .global HostFlags
 
 # Load 0x8000 in r5
@@ -122,14 +122,15 @@ xori r12, r12, 1
 stb r12, BtGlitch@l(r5)
 b end
 
-# Store NoCooldown
+# Store NoInvincibility
 continueSubCheck6:
 cmpwi r12, 13
 bgt end
 
-# Flag = (MSG & 1)
+# Flag = !(MSG & 1)
 rlwinm r12, r12, 0, 31, 31
-stb r12, NoCooldown@l(r5)
+xori r12, r12, 1
+stb r12, NoInvincibility@l(r5)
 
 # Original instruction
 end:

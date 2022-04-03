@@ -22,7 +22,7 @@ SECTIONS {
 	AlwaysSeeker = 0x800002B4;
 	GlitchesAllowed = 0x800002B5;
 	BtGlitch = 0x800002B6;
-	NoCooldown = 0x800002B7;
+	NoInvincibility = 0x800002B7;
 	PrevSeekers = 0x800002B8;
 
 	/* Version */
