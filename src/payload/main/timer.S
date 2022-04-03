@@ -39,7 +39,7 @@ bne+ end
 
 # Set seconds to 0 and minutes to 1
 mr r12, r31
-stb r30, 0x14(r3)
+sth r30, 0x14(r3)
 
 # Modified original instruction
 end:
