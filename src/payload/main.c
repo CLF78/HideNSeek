@@ -170,7 +170,7 @@ void loadCodes() {
 	directWriteBranch(ItemHitLocalHook, ItemHitLocalHelper, false);
 	directWriteBranch(HitboxPatch1Hook, HitboxPatch1, true);
 	directWriteBranch(HitboxPatch2Hook, HitboxPatch2, true);
-	directWriteBranch(ItemHitRemoteHook, ItemHitRemote, true);
+	directWriteBranch(ItemHitRemoteHook, ItemHitRemoteASM, false);
 	directWriteBranch(PlayerDCHook, PlayerDC, false);
 
 	// Item Mod (by CLF78 & XeR)

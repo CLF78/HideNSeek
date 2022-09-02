@@ -175,7 +175,7 @@ SECTIONS {
 
 	/* Item Hit Hooks */
 	ItemHitLocalHook = 0x8056A330;
-	ItemHitRemoteHook = 0x8065EBCC;
+	ItemHitRemoteHook = 0x8065EBC8;
 	DisconnectPlayer = 0x8052F23C;
 	PlayerDCHook = 0x80654710;
 	HitboxPatch1Hook = 0x8056A158;

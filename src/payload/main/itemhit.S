@@ -1,7 +1,7 @@
 .include "asm_setup.S"
 
-.extern ItemHitLocal
-.global ItemHitLocalHelper, HitboxPatch1, HitboxPatch2
+.extern ItemHitLocal, ItemHitRemote, ItemHitRemoteHook
+.global ItemHitLocalHelper, HitboxPatch1, HitboxPatch2, ItemHitRemoteASM
 
 #####################
 # Item Hit Helper 1 #
@@ -51,3 +51,15 @@ lfs f29, 0x4(r4)
 # Multiply and return
 fmuls f29, f29, f2
 blr
+
+######################################################
+# Trampoline for ItemHitRemote because Wiimmfi sucks #
+######################################################
+
+# Original instruction
+ItemHitRemoteASM:
+add r4, r0, r23
+
+# Call our function and skip Wiimmfi hook
+bl ItemHitRemote
+b ItemHitRemoteHook+8
