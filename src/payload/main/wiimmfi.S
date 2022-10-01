@@ -101,9 +101,11 @@ exit:
 cmpw r6, r5
 addi r1, r1, 0x80
 lwz r4, OFF2(r13)
-beq 0
+beq return
 
 # Return 0 otherwise
 nomatch:
 li r4, 0
+
+return:
 b WiimmfiPatch4+4
