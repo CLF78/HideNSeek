@@ -147,7 +147,7 @@ SECTIONS {
 
 	/* Host Version Check */
 	GuestSendHook = 0x800DBD38;
-	HostCheckHook = 0x800DC49C;
+	HostCheckHook = 0x800DC498;
 	DWCiCheckResvCommand = 0x800DE6B8;
 	HostCheckHelperHook = 0x800DC3B0;
 	Original30 = 0x80277050;

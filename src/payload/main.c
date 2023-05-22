@@ -141,7 +141,7 @@ void loadCodes() {
 
 	// Host Version Check (by CLF78 & Seeky)
 	directWriteBranch(GuestSendHook, GuestSend, false);
-	directWriteBranch(HostCheckHook, HostCheck, true);
+	directWriteBranch(HostCheckHook, HostCheck, false);
 	directWriteBranch(HostCheckHelperHook, HostCheckHelper, true);
 	directWrite8(Version, 7);
 
