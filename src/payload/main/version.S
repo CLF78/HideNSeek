@@ -30,6 +30,7 @@ b GuestSendHook+4
 
 # Check if command is reservation
 HostCheck:
+addi r8, r1, 208
 cmpwi r30, 1
 
 # Restore r30
