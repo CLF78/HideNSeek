@@ -28,8 +28,11 @@ b GuestSendHook+4
 # Host Check #
 ##############
 
-# Check if command is reservation
+# Skipped instruction
 HostCheck:
+addi r8, r1, 0xD0
+
+# Check if command is reservation
 cmpwi r30, 1
 
 # Restore r30
