@@ -1,6 +1,6 @@
 #pragma once
-#include <common.h>
-#include <screentext.h>
+#include "common.h"
+#include "screentext.h"
 
 extern void* GetBMGPlayer(u16 pid);
 extern void ApplyKillData(screenText* textData);

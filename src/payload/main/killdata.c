@@ -1,6 +1,6 @@
-#include <common.h>
-#include <killdata.h>
-#include <screentext.h>
+#include "common.h"
+#include "killdata.h"
+#include "screentext.h"
 
 void AddNewKillData(u16 type, u16 int1, u16 int2) {
 	

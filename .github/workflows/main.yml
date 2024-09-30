@@ -33,7 +33,7 @@ jobs:
 
       - name: Compile
         run: |
-          PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro
+          cp -r $(pwd)/devkitpro/devkitPPC devkitPPC/
           cd src
           python3 make.py
 

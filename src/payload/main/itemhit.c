@@ -1,12 +1,12 @@
-#include <common.h>
-#include <hidenseek.h>
-#include <killdata.h>
-#include <musichandler.h>
-#include <player.h>
-#include <racedata.h>
-#include <racepacket.h>
-#include <rknetcontroller.h>
-#include <utils.h>
+#include "common.h"
+#include "hidenseek.h"
+#include "killdata.h"
+#include "musichandler.h"
+#include "player.h"
+#include "racedata.h"
+#include "racepacket.h"
+#include "rknetcontroller.h"
+#include "utils.h"
 
 void PlayerKiller(char pid) {
 

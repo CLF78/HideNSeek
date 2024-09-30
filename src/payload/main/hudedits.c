@@ -1,7 +1,7 @@
-#include <common.h>
-#include <hidenseek.h>
-#include <racedata.h>
-#include <raceinfo.h>
+#include "common.h"
+#include "hidenseek.h"
+#include "racedata.h"
+#include "raceinfo.h"
 
 int ScoreSound(int score) {
 

@@ -1,5 +1,4 @@
 #include "common.h"
-
 // Forward declarations
 void CupScreenPatch();
 void BattleCupScreenPatch();
@@ -143,7 +142,7 @@ void loadCodes() {
 	directWriteBranch(GuestSendHook, GuestSend, false);
 	directWriteBranch(HostCheckHook, HostCheck, false);
 	directWriteBranch(HostCheckHelperHook, HostCheckHelper, true);
-	directWrite8(Version, 7);
+	directWrite8(Version, 8);
 
 	// Improved Position Interpolation (by stebler)
 	directWrite32(NoInterpolation, 0x3F800000);
@@ -344,6 +343,10 @@ void loadCodes() {
 	directWriteBranch(TagDistanceHook, TagDistanceFunc, true);
 	directWriteBranch(TagDistanceHook2, TagDistanceFunc, true);
 	directWriteBranch(TagShowHook, HandleTags, true);
+
+	// Track Check (by CLF78 and Lami)
+	directWriteBranch(InsertTrackIdentHook, InsertTrackIdent, false);
+	directWriteBranch(CheckTrackIdentHook, CheckTrackIdent, false);
 
 	// Disable Track Music (by CosmoCourtney)
 	if (NoMusic == 1) {

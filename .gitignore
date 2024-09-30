@@ -5,3 +5,5 @@ src/bin
 files/UIPatches/*.szs
 __pycache__/
 *.zip
+devkitPPC/
+.vscode/

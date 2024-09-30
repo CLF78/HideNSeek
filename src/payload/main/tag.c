@@ -1,7 +1,7 @@
-#include <common.h>
-#include <hidenseek.h>
-#include <racedata.h>
-#include <utils.h>
+#include "common.h"
+#include "hidenseek.h"
+#include "racedata.h"
+#include "utils.h"
 
 void HandleTags(void* something, int pid) {
 

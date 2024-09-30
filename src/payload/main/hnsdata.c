@@ -1,8 +1,8 @@
-#include <common.h>
-#include <hidenseek.h>
-#include <racedata.h>
-#include <rknetcontroller.h>
-#include <utils.h>
+#include "common.h"
+#include "hidenseek.h"
+#include "racedata.h"
+#include "rknetcontroller.h"
+#include "utils.h"
 
 int pidHelper(char currentpid, char prevaid1, char prevaid2, int index) {
 

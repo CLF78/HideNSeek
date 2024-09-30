@@ -1,8 +1,8 @@
 #pragma once
-#include <common.h>
+#include "common.h"
 
 typedef struct {
- 	u8 isStopped, isSeeker, isRealSeeker, unused;
+ 	u8 isStopped, isSeeker, isRealSeeker, doneTrackCheck;
 } HideNSeekPlayer;
 
 typedef struct {

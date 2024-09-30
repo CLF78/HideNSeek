@@ -1,9 +1,9 @@
-#include <common.h>
-#include <hidenseek.h>
-#include <jgpt.h>
-#include <raceinfo.h>
-#include <player.h>
-#include <vec.h>
+#include "common.h"
+#include "hidenseek.h"
+#include "jgpt.h"
+#include "raceinfo.h"
+#include "player.h"
+#include "vec.h"
 
 #define DELFINOPIERCRC 0x72836BEE
 
