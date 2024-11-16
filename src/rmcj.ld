@@ -358,5 +358,5 @@ SECTIONS {
 	/* Track Check */
 	InsertTrackIdentHook = 0x8053ddf0;
 	CheckTrackIdentHook = 0x8053ee1c;
-	unk80653d78 = 0x806533e4;
+	clearSendRH2 = 0x806533e4;
 }

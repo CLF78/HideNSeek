@@ -30,4 +30,3 @@ typedef struct {
 } RaceModeOnlineVs; // Total size 0x174
 
 RaceHeader2VS* GetRaceHeader2Buffer(u32 param_1, u32 playerId);
-void unk80653d78(u32 param_1) __attribute__((noreturn));
