@@ -60,14 +60,16 @@ typedef struct {
 } RaceinfoPlayer;	// Total size 0x54
 
 typedef struct {
-	void* vtable;
-	void* random1;
-	void* random2;
-	RaceinfoPlayer **players;
-	void* gamemodeData;
-	TimerManager* timerManager;
-	u8 unk[0x10];
-	u32 raceState;
+    void* vtable;
+    void* random1;
+    void* random2;
+    RaceinfoPlayer **players;
+    void* gamemodeData;
+    TimerManager* timerManager;
+    u8 unk[8];
+    u32 timer;
+    u8 unk2[4];
+    u32 raceState;
 } _Raceinfo;
 
 extern _Raceinfo* Raceinfo;
