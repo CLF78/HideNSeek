@@ -1,11 +1,11 @@
-#include <common.h>
-#include <hidenseek.h>
-#include <killdata.h>
-#include <musichandler.h>
-#include <player.h>
-#include <racedata.h>
-#include <raceinfo.h>
-#include <utils.h>
+#include "common.h"
+#include "hidenseek.h"
+#include "killdata.h"
+#include "musichandler.h"
+#include "player.h"
+#include "racedata.h"
+#include "raceinfo.h"
+#include "utils.h"
 
 // External timer values
 extern u32 TimerVals[3];

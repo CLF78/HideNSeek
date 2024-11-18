@@ -1,6 +1,6 @@
 #pragma once
-#include <common.h>
-#include <inputdata.h>
+#include "common.h"
+#include "inputdata.h"
 
 typedef struct {
 	u32 controllerInfo, unk, wantsController;

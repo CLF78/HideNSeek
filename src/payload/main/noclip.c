@@ -1,5 +1,5 @@
-#include <hidenseek.h>
-#include <player.h>
+#include "hidenseek.h"
+#include "player.h"
 
 bool NoClip(PlayerPointers** player1) {
 	register PlayerSub18* player2 asm("r30");

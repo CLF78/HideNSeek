@@ -1,7 +1,7 @@
 #pragma once
-#include <common.h>
-#include <player.h>
-#include <raceinfo.h>
+#include "common.h"
+#include "player.h"
+#include "raceinfo.h"
 
 int UtilRandint(int lo, int hi);
 void UtilRandomSeed(int seed);

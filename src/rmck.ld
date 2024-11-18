@@ -13,6 +13,13 @@ SECTIONS {
 
 	PSVECSquareDistance = 0x8019B13C;
 
+	DWC_IsServerMyself = 0x800d27c0;
+	DWC_CloseConnectionHard = 0x800d2060;
+	GetRaceHeader2Buffer = 0x80641fd0;
+	OSDisableInterrupts = 0x801a6908;
+	OSRestoreInterrupts = 0x801a6930;
+	ptr_miscPacketHandler = 0x809b0590;
+
 	NETSHA1Init = 0x801D2850;
 	NETSHA1Update = 0x801D28A0;
 	NETSHA1GetDigest = 0x801D2954;
@@ -347,4 +354,9 @@ SECTIONS {
 	PlayAnim = 0x8062AC34;
 	TeamLineColors = 0x80898254;
 	ZeroFloat = 0x80898198;
+
+	/* Track Check */
+	InsertTrackIdentHook = 0x8052c4c8;
+	CheckTrackIdentHook = 0x8052d4f4;
+	clearSendRH2 = 0x80642090;
 }

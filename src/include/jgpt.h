@@ -1,6 +1,6 @@
 #pragma once
-#include <common.h>
-#include <vec.h>
+#include "common.h"
+#include "vec.h"
 
 typedef struct {
 	VEC3 pos, rot;

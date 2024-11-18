@@ -1,8 +1,8 @@
-#include <common.h>
-#include <hidenseek.h>
-#include <inputdata.h>
-#include <menudata.h>
-#include <raceinfo.h>
+#include "common.h"
+#include "hidenseek.h"
+#include "inputdata.h"
+#include "menudata.h"
+#include "raceinfo.h"
 
 // Main func
 int SpectatorModeMain(char ogpid) {

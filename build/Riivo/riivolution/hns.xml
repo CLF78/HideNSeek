@@ -38,7 +38,7 @@
 		<folder disc="/Scene/UI" external="/hns/UI" create="true" />
 		<!--Load Code-->
 		<memory valuefile="/hns/Loader.bin" offset="0x80004010" />
-		<memory offset="0x8000629C" value="4BFFDF4C" />
+		<memory offset="0x8000629C" value="4BFFDF58" />
 		<folder external="/hns/hns" disc="/hns" create="true"/>
 	</patch>
 	<patch id="mythingsctgp">
