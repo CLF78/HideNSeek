@@ -14,6 +14,7 @@ SECTIONS {
 	PSVECSquareDistance = 0x8019ADE0;
 
 	DWC_IsServerMyself = 0x800d2760;
+	DWC_GetServerAid = 0x800d26e8;
 	DWC_CloseConnectionHard = 0x800D2000;
 	GetRaceHeader2Buffer = 0x80653cb8;
 	OSDisableInterrupts = 0x801a65ac;
@@ -176,6 +177,8 @@ SECTIONS {
 	/* Instant Respawn */
 	InstantRespawn1 = 0x80573E2B;
 	InstantRespawn2 = 0x80579C20;
+	InstantRespawn3 = 0x80579bff;
+	InstantRespawn4 = 0x808b5bc5;
 
 	/* Invisibility */
 	InvisibilityHook = 0x80657F34;

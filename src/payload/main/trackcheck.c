@@ -18,26 +18,25 @@ void InsertTrackIdent(RaceModeOnlineVs *RaceModeOnlineVs) {
 }
 
 void CheckTrackIdent() {
-    if(DWC_IsServerMyself()){
-        if (Raceinfo->timer != 240) {
-            return;
-        }
-        u8 playerId;
-        for (playerId = 0; playerId < Racedata->main.scenarios[0].playerCount; playerId++) {
-            if (HideNSeekData.players[RKNetController->aidsToPids[playerId]].doneTrackCheck) {
+    if(Raceinfo->timer == 240){
+        
+        u8 aid;
+        for (aid = 0; aid < Racedata->main.scenarios[0].playerCount; aid++) {
+            if (HideNSeekData.players[RKNetController->aidsToPids[aid]].doneTrackCheck || Racedata->main.scenarios->players[aid].playerType == PLAYER_REAL_LOCAL) {
                 continue;
             }
-            if (Racedata->main.scenarios->players[playerId].playerType == PLAYER_REAL_LOCAL) {
-                continue;
-            }
-            RaceHeader2VS* RH2 = GetRaceHeader2Buffer(ptr_miscPacketHandler, playerId);
+            RaceHeader2VS* RH2 = GetRaceHeader2Buffer(ptr_miscPacketHandler, aid);
             
-            if (RH2->minimumRaceFinishTime != ENPTCRC) {
-                bool ret = OSDisableInterrupts();
-                DWC_CloseConnectionHard(RKNetController->aidsToPids[playerId]);
-                OSRestoreInterrupts(ret);
+            if (RH2->minimumRaceFinishTime != ENPTCRC && aid != DWC_GetServerAid()) {
+                HideNSeekData.players[RKNetController->aidsToPids[aid]].doneTrackCheck = 2; // We use this to show the right disconnection message later
+                if (DWC_IsServerMyself()) {
+                    bool ret = OSDisableInterrupts();
+                    DWC_CloseConnectionHard(RKNetController->aidsToPids[aid]);
+                    OSRestoreInterrupts(ret);
+                }
+                continue;
             }
-            HideNSeekData.players[RKNetController->aidsToPids[playerId]].doneTrackCheck = 1;
+            HideNSeekData.players[RKNetController->aidsToPids[aid]].doneTrackCheck = 1;
         }
         
     }
