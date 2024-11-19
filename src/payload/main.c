@@ -161,9 +161,6 @@ void loadCodes() {
 	// Instant Respawn + Respawn Cooldown (by davidevgen, CLF78,stebler and Lami)
 	directWrite8(InstantRespawn1, 0);
 	directWriteBranch(InstantRespawn2, RespawnCooldown, true);
-	directWrite8(InstantRespawn3, 0);
-	directWrite8(InstantRespawn4, 0);
-	directWrite8Offset(InstantRespawn4, 0x2, 0);
 
 	// Invisibility (by CLF78)
 	directWriteBranch(InvisibilityHook, Invisibility, true);
