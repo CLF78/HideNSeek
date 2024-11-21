@@ -158,7 +158,7 @@ void loadCodes() {
 	directWriteBranch(NoStarInvincibilityHook2, NoStarInvincibility2, true); // enable damage from objects
 	directWriteBranch(NoStarInvincibilityHook3, NoStarInvincibility3, true); // enable damage from players
 
-	// Instant Respawn + Respawn Cooldown (by davidevgen, CLF78 and stebler)
+	// Instant Respawn + Respawn Cooldown (by davidevgen, CLF78,stebler and Lami)
 	directWrite8(InstantRespawn1, 0);
 	directWriteBranch(InstantRespawn2, RespawnCooldown, true);
 
