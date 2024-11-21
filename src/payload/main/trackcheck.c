@@ -20,23 +20,23 @@ void InsertTrackIdent(RaceModeOnlineVs *RaceModeOnlineVs) {
 void CheckTrackIdent() {
     if(Raceinfo->timer == 240){
         
-        u8 aid;
-        for (aid = 0; aid < Racedata->main.scenarios[0].playerCount; aid++) {
-            if (HideNSeekData.players[RKNetController->aidsToPids[aid]].doneTrackCheck || Racedata->main.scenarios->players[aid].playerType == PLAYER_REAL_LOCAL) {
+        u8 pid;
+        for (pid = 0; pid < Racedata->main.scenarios[0].playerCount; pid++) {
+            if (HideNSeekData.players[pid].doneTrackCheck || Racedata->main.scenarios->players[pid].playerType == PLAYER_REAL_LOCAL) {
                 continue;
             }
-            RaceHeader2VS* RH2 = GetRaceHeader2Buffer(ptr_miscPacketHandler, aid);
+            RaceHeader2VS* RH2 = GetRaceHeader2Buffer(ptr_miscPacketHandler, RKNetController->aidsToPids[pid]);
             
-            if (RH2->minimumRaceFinishTime != ENPTCRC && aid != DWC_GetServerAid()) {
-                HideNSeekData.players[RKNetController->aidsToPids[aid]].doneTrackCheck = 2; // We use this to show the right disconnection message later
+            if (RH2->minimumRaceFinishTime != ENPTCRC && RKNetController->aidsToPids[pid] != DWC_GetServerAid()) {
+                HideNSeekData.players[pid].doneTrackCheck = 2; // We use this to show the right disconnection message later
                 if (DWC_IsServerMyself()) {
                     bool ret = OSDisableInterrupts();
-                    DWC_CloseConnectionHard(RKNetController->aidsToPids[aid]);
+                    DWC_CloseConnectionHard(RKNetController->aidsToPids[pid]);
                     OSRestoreInterrupts(ret);
                 }
                 continue;
             }
-            HideNSeekData.players[RKNetController->aidsToPids[aid]].doneTrackCheck = 1;
+            HideNSeekData.players[pid].doneTrackCheck = 1;
         }
         
     }
