@@ -14,38 +14,22 @@ void loadCodes() {
 	// Exception Handler (by Star)
 	directWrite32(ShowExceptions, 0);
 
-	// Wiimmfi Code Patches (by Leseratte)
-	directWriteNop(WiimmfiPatch1);
-	directWrite32(WiimmfiPatch2, 0x3BC00000);
-	directWriteBranch(WiimmfiPatch3, WiimmfiASM1, false);
-	directWriteBranch(WiimmfiPatch4, WiimmfiASM2, false);
+	// WiiLink Code Patches (by The WiiLink Team, ported by Palapeli and Ismy)
+    directWriteArray(WL_Code_Text_Hook, WL_Code_Text, 0x58);
+    directWriteArray(WL_Code_Data_Hook, WL_Code_Data, 0x4C);
+    
+    // WiiLink Auth response
+    directWriteArray(WL_Auth_Response_Hook, WL_Auth_Response, 0x8);
+    
+    // WiiLink String Patches
+    directWriteArray(WL_Domain_Hook, WL_Domain, 0x11);
+    directWriteArray(WL_URL_Hook, WL_URL, 0x18);
+    
+    // WiiLink Skip DNS request caching
+    directWrite32(WL_Skip_DNS, 0x480001F4);
 
-	// Wiimmfi Domain Name Patches (by Seeky)
-	directWriteString(WiimmfiVersionString, "LE-CODE GCT v1 ");
-	directWriteString(WiimmfiURLs, "://ca.nas.wiimmfi.de/ca");
-	directWriteStringOffset(WiimmfiURLs, 0x28, "://naswii.wiimmfi.de/ac");
-	directWriteStringOffset(WiimmfiURLs, 0xA8, "://naswii.wiimmfi.de/pr");
-
-	#ifdef REGION_P
-	directWriteStringOffset(WiimmfiURLs, 0x50, "main.nas.wiimmfi.de/pp");
-	#elif REGION_E
-	directWriteStringOffset(WiimmfiURLs, 0x50, "main.nas.wiimmfi.de/pe");
-	#elif REGION_J
-	directWriteStringOffset(WiimmfiURLs, 0x50, "main.nas.wiimmfi.de/pj");
-	#elif REGION_K
-	directWriteStringOffset(WiimmfiURLs, 0x50, "main.nas.wiimmfi.de/pk");
-	#endif
-
-	directWriteStringOffset(WiimmfiURLs, 0x964, "wiimmfi.de"); // Available
-	directWriteStringOffset(WiimmfiURLs, 0x10D4, "wiimmfi.de"); // GPCM
-	directWriteStringOffset(WiimmfiURLs, 0x1AEC, "wiimmfi.de"); // GPSP
-	directWriteStringOffset(WiimmfiURLs, 0x2C8D, "wiimmfi.de"); // Master
-	directWriteStringOffset(WiimmfiURLs, 0x38A7, "wiimmfi.de"); // Natneg
-	directWriteStringOffset(WiimmfiURLs, 0x38C3, "wiimmfi.de");
-	directWriteStringOffset(WiimmfiURLs, 0x38DF, "wiimmfi.de");
-	directWriteStringOffset(WiimmfiURLs, 0x3A2F, "wiimmfi.de"); // MS
-	directWriteStringOffset(WiimmfiURLs, 0x3AB3, "wiimmfi.de"); // SAKE
-
+	
+/*
 	// Wiimmfi Login Region Changer (by Atlas)
 	directWriteString(LoginRegion, "120053");
 
@@ -54,7 +38,7 @@ void loadCodes() {
 	directWrite32(VSRegion, 0x38A04E55);
 	directWrite32(VSRegion2, tempVal32);
 	directWrite32Offset(VSRegion2, 0x518, tempVal32);
-	directWrite32(VSRegion3, 0x38800055);
+	directWrite32(VSRegion3, 0x38800055); */
 
 	// Always Win Track Vote (by Star, modified by Seeky & CLF78)
 	directWriteBranch(AlwaysWinVoteHook, VotePatch, true);
@@ -142,7 +126,7 @@ void loadCodes() {
 	directWriteBranch(GuestSendHook, GuestSend, false);
 	directWriteBranch(HostCheckHook, HostCheck, false);
 	directWriteBranch(HostCheckHelperHook, HostCheckHelper, true);
-	directWrite8(Version, 8);
+	directWrite8(Version, 9);
 
 	// Improved Position Interpolation (by stebler)
 	directWrite32(NoInterpolation, 0x3F800000);
@@ -158,7 +142,7 @@ void loadCodes() {
 	directWriteBranch(NoStarInvincibilityHook2, NoStarInvincibility2, true); // enable damage from objects
 	directWriteBranch(NoStarInvincibilityHook3, NoStarInvincibility3, true); // enable damage from players
 
-	// Instant Respawn + Respawn Cooldown (by davidevgen, CLF78,stebler and Lami)
+	// Instant Respawn + Respawn Cooldown (by davidevgen, CLF78, stebler and Lami)
 	directWrite8(InstantRespawn1, 0);
 	directWriteBranch(InstantRespawn2, RespawnCooldown, true);
 

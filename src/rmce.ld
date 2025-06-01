@@ -10,6 +10,7 @@ SECTIONS {
 	MusicHandler = 0x809BDBB8;
 	RKNetSelectHandler = 0x809BD930;
 	ScreenHUD = 0x809BFDC0;
+	/* KartObjectManager = 811242a4;??????? PAL */
 
 	PSVECSquareDistance = 0x8019AD40;
 
@@ -361,4 +362,17 @@ SECTIONS {
 	InsertTrackIdentHook = 0x80538f34;
 	CheckTrackIdentHook = 0x80539f60;
 	clearSendRH2 = 0x8064f8f0;
+
+	/* Wiilink */
+	WL_Code_Text_Hook = 0x800EDFF8;
+	WL_Code_Data_Hook = 0x800EDDE4;
+	WL_Auth_Response_Hook = 0x800EE304;
+	WL_Domain_Hook = 0x80276A25;
+	WL_URL_Hook = 0x802760EC;
+	WL_Skip_DNS = 0x800D1478;
+
+	/* Anti-Wiimmfi */
+	Anti_Wiimmfi_1 = 0x800EE300;
+	Anti_Wiimmfi_2 = 0x800ECA0C;
+	Anti_Wiimmfi_3 = 0x80005EFC;
 }
