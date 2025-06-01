@@ -18,7 +18,7 @@ void InsertTrackIdent(RaceModeOnlineVs *RaceModeOnlineVs) {
 }
 
 void CheckTrackIdent() {
-    if(Raceinfo->timer == 240){
+    if (Raceinfo->timer == 240) {
         
         u8 pid;
         for (pid = 0; pid < Racedata->main.scenarios[0].playerCount; pid++) {

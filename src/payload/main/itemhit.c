@@ -125,11 +125,8 @@ void PlayerDC() {
 		if (pid != -1) {
 
 			// Update KillData
-			u16 DCType = 2;
 			// Check if the player got kicked for having the wrong track
-			if (HideNSeekData.players[pid].doneTrackCheck == 2){
-				DCType = 4;
-			}
+			u16 DCType = (HideNSeekData.players[pid].doneTrackCheck == 2) ? 4 : 2;
 			AddNewKillData(DCType, (u16)pid, 0xFFFF);
 
 			// If the player is a Seeker, just decrease totalSeekers

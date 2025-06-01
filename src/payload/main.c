@@ -15,30 +15,18 @@ void loadCodes() {
 	directWrite32(ShowExceptions, 0);
 
 	// WiiLink Code Patches (by The WiiLink Team, ported by Palapeli and Ismy)
-    directWriteArray(WL_Code_Text_Hook, WL_Code_Text, 0x58);
-    directWriteArray(WL_Code_Data_Hook, WL_Code_Data, 0x4C);
-    
-    // WiiLink Auth response
-    directWriteArray(WL_Auth_Response_Hook, WL_Auth_Response, 0x8);
-    
-    // WiiLink String Patches
-    directWriteArray(WL_Domain_Hook, WL_Domain, 0x11);
-    directWriteArray(WL_URL_Hook, WL_URL, 0x18);
-    
-    // WiiLink Skip DNS request caching
-    directWrite32(WL_Skip_DNS, 0x480001F4);
-
+	directWriteArray(WL_Code_Text_Hook, WL_Code_Text, 0x58);
+	directWriteArray(WL_Code_Data_Hook, WL_Code_Data, 0x4C);
 	
-/*
-	// Wiimmfi Login Region Changer (by Atlas)
-	directWriteString(LoginRegion, "120053");
-
-	// VS Matchmaking Region Patch (by Leseratte)
-	tempVal32 = 0x38E04E55;
-	directWrite32(VSRegion, 0x38A04E55);
-	directWrite32(VSRegion2, tempVal32);
-	directWrite32Offset(VSRegion2, 0x518, tempVal32);
-	directWrite32(VSRegion3, 0x38800055); */
+	// WiiLink Auth response
+	directWriteArray(WL_Auth_Response_Hook, WL_Auth_Response, 0x8);
+	
+	// WiiLink String Patches
+	directWriteArray(WL_Domain_Hook, WL_Domain, 0x11);
+	directWriteArray(WL_URL_Hook, WL_URL, 0x18);
+	
+	// WiiLink Skip DNS request caching
+	directWrite32(WL_Skip_DNS, 0x480001F4);
 
 	// Always Win Track Vote (by Star, modified by Seeky & CLF78)
 	directWriteBranch(AlwaysWinVoteHook, VotePatch, true);

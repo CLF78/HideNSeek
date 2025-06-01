@@ -10,7 +10,6 @@ SECTIONS {
 	MusicHandler = 0x809BDBB8;
 	RKNetSelectHandler = 0x809BD930;
 	ScreenHUD = 0x809BFDC0;
-	/* KartObjectManager = 811242a4;??????? PAL */
 
 	PSVECSquareDistance = 0x8019AD40;
 
