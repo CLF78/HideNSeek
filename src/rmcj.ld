@@ -14,6 +14,7 @@ SECTIONS {
 	PSVECSquareDistance = 0x8019AD00;
 
 	DWC_IsServerMyself = 0x800d2680;
+	DWC_GetServerAid = 0x800d2608;
 	DWC_CloseConnectionHard = 0x800D1F20;
 	GetRaceHeader2Buffer = 0x80653324;
 	OSDisableInterrupts = 0x801a64cc;
@@ -175,7 +176,8 @@ SECTIONS {
 
 	/* Instant Respawn */
 	InstantRespawn1 = 0x805737AB;
-	InstantRespawn2 = 0x805795A0;
+	InstantRespawn2 = 0x80579580;
+	InstantRespawn3 = 0x808b4d25;
 
 	/* Invisibility */
 	InvisibilityHook = 0x806575A0;
@@ -359,4 +361,17 @@ SECTIONS {
 	InsertTrackIdentHook = 0x8053ddf0;
 	CheckTrackIdentHook = 0x8053ee1c;
 	clearSendRH2 = 0x806533e4;
+
+	/* Wiilink */
+	WL_Code_Text_Hook = 0x800EDFB8;
+	WL_Code_Data_Hook = 0x800EDDA4;
+	WL_Auth_Response_Hook = 0x800EE2C4;
+	WL_Domain_Hook = 0x8027A705;
+	WL_URL_Hook = 0x80279DCC;
+	WL_Skip_DNS = 0x800D1438;
+
+	/* Anti-Wiimmfi */
+	Anti_Wiimmfi_1 = 0x800EE2C0;
+	Anti_Wiimmfi_2 = 0x800EC9CC;
+	Anti_Wiimmfi_3 = 0x80005EFC;
 }
